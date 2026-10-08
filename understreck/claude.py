@@ -36,12 +36,24 @@ NOTES_SCHEMA = {
 }
 
 
+_KEY = (os.environ.get("ANTHROPIC_API_KEY") or "").strip()
+_disabled = False
+
+
 def available() -> bool:
-    return bool(os.environ.get("ANTHROPIC_API_KEY"))
+    return bool(_KEY) and not _disabled
 
 
 def _client():
-    return anthropic.Anthropic(max_retries=3)
+    return anthropic.Anthropic(api_key=_KEY, max_retries=3)
+
+
+def _auth_failed(e) -> None:
+    """Stänger av Claude resten av körningen och förklarar vad som är fel."""
+    global _disabled
+    _disabled = True
+    log.error("Claude: nyckeln godkänns inte (%s). Skapa en ny nyckel på platform.claude.com → API Keys "
+              "och klistra in hela värdet (börjar med sk-ant-) i secret ANTHROPIC_API_KEY.", e.status_code)
 
 
 def _log_cost(resp, what):
@@ -104,6 +116,9 @@ Skriv för varje match:
         resp = _create(system="Du är analytiker för Stryktipset.", output_config={
             "effort": "medium", "format": {"type": "json_schema", "schema": NOTES_SCHEMA}},
             messages=[{"role": "user", "content": prompt}])
+    except anthropic.AuthenticationError as e:
+        _auth_failed(e)
+        return None
     except anthropic.APIError as e:
         log.error("Claude-anropet för analyser misslyckades: %s", e)
         return None
@@ -181,6 +196,9 @@ med bara de fält som efterfrågats."""
             if resp.stop_reason != "pause_turn":
                 break
             messages = [messages[0], {"role": "assistant", "content": resp.content}]
+    except anthropic.AuthenticationError as e:
+        _auth_failed(e)
+        return {}
     except anthropic.APIError as e:
         log.error("Claude-researchen misslyckades: %s", e)
         return {}

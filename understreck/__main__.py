@@ -20,8 +20,8 @@ from . import claude, model, odds, store, tipsrader, understat
 from .apifootball import ApiFootball, ApiFootballError, enrich_friday, lineups as af_lineups, set_injuries
 from .util import TZ, http, log, now, set_output, team_sim
 
-ODDS_KEY = os.environ.get("ODDS_API_KEY", "")
-AF_KEY = os.environ.get("API_FOOTBALL_KEY", "")
+ODDS_KEY = os.environ.get("ODDS_API_KEY", "").strip()
+AF_KEY = os.environ.get("API_FOOTBALL_KEY", "").strip()
 RESEARCH = os.environ.get("RESEARCH", "1") != "0"
 
 

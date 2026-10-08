@@ -13,6 +13,7 @@ from datetime import datetime
 from .util import TZ, best_pair, log, ordinal
 
 BASE = "https://v3.football.api-sports.io"
+RAPID_HOST = "api-football-v1.p.rapidapi.com"   # samma API om kontot skapades via RapidAPI
 MIN_GAP = 6.5  # sekunder mellan anrop, håller oss under gratisnivåns minutgräns
 
 LEAGUE_IDS = {
@@ -34,16 +35,33 @@ class ApiFootballError(RuntimeError):
 
 class ApiFootball:
     def __init__(self, http, key: str):
-        self.http, self.key, self._last = http, key, 0.0
+        self.http, self.key, self._last = http, key.strip(), 0.0
         self.calls = 0
+        self.rapid = False
 
-    def get(self, path: str, **params):
+    def _request(self, path, params):
         wait = MIN_GAP - (time.monotonic() - self._last)
         if wait > 0:
             time.sleep(wait)
-        r = self.http.get(BASE + path, params=params, headers={"x-apisports-key": self.key}, timeout=60)
+        if self.rapid:
+            url, headers = f"https://{RAPID_HOST}/v3{path}", {"x-rapidapi-key": self.key, "x-rapidapi-host": RAPID_HOST}
+        else:
+            url, headers = BASE + path, {"x-apisports-key": self.key}
+        r = self.http.get(url, params=params, headers=headers, timeout=60)
         self._last = time.monotonic()
         self.calls += 1
+        return r
+
+    def get(self, path: str, **params):
+        r = self._request(path, params)
+        if r.status_code in (401, 403) and not self.rapid:
+            log.info("API-Football nekade nyckeln (%s), provar RapidAPI-adressen", r.status_code)
+            self.rapid = True
+            r = self._request(path, params)
+        if r.status_code in (401, 403):
+            raise ApiFootballError(
+                f"nyckeln nekades ({r.status_code}) både hos api-sports.io och RapidAPI. Kontrollera att "
+                "API_FOOTBALL_KEY är rätt kopierad och att kontot är aktiverat (bekräftad e-post).")
         r.raise_for_status()
         j = r.json()
         if j.get("errors"):
