@@ -9,7 +9,7 @@ window.STRYK_ROUNDS = [
   "draw": "4974",
   "date": "2026-10-10",
   "deadline": "15:59",
-  "turnover": 1988922,
+  "turnover": 1998543,
   "updated": "2026-10-08",
   "lineupUpdate": null,
   "matches": [
@@ -29,7 +29,10 @@ window.STRYK_ROUNDS = [
      4.2,
      4.4
     ],
-    "table": null,
+    "table": {
+     "home": "12:e, 5 p (5 matcher)",
+     "away": "20:e, 2 p (5 matcher)"
+    },
     "form": {
      "home": "FVOFO",
      "away": "FFOOF"
@@ -45,16 +48,38 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Manuel Ugarte (skadad)",
+      "Matthijs de Ligt (skadad)",
+      "Tom Heaton (skadad)",
+      "Amad Diallo (osäker)",
+      "Benjamin Sesko (osäker)",
+      "Patrick Dorgu (osäker)",
+      "Noussair Mazraoui (osäker)",
+      "Kobbie Mainoo (osäker)",
+      "Marcus Rashford (osäker)",
+      "Karl Darlow (osäker)"
+     ],
+     "away": [
+      "Pedro Porro (skadad)",
+      "Dejan Kulusevski (skadad)",
+      "Xavi Simons (skadad)",
+      "Wilson Odobert (skadad)",
+      "Mykhailo Mudryk (skadad)",
+      "Micky van de Ven (osäker)",
+      "Jan Paul van Hecke (osäker)"
+     ],
+     "impact": [
+      2,
+      2
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-10-10T18:30:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 1 55 % mot folkets 64 %. X är understreckat: 23 % enligt modellen, 20 % hos folket. xG för och emot per match: Manchester United 2,1 och 1,4, Tottenham 1,2 och 1,8.",
+    "note": "Modellen ger Manchester United 55 % mot folkets 64 %, så ettan är överstreckad med spelvärde 0,86. United skapar 2,12 xG per match mot Tottenhams 1,16, och Tottenham ligger sist med 2 poäng utan vinst på fem matcher (FFOOF). Tottenham saknar bland annat Pedro Porro, Dejan Kulusevski och Xavi Simons. Tvåan är understreckad med 16 % hos folket mot modellens 22 % och har spelvärde 1,35.",
     "valueNote": ""
    },
    {
@@ -73,7 +98,10 @@ window.STRYK_ROUNDS = [
      4.1,
      4.5
     ],
-    "table": null,
+    "table": {
+     "home": "10:e, 7 p (5 matcher)",
+     "away": "17:e, 3 p (5 matcher)"
+    },
     "form": {
      "home": "VVFOF",
      "away": "FOOOF"
@@ -98,8 +126,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 1 51 % mot folkets 63 %. 2 är understreckat: 25 % enligt modellen, 16 % hos folket. 1 är överstreckat. xG för och emot per match: Chelsea 1,8 och 2,1, Bournemouth 1,6 och 1,4.",
-    "valueNote": "Modellen ger 2 25 % mot folkets 16 %."
+    "note": "Chelsea är favorit med 51 % hos modellen, men folket streckar ettan till 63 %, vilket ger spelvärde 0,80. Chelsea släpper in 2,06 xG per match, och Bournemouth skapar 1,62 xG framåt. Tvåan är tydligt understreckad med 16 % hos folket mot modellens 25 %.",
+    "valueNote": "Tvåan har spelvärde 1,58 eftersom modellen ger Bournemouth 25 % medan folket bara streckar 16 %, och Chelsea släpper till 2,06 xG per match."
    },
    {
     "n": 3,
@@ -117,7 +145,10 @@ window.STRYK_ROUNDS = [
      3.5,
      2.6
     ],
-    "table": null,
+    "table": {
+     "home": "16:e, 4 p (5 matcher)",
+     "away": "4:e, 9 p (5 matcher)"
+    },
     "form": {
      "home": "FFOFV",
      "away": "VOOOV"
@@ -133,16 +164,31 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Ian Maatsen (skadad)",
+      "Brian Madjo (skadad)",
+      "Pau Torres (skadad)",
+      "Leon Goretzka (skadad)",
+      "Marco Bizot (skadad)",
+      "Alysson (skadad)",
+      "Matty Cash (skadad)",
+      "Amadou Onana (skadad)"
+     ],
+     "away": [
+      "Mikkel Damsgaard (osäker)",
+      "Nathan Collins (osäker)"
+     ],
+     "impact": [
+      2,
+      1
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 2 39 % mot folkets 32 %. 2 är understreckat: 39 % enligt modellen, 32 % hos folket. 1 är överstreckat. xG för och emot per match: Aston Villa 1,0 och 2,2, Brentford 2,1 och 1,5.",
+    "note": "Brentford är troligast med 40 % hos modellen, ligger 4:a med 9 poäng och har formen VOOOV. Brentford skapar 2,10 xG per match mot Villas 1,00, och Villa släpper in 2,17 xG. Villa har åtta skadade, bland dem Pau Torres, Amadou Onana och Matty Cash. Folket streckar ettan till 42 % mot modellens 33 %, medan tvåan är understreckad med 32 % mot 40 % och spelvärde 1,24.",
     "valueNote": ""
    },
    {
@@ -161,7 +207,10 @@ window.STRYK_ROUNDS = [
      3.5,
      2.3
     ],
-    "table": null,
+    "table": {
+     "home": "14:e, 4 p (5 matcher)",
+     "away": "3:e, 10 p (5 matcher)"
+    },
     "form": {
      "home": "FVOFF",
      "away": "VFOVV"
@@ -177,16 +226,36 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Romaine Mundle (skadad)",
+      "Daniel Ballard (skadad)",
+      "Habib Diarra (skadad)",
+      "Reinildo Mandava (avstängd)",
+      "Brian Brobbey (osäker)"
+     ],
+     "away": [
+      "Stefanos Tzimas (skadad)",
+      "Yankuba Minteh (skadad)",
+      "Kaoru Mitoma (skadad)",
+      "Jack Hinshelwood (skadad)",
+      "Mats Wieffer (skadad)",
+      "Femi Azeez (skadad)",
+      "Zadok Yohanna (skadad)",
+      "Evan Ferguson (skadad)",
+      "Yasin Ayari (osäker)",
+      "Lewis Dunk (osäker)"
+     ],
+     "impact": [
+      2,
+      2
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 2 40 % mot folkets 49 %. 1 är understreckat: 34 % enligt modellen, 27 % hos folket. 2 är överstreckat. xG för och emot per match: Sunderland 2,0 och 1,8, Brighton 2,6 och 1,7.",
+    "note": "Brighton är troligast med 39 % hos modellen, ligger 3:a med 10 poäng, har formen VFOVV och skapar 2,58 xG per match. Samtidigt saknar Brighton många spelare, bland dem Kaoru Mitoma, Yankuba Minteh och Evan Ferguson. Folket streckar tvåan till 49 %, vilket gör den överstreckad med spelvärde 0,81. Ettan är understreckad med 27 % hos folket mot modellens 34 % och har spelvärde 1,27.",
     "valueNote": ""
    },
    {
@@ -205,7 +274,10 @@ window.STRYK_ROUNDS = [
      3.5,
      2.45
     ],
-    "table": null,
+    "table": {
+     "home": "11:e, 6 p (5 matcher)",
+     "away": "19:e, 2 p (5 matcher)"
+    },
     "form": {
      "home": "VFFVF",
      "away": "FFFOO"
@@ -221,16 +293,24 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Abdul Fatawu (avstängd)",
+      "Jack Taylor (osäker)"
+     ],
+     "away": [
+      "Tom Cairney (skadad)"
+     ],
+     "impact": [
+      1,
+      1
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 1 38 % mot folkets 40 %. xG för och emot per match: Ipswich 1,4 och 2,1, Fulham 1,6 och 2,1.",
+    "note": "Modellen ser en jämn match med 38, 27 och 36 %, där Ipswich är en aning troligast. Ipswich ligger 11:a med 6 poäng, medan Fulham är 19:e med 2 poäng och saknar vinst (FFFOO). Båda lagen släpper in över 2 xG per match, 2,06 för Ipswich och 2,09 för Fulham. Strecken ligger nära modellen med spelvärden mellan 0,94 och 1,09, så inget tecken sticker ut.",
     "valueNote": ""
    },
    {
@@ -245,25 +325,49 @@ window.STRYK_ROUNDS = [
      24
     ],
     "odds": [
-     2.62,
+     2.63,
      3.55,
      2.45
     ],
     "table": null,
     "form": {},
-    "xg": null,
+    "xg": {
+     "home": [
+      0.88,
+      1.41
+     ],
+     "away": [
+      1.75,
+      1.36
+     ]
+    },
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Lewis Miller (skadad)",
+      "Yuki Ohashi (skadad)",
+      "Matty Litherland (skadad)",
+      "Yuri Ribeiro (skadad)",
+      "Mathias Jørgensen (osäker)"
+     ],
+     "away": [
+      "Will Fish (skadad)",
+      "Calum Chambers (skadad)",
+      "Isaak Davies (skadad)",
+      "Krystian Bielik (skadad)",
+      "Rubin Colwill (osäker)"
+     ],
+     "impact": [
+      1,
+      2
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 2 38 % mot folkets 24 %. 2 är understreckat: 38 % enligt modellen, 24 % hos folket. 1 är överstreckat.",
-    "valueNote": "Modellen ger 2 38 % mot folkets 24 %."
+    "note": "Cardiff är troligast med 37 % hos modellen och skapar 1,75 xG per match mot Blackburns 0,88. Folket streckar ändå Blackburn till 52 % mot modellens 36 %, så ettan är kraftigt överstreckad med spelvärde 0,69. Cardiff har fyra skadade, bland dem Calum Chambers och Krystian Bielik, men tvåan streckas bara till 24 %.",
+    "valueNote": "Tvåan har spelvärde 1,53 när modellen ger Cardiff 37 % och folket bara 24 %, och Cardiff skapar dubbelt så mycket xG som Blackburn."
    },
    {
     "n": 7,
@@ -294,7 +398,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 2 37 % mot folkets 38 %.",
+    "note": "Modellen ger 35, 28 och 37 %, så Stoke är bara marginellt troligast. Folket streckar nästan exakt likadant med 34, 28 och 38 %, och spelvärdena ligger mellan 0,98 och 1,04. Underlaget saknar form och xG, så matchen är öppen.",
     "valueNote": ""
    },
    {
@@ -326,7 +430,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 2 36 % mot folkets 37 %.",
+    "note": "Modellen ger 35, 28 och 36 %, och Wrexham är en hårsmån troligast. Folket streckar 35, 28 och 37 %, så inget tecken är felstreckat och spelvärdena ligger mellan 0,98 och 1,01. Underlaget saknar form och xG.",
     "valueNote": ""
    },
    {
@@ -345,7 +449,10 @@ window.STRYK_ROUNDS = [
      3.63,
      2.9
     ],
-    "table": null,
+    "table": {
+     "home": "3:e, 15 p (8 matcher)",
+     "away": "4:e, 14 p (7 matcher)"
+    },
     "form": {},
     "xg": null,
     "injuries": {
@@ -358,7 +465,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 1 42 % mot folkets 51 %. 2 är understreckat: 32 % enligt modellen, 25 % hos folket. 1 är överstreckat.",
+    "note": "Middlesbrough är troligast med 42 % hos modellen och ligger 3:a med 15 poäng på 8 matcher, strax före Wolverhampton som har 14 poäng på 7 matcher. Folket streckar ettan till 51 %, så den är överstreckad med spelvärde 0,83. Tvåan är understreckad med 25 % hos folket mot modellens 32 % och har spelvärde 1,29.",
     "valueNote": ""
    },
    {
@@ -390,7 +497,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 2 39 % mot folkets 44 %. 1 är understreckat: 34 % enligt modellen, 29 % hos folket.",
+    "note": "Millwall är troligast med 39 % hos modellen, i linje med oddset 2,42. Folket streckar tvåan till 44 %, vilket ger spelvärde 0,88. Ettan är understreckad med 29 % hos folket mot modellens 34 % och har spelvärde 1,17.",
     "valueNote": ""
    },
    {
@@ -422,7 +529,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 1 45 % mot folkets 57 %. X är understreckat: 28 % enligt modellen, 21 % hos folket. 1 är överstreckat.",
+    "note": "Sheffield United är troligast med 45 % hos modellen, men folket streckar ettan till 57 %, vilket ger spelvärde 0,79. Krysset är understreckat med 21 % hos folket mot modellens 28 % och har spelvärde 1,32. Även tvåan har spelvärde med 22 % hos folket mot modellens 27 %.",
     "valueNote": ""
    },
    {
@@ -437,8 +544,8 @@ window.STRYK_ROUNDS = [
      30
     ],
     "odds": [
-     2.9,
-     3.49,
+     2.95,
+     3.47,
      2.27
     ],
     "table": null,
@@ -454,8 +561,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger 2 41 % mot folkets 30 %. 2 är understreckat: 41 % enligt modellen, 30 % hos folket. 1 är överstreckat.",
-    "valueNote": "Modellen ger 2 41 % mot folkets 30 %."
+    "note": "Burnley är troligast med 41 % hos modellen, och oddset 2,27 pekar åt samma håll. Folket streckar ändå Watford till 44 % mot modellens 32 %, så ettan är överstreckad med spelvärde 0,72. Tvåan streckas bara till 30 %.",
+    "valueNote": "Tvåan har spelvärde 1,38 eftersom modellen ger Burnley 41 % medan folket bara streckar 30 %."
    },
    {
     "n": 13,
@@ -486,7 +593,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Modellen ger 1 55 % mot folkets 56 %. 2 är understreckat: 22 % enligt modellen, 19 % hos folket.",
+    "note": "Huddersfield är troligast med 55 % hos modellen, och folket streckar nästan exakt likadant med 56 %. Ettan är alltså rätt streckad med spelvärde 0,98. Tvåan är något understreckad med 19 % hos folket mot modellens 22 % och har spelvärde 1,16.",
     "valueNote": ""
    }
   ]
