@@ -23,6 +23,9 @@ from .util import TZ, http, log, now, set_output, team_sim
 ODDS_KEY = os.environ.get("ODDS_API_KEY", "").strip()
 AF_KEY = os.environ.get("API_FOOTBALL_KEY", "").strip()
 RESEARCH = os.environ.get("RESEARCH", "1") != "0"
+# xG utanför de stora ligorna finns inte gratis. Att låta Claude söka upp det kostar ca 1 dollar per körning,
+# så det är avstängt som standard. Modellen klarar sig då på odds, form och skador för de matcherna.
+RESEARCH_XG = os.environ.get("RESEARCH_XG", "0") == "1"
 
 
 def kickoff(m) -> datetime:
@@ -73,7 +76,8 @@ def run_friday(s) -> dict:
     understat.enrich(s, matches, day)
 
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
-              "fields": [f for f in ("table", "form", "xg", "injuries") if _missing(m, f)]} for m in matches]
+              "fields": [f for f in ("table", "form", "xg", "injuries")
+                         if _missing(m, f) and (f != "xg" or RESEARCH_XG)]} for m in matches]
     needs = [x for x in needs if x["fields"]]
     if needs and RESEARCH and claude.available():
         log.info("Claude söker uppgifter som saknas för %d matcher", len(needs))

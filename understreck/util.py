@@ -11,7 +11,8 @@ from zoneinfo import ZoneInfo
 import requests
 
 TZ = ZoneInfo("Europe/Stockholm")
-USER_AGENT = "Understreck/1.0 (privat statistikprojekt, uppdateras två gånger i veckan)"
+# Bara ASCII: API-Footballs brandvägg nekar (403) huvuden med å/ä/ö.
+USER_AGENT = "Understreck/1.0 (privat statistikprojekt)"
 
 log = logging.getLogger("understreck")
 

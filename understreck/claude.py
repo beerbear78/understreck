@@ -15,7 +15,7 @@ from .model import SIGNS
 from .util import log
 
 MODEL = os.environ.get("CLAUDE_MODEL") or "claude-opus-5-5"
-RESEARCH_MAX_SEARCHES = int(os.environ.get("RESEARCH_MAX_SEARCHES") or 12)
+RESEARCH_MAX_SEARCHES = int(os.environ.get("RESEARCH_MAX_SEARCHES") or 8)
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50)}
 
