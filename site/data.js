@@ -9,7 +9,7 @@ window.STRYK_ROUNDS = [
   "draw": "4974",
   "date": "2026-10-10",
   "deadline": "15:59",
-  "turnover": 2049819,
+  "turnover": 2053729,
   "updated": "2026-10-08",
   "lineupUpdate": null,
   "matches": [
@@ -48,36 +48,16 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Manuel Ugarte (skadad)",
-      "Matthijs de Ligt (skadad)",
-      "Tom Heaton (skadad)",
-      "Benjamin Sesko (osäker)",
-      "Patrick Dorgu (osäker)",
-      "Noussair Mazraoui (osäker)",
-      "Kobbie Mainoo (osäker)",
-      "Amad Diallo (osäker)"
-     ],
-     "away": [
-      "Dejan Kulusevski (skadad)",
-      "Xavi Simons (skadad)",
-      "Wilson Odobert (skadad)",
-      "Mykhailo Mudryk (skadad)",
-      "Pedro Porro (skadad)",
-      "Micky van de Ven (osäker)",
-      "Jan Paul van Hecke (osäker)"
-     ],
-     "impact": [
-      2,
-      3
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Manchester United hemma: – (V–O–F). Tottenham borta: –.",
     "_src": {
      "kickoff": "2026-10-10T18:30:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Manchester United är klar favorit med 56 procent hos modellen. United skapar 2,12 i xG per match mot Tottenhams 1,16, och Tottenham ligger sist med 2 poäng på fem matcher. Tottenham saknar dessutom bland andra Kulusevski, Xavi Simons och Pedro Porro och har högre skadepåverkan, 3 mot 2. Folket har ändå överstreckat ettan med 64 procent mot modellens 56, så tvåan på 16 procent mot 21 är det tecken som är understreckat.",
+    "note": "Manchester United är favorit med 55 procent hos modellen, och Tottenham ligger sist i tabellen med 2 poäng och formen FFOOF. United skapar 2,12 i xG per match, medan Tottenham släpper till 1,84. Folket streckar ettan till 64 procent, vilket gör den överstreckad med spelvärde 0,86. Tvåan på 16 procent hos folket mot 22 hos modellen är understreckad.",
     "valueNote": ""
    },
    {
@@ -115,33 +95,17 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Joao Pedro (osäker)",
-      "Reece James (osäker)",
-      "Cole Palmer (osäker)",
-      "Moises Caicedo (osäker)",
-      "Marco Palestra (osäker)",
-      "Emmanuel Emegha (osäker)"
-     ],
-     "away": [
-      "Alex Scott (skadad)",
-      "Eli Kroupi (skadad)",
-      "Amine Adli (skadad)",
-      "Julian Araujo (skadad)",
-      "Justin Kluivert (skadad)"
-     ],
-     "impact": [
-      2,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Chelsea hemma: – (V–O–F). Bournemouth borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Chelsea är favorit med 51 procent hos modellen och 56 procent enligt oddsen, men Chelsea släpper till 2,06 i xG per match bakåt. Bournemouth har bättre xG-balans, 1,62 framåt och 1,40 bakåt, trots plats 17 med 3 poäng. Folket har lagt 63 procent på ettan, vilket är tydligt överstreckat. Hos Chelsea är Cole Palmer, Moises Caicedo, Joao Pedro och Reece James osäkra.",
-    "valueNote": "Bournemouth vinner i 25 procent av fallen enligt modellen men har bara 16 procent av folkets streck, vilket ger spelvärde 1,58."
+    "note": "Chelsea är troligast med 51 procent hos modellen, men folket streckar ettan till 63 procent och den blir överstreckad med spelvärde 0,81. Chelsea släpper till 2,06 i xG per match, vilket öppnar för Bournemouth som själva skapar 1,62. Bournemouth saknar vinst i formen FOOOF men får 25 procent hos modellen.",
+    "valueNote": "Folket ger Bournemouth bara 16 procent medan modellen ger 25 procent, vilket ger veckans högsta spelvärde på 1,58."
    },
    {
     "n": 3,
@@ -178,35 +142,16 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Amadou Onana (skadad)",
-      "Ian Maatsen (skadad)",
-      "Brian Madjo (osäker)",
-      "Leon Goretzka (osäker)",
-      "Pau Torres (osäker)",
-      "Matty Cash (osäker)",
-      "Alysson (osäker)"
-     ],
-     "away": [
-      "Mathias Jensen (skadad)",
-      "Joshua Dasilva (skadad)",
-      "Antoni Milambo (skadad)",
-      "Nathan Collins (skadad)",
-      "Sepp van den Berg (skadad)",
-      "Kaye Furo (skadad)",
-      "Dango Ouattara (osäker)"
-     ],
-     "impact": [
-      2,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Aston Villa hemma: – (V–O–F). Brentford borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen tror lite mer på Brentford med 39 procent mot Aston Villas 34. Brentford ligger fyra med 9 poäng och har 2,10 i xG framåt, medan Villa ligger 16:e med bara 1,00 i xG framåt och 2,17 bakåt. Folket har ändå 42 procent på ettan, så ettan är överstreckad och tvåan understreckad med 32 procent mot 39.",
+    "note": "Brentford är knapp favorit med 39 procent hos modellen och ligger fyra med 9 poäng, medan Aston Villa är sextonde med 4 poäng. Villa skapar bara 1,0 i xG per match och släpper till 2,17, medan Brentford har 2,1 framåt och 1,5 bakåt. Folket streckar Villa till 42 procent mot modellens 34, så ettan är överstreckad och tvåan understreckad.",
     "valueNote": ""
    },
    {
@@ -244,36 +189,16 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Romaine Mundle (skadad)",
-      "Daniel Ballard (skadad)",
-      "Habib Diarra (skadad)",
-      "Reinildo Mandava (avstängd)",
-      "Brian Brobbey (osäker)"
-     ],
-     "away": [
-      "Stefanos Tzimas (skadad)",
-      "Yankuba Minteh (skadad)",
-      "Kaoru Mitoma (skadad)",
-      "Jack Hinshelwood (skadad)",
-      "Mats Wieffer (skadad)",
-      "Femi Azeez (skadad)",
-      "Zadok Yohanna (skadad)",
-      "Evan Ferguson (skadad)",
-      "Yasin Ayari (osäker)",
-      "Lewis Dunk (osäker)"
-     ],
-     "impact": [
-      2,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Sunderland hemma: – (V–O–F). Brighton borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Brighton är trolig vinnare med 39 procent hos modellen, tredje i tabellen med 10 poäng och 2,58 i xG framåt per match. Men folket har lagt hela 50 procent på tvåan, vilket är överstreckat. Brighton saknar många spelare, bland andra Mitoma, Minteh och Evan Ferguson, och Sunderland har 2,01 i xG framåt. Ettan har 27 procent hos folket mot modellens 34 och ger spelvärde 1,27.",
+    "note": "Brighton är troligast med 40 procent hos modellen, ligger trea med 10 poäng och har formen VFOVV. Brighton skapar 2,58 i xG per match men släpper också till 1,73. Folket streckar tvåan till 50 procent, vilket gör den överstreckad med spelvärde 0,79, medan Sunderland på 27 procent mot modellens 34 är understreckad.",
     "valueNote": ""
    },
    {
@@ -311,25 +236,16 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Abdul Fatawu (avstängd)",
-      "Jack Taylor (osäker)"
-     ],
-     "away": [
-      "Tom Cairney (skadad)",
-      "Kenny Tete (osäker)"
-     ],
-     "impact": [
-      1,
-      1
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Ipswich hemma: – (V–O–F). Fulham borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "En mycket jämn match där modellen ger 38 procent på Ipswich och 36 på Fulham, medan oddsen lutar åt Fulham med 39 procent. Båda lagen släpper till mycket, Ipswich 2,06 och Fulham 2,09 i xG per match. Fulham ligger 19:e med 2 poäng och har inte vunnit på fem matcher. Folkets streck på 40, 27 och 33 procent ligger nära modellen, så inget tecken sticker ut.",
+    "note": "En jämn match där modellen ger 38 procent på Ipswich och 36 på Fulham. Fulham ligger nittonde med 2 poäng utan vinst i formen FFFOO, men oddsen ger ändå Fulham 39 procent. Båda lagen släpper till över 2 i xG per match. Folket ligger nära modellen och inget tecken sticker ut.",
     "valueNote": ""
    },
    {
@@ -358,32 +274,17 @@ window.STRYK_ROUNDS = [
     },
     "xg": null,
     "injuries": {
-     "home": [
-      "Lewis Miller (skadad)",
-      "Yuki Ohashi (skadad)",
-      "Matty Litherland (skadad)",
-      "Yuri Ribeiro (skadad)",
-      "Mathias Jørgensen (osäker)"
-     ],
-     "away": [
-      "Will Fish (skadad)",
-      "Calum Chambers (skadad)",
-      "Isaak Davies (skadad)",
-      "Krystian Bielik (avstängd)",
-      "Rubin Colwill (osäker)"
-     ],
-     "impact": [
-      2,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Blackburn hemma: – (V–O–F). Cardiff borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ser Cardiff som knapp favorit med 38 procent mot Blackburns 36, i linje med oddsen. Lagen ligger nära varandra, Blackburn 16:e med 9 poäng och Cardiff 21:a med 7 poäng, och Cardiff vann senast. Folket har ändå lagt 52 procent på Blackburn, vilket är kraftigt överstreckat.",
-    "valueNote": "Cardiff har bara 24 procent av folkets streck men 38 procent hos modellen, vilket ger spelvärde 1,58."
+    "note": "Modellen ger Cardiff 38 procent och Blackburn 36, så tvåan är knapp favorit. Folket streckar Blackburn till 52 procent, vilket gör ettan kraftigt överstreckad med spelvärde 0,69. Blackburn är sextonde med 9 poäng och Cardiff tjugoförsta med 7 poäng, men Cardiff vann sin senaste match.",
+    "valueNote": "Folket streckar Cardiff till bara 24 procent mot modellens 38, vilket ger spelvärde 1,58."
    },
    {
     "n": 7,
@@ -411,28 +312,16 @@ window.STRYK_ROUNDS = [
     },
     "xg": null,
     "injuries": {
-     "home": [
-      "Luca Stephenson (skadad)",
-      "Lewis Brunt (skadad)"
-     ],
-     "away": [
-      "Bosun Lawal (skadad)",
-      "Svante Ingelsson (skadad)",
-      "Aaron Cresswell (skadad)",
-      "Ato Ampah (skadad)",
-      "Ethan Galbraith (osäker)"
-     ],
-     "impact": [
-      1,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
     "facts": "Bolton hemma: – (V–O–F). Stoke borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Jämnt mellan Bolton med 36 procent och Stoke med 37 procent hos modellen. Stoke ligger sjua med 13 poäng och har formen VVOVV, medan Bolton har vunnit sina två senaste. Stoke saknar bland andra Svante Ingelsson och Aaron Cresswell. Folket ligger nära modellen på alla tre tecken.",
+    "note": "Stoke är knapp favorit med 38 procent och ligger sjua med 13 poäng och formen VVOVV. Bolton är femtonde med 10 poäng men har vunnit sina två senaste. Folket och modellen ligger exakt lika, så inget tecken är över- eller understreckat.",
     "valueNote": ""
    },
    {
@@ -470,7 +359,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen, oddsen och folket är i princip överens, med 35, 28 och 37 procent. Wrexham ligger 14:e med 10 poäng och vann senast, medan Derby ligger 22:a med 5 poäng och har en enda vinst på fem matcher. Inget tecken är över- eller understreckat, spelvärdet ligger kring 1,00 överallt.",
+    "note": "Wrexham är knapp favorit med 37 procent hos modellen och ligger fjortonde med 10 poäng. Derby är tjugoandra med 5 poäng och har bara en vinst i formen VFFFO. Folket och modellen ligger lika, så streckningen ger inget spelvärde åt något håll.",
     "valueNote": ""
    },
    {
@@ -508,7 +397,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Middlesbrough är favorit med 42 procent hos modellen, ligger trea med 15 poäng och är obesegrat i de fem senaste. Wolverhampton ligger fyra med 14 poäng på en match mindre och har formen VFOVV. Folket har 52 procent på ettan, vilket är överstreckat, och tvåan har 24 procent mot modellens 32, med spelvärde 1,35.",
+    "note": "Middlesbrough är troligast med 42 procent hos modellen, ligger trea med 15 poäng och är obesegrade i formen OVVOO. Wolverhampton är fyra med 14 poäng på en match mindre och har formen VFOVV. Folket streckar ettan till 52 procent, vilket gör den överstreckad med spelvärde 0,81, medan tvåan på 24 procent mot modellens 32 är understreckad.",
     "valueNote": ""
    },
    {
@@ -546,7 +435,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Millwall är trolig vinnare med 39 procent hos modellen. Preston ligger 23:e med 4 poäng, medan Millwall ligger 11:e med 11 poäng. Folket har dock 44 procent på tvåan, så ettan är understreckad med 29 procent mot modellens 34 och spelvärde 1,17.",
+    "note": "Millwall är favorit med 39 procent hos modellen och ligger elva med 11 poäng, medan Preston är tjugotredje med 4 poäng. Folket streckar Millwall till 44 procent, så tvåan är något överstreckad med spelvärde 0,88. Preston på 29 procent hos folket mot modellens 34 är understreckad.",
     "valueNote": ""
    },
    {
@@ -584,7 +473,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Sheffield United är favorit med 45 procent hos modellen, men laget ligger 18:e med 9 poäng och har förlorat de två senaste. Lincoln ligger 12:e med 11 poäng. Folket har 57 procent på ettan, vilket är överstreckat. Krysset har spelvärde 1,32 och tvåan 1,26.",
+    "note": "Sheffield United är troligast med 45 procent hos modellen, men laget är artonde med 9 poäng och har förlorat sina två senaste. Lincoln är tolfte med 11 poäng. Folket streckar ettan till 57 procent, vilket ger spelvärde 0,78, medan krysset på 21 procent mot modellens 28 är understreckat.",
     "valueNote": ""
    },
    {
@@ -622,8 +511,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ser Burnley som favorit med 41 procent mot Watfords 32, i linje med oddsen. Watford ligger 20:e med 8 poäng och har fyra förluster på fem matcher, medan Burnley är sist med 4 poäng och har tre oavgjorda på fem. Folket har 44 procent på Watford, vilket är överstreckat.",
-    "valueNote": "Burnley har bara 30 procent av folkets streck men 41 procent hos modellen, vilket ger spelvärde 1,37."
+    "note": "Burnley är favorit med 41 procent hos modellen trots att laget ligger sist med 4 poäng utan vinst i formen OFOFO. Watford är tjugonde med 8 poäng och formen FFVFF. Folket streckar Watford till 44 procent mot modellens 32, så ettan är överstreckad och Burnley på 30 procent är understreckad.",
+    "valueNote": "Folket ger Burnley 30 procent medan modellen ger 41 procent, vilket ger spelvärde 1,37."
    },
    {
     "n": 13,
@@ -654,7 +543,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Huddersfield är klar favorit med 55 procent hos modellen och odds 1,70. Underlaget saknar tabell, form och skador för matchen. Folket ligger nära modellen på ettan med 56 procent, men tvåan är något understreckad med 19 procent mot 22 och har spelvärde 1,16.",
+    "note": "Huddersfield är klar favorit med 55 procent hos modellen och oddsen säger samma sak. Folket streckar ettan till 56 procent, nästan exakt som modellen. Sheffield Wednesday på 19 procent hos folket mot modellens 22 är något understreckat med spelvärde 1,16. Tabell och form saknas i underlaget.",
     "valueNote": ""
    }
   ]
