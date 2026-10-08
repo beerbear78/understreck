@@ -79,7 +79,8 @@ def run_friday(s) -> dict:
     understat.enrich(s, matches, day)
 
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
-              "fields": [f for f in ("table", "form", "xg", "injuries")
+              # Skador söks inte på fredagen; lördagskörningen hämtar dem tillsammans med startelvorna.
+              "fields": [f for f in ("table", "form", "xg")
                          if _missing(m, f) and (f != "xg" or RESEARCH_XG)]} for m in matches]
     needs = [x for x in needs if x["fields"]]
     if needs and RESEARCH and claude.available():
@@ -154,10 +155,11 @@ def run_lineups(s, rounds, force=False) -> dict | None:
                     lineup_data[m["n"]] = lu
             except (ApiFootballError, requests.RequestException) as e:
                 log.warning("API-Football, startelva %s – %s: %s", m["home"], m["away"], e)
-    missing = [m for m in early if m["n"] not in lineup_data]
-    if missing and RESEARCH:
-        needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"],
-                  "kickoff": m["kickoff"], "fields": ["lineup", "injuries"]} for m in missing]
+    # Tidiga matcher: startelva + skador. Senare matcher: bara skador (deras startelvor släpps efter spelstopp).
+    needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
+              "fields": ["lineup", "injuries"] if m in early else ["injuries"]}
+             for m in matches if m["n"] not in lineup_data]
+    if needs and RESEARCH and claude.available():
         for n, found in claude.research(needs, first, lineups=True).items():
             m = next((x for x in matches if x["n"] == n), None)
             if m:

@@ -88,7 +88,9 @@ def _payload(m, a, pick, lineup):
         "spelvarde_1X2": [round(v, 2) for v in a["value"]],
         "troligt_utfall": SIGNS[a["likely"]], "troligaste_resultat": a.get("score"),
         "bedomning": a["verdict"], "tabell": m.get("table"), "form_aldst_forst": m.get("form"),
-        "xg_for_emot_per_match": m.get("xg"), "skador": m.get("injuries"), "fakta": m.get("facts"),
+        "xg_for_emot_per_match": m.get("xg"), "fakta": m.get("facts"),
+        "skador": m.get("injuries") if (m.get("injuries") or {}).get("impact") is not None
+        else "inte kontrollerat än (läggs in på lördagen), skriv inget om skador",
         "veckans_spelvarda_tecken": SIGNS[pick["k"]] if pick else None,
         "startelvor": lineup,
     }
