@@ -66,6 +66,15 @@ h1{font-size:clamp(34px,6vw,50px);text-transform:uppercase;letter-spacing:.01em}
 select{font:inherit;font-family:var(--font-mono);font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
 .roundbar{display:flex;flex-wrap:wrap;gap:6px 22px;padding-block:12px 0;color:var(--muted);font-size:13.5px}
 .roundbar b{color:var(--ink);font-weight:600}
+.updates{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:680px){.updates{grid-template-columns:1fr}}
+.updates li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.upd-n{grid-row:1 / span 2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-mono);font-size:12px;font-weight:600;background:var(--surface-2);color:var(--muted)}
+.updates li.done .upd-n{background:var(--good);color:var(--on-strong)}
+.upd-t{font-weight:600;font-size:14px;min-width:0}
+.upd-d{grid-column:2 / span 2;font-size:12.5px;color:var(--muted)}
+.upd-s{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.updates li.done .upd-s{background:var(--good-soft);color:var(--good)}
 
 section{margin-top:40px}
 .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin-bottom:14px}
@@ -225,6 +234,7 @@ footer a{color:inherit}
     </div>
   </header>
   <div class="roundbar" id="roundbar"></div>
+  <ol class="updates" id="updates" aria-label="Uppdateringar av omgången"></ol>
 
   <section aria-labelledby="h-top">
     <div class="sec-head">
@@ -504,11 +514,31 @@ footer a{color:inherit}
       `<span><b>${esc(dateLabel(r.date))}</b></span>`,
       `<span>Spelstopp <b class="mono">${esc(r.deadline || '16:00')}</b></span>`,
       r.turnover ? `<span>Omsättning <b class="mono">${money(r.turnover)}</b> när datan hämtades</span>` : '',
-      r.updated ? `<span>Data uppdaterad <b>${esc(dateLabel(r.updated, true))}</b></span>` : '',
-      r.lineupUpdate
-        ? `<span class="lineup-ok">Startelvor inlagda <b class="mono">${esc(String(r.lineupUpdate).slice(11,16))}</b></span>`
-        : `<span>Startelvor läggs in cirka en timme före första match</span>`
+      r.updated ? `<span>Data uppdaterad <b>${esc(dateLabel(r.updated, true))}</b></span>` : ''
     ].join('');
+
+    // Uppdateringarna: fredag kväll, sedan ungefär en timme före första match
+    const firstKick = r.matches.map(m => m.kickoff).filter(Boolean).sort()[0];
+    let preTime = '';
+    if (firstKick){
+      const [hh, mm] = firstKick.split(':').map(Number);
+      const t = hh * 60 + mm - 60;
+      preTime = `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+    }
+    const lu = r.lineupUpdate ? String(r.lineupUpdate).slice(11, 16) : '';
+    $('#updates').innerHTML = `
+      <li class="done">
+        <span class="upd-n" aria-hidden="true">1</span>
+        <span class="upd-t">Fredag kväll</span>
+        <span class="upd-s">Klar</span>
+        <span class="upd-d">Veckans kupong, odds, tabell, form, skador och analys.</span>
+      </li>
+      <li class="${lu ? 'done' : ''}">
+        <span class="upd-n" aria-hidden="true">2</span>
+        <span class="upd-t">${preTime ? `Lördag ca ${preTime}` : 'Lördag'}, en timme före första match</span>
+        <span class="upd-s">${lu ? `Klar ${esc(lu)}` : 'Väntar'}</span>
+        <span class="upd-d">Startelvor, färska skador, odds och folkets streck. Allt räknas om.</span>
+      </li>`;
 
     // Topp 3
     const picks = topPicks(r.matches, an);
