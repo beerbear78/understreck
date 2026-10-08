@@ -1,0 +1,92 @@
+name: Uppdatera Understreck
+
+on:
+  schedule:
+    # GitHub räknar i UTC. 17:00 UTC = 19:00 svensk sommartid, 18:00 vintertid.
+    - cron: "0 17 * * 5"
+    # Lördagar var 15:e minut 09–15 UTC. Skriptet gör bara jobbet när första
+    # avspark är ungefär en timme bort, övriga körningar avslutas direkt.
+    - cron: "*/15 9-15 * * 6"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Vad ska köras?"
+        type: choice
+        options: [friday, lineups, deploy]
+        default: friday
+      force:
+        description: "Kör startelvor även utanför tidsfönstret"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ["site/index.html", ".github/workflows/update.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: understreck
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      changed: ${{ steps.run.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - id: run
+        name: Hämta data och räkna
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL || 'claude-opus-5-5' }}
+          RESEARCH: ${{ vars.RESEARCH || '1' }}
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          MODE_INPUT: ${{ inputs.mode }}
+          FORCE_INPUT: ${{ inputs.force }}
+        run: |
+          MODE="$MODE_INPUT"
+          if [ "$EVENT" = "schedule" ]; then
+            if [ "$SCHEDULE" = "0 17 * * 5" ]; then MODE=friday; else MODE=lineups; fi
+          fi
+          if [ "$EVENT" = "push" ]; then MODE=deploy; fi
+          ARGS="--mode $MODE"
+          if [ "$FORCE_INPUT" = "true" ]; then ARGS="$ARGS --force"; fi
+          python -m understreck $ARGS
+      - name: Spara data.js
+        if: steps.run.outputs.changed == 'true'
+        run: |
+          git config user.name "understreck-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data.js
+          git diff --cached --quiet || (git commit -m "Uppdatera omgång" && git push)
+
+  deploy:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
