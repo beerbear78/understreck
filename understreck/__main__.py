@@ -16,12 +16,13 @@ from datetime import datetime, timedelta
 
 import requests
 
-from . import claude, model, odds, store, tipsrader, understat
+from . import claude, footballdata, model, odds, store, tipsrader, understat
 from .apifootball import ApiFootball, ApiFootballError, enrich_friday, lineups as af_lineups, set_injuries
 from .util import TZ, http, log, now, set_output, team_sim
 
 ODDS_KEY = os.environ.get("ODDS_API_KEY", "").strip()
 AF_KEY = os.environ.get("API_FOOTBALL_KEY", "").strip()
+FD_KEY = os.environ.get("FOOTBALL_DATA_KEY", "").strip()
 RESEARCH = os.environ.get("RESEARCH", "1") != "0"
 # xG utanför de stora ligorna finns inte gratis. Att låta Claude söka upp det kostar ca 1 dollar per körning,
 # så det är avstängt som standard. Modellen klarar sig då på odds, form och skador för de matcherna.
@@ -73,6 +74,8 @@ def run_friday(s) -> dict:
             enrich_friday(ApiFootball(s, AF_KEY), matches, day)
         except (ApiFootballError, requests.RequestException) as e:
             log.warning("API-Football gick inte att använda: %s", e)
+    if FD_KEY:
+        footballdata.enrich(footballdata.FootballData(s, FD_KEY), matches)
     understat.enrich(s, matches, day)
 
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],

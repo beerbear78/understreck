@@ -14,7 +14,8 @@ import anthropic
 from .model import SIGNS
 from .util import log
 
-MODEL = os.environ.get("CLAUDE_MODEL") or "claude-opus-5-5"
+MODEL = os.environ.get("CLAUDE_MODEL") or "claude-opus-5-5"              # skriver analyserna
+RESEARCH_MODEL = os.environ.get("RESEARCH_MODEL") or "claude-sonnet-5-5"  # webbsökning, halva priset
 RESEARCH_MAX_SEARCHES = int(os.environ.get("RESEARCH_MAX_SEARCHES") or 8)
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50)}
@@ -56,17 +57,18 @@ def _auth_failed(e) -> None:
               "och klistra in hela värdet (börjar med sk-ant-) i secret ANTHROPIC_API_KEY.", e.status_code)
 
 
-def _log_cost(resp, what):
+def _log_cost(resp, what, model):
     u = resp.usage
-    pin, pout = PRICES.get(MODEL, (4.0, 20.0))
+    pin, pout = PRICES.get(model, (4.0, 20.0))
     searches = getattr(getattr(u, "server_tool_use", None), "web_search_requests", 0) or 0
     cost = u.input_tokens / 1e6 * pin + u.output_tokens / 1e6 * pout + searches * 0.01
-    log.info("Claude %s: %d in, %d ut, %d sökningar, ca $%.3f", what, u.input_tokens, u.output_tokens, searches, cost)
+    log.info("Claude %s (%s): %d in, %d ut, %d sökningar, ca $%.3f",
+             what, model, u.input_tokens, u.output_tokens, searches, cost)
 
 
-def _create(**kw):
+def _create(model=MODEL, **kw):
     return _client().beta.messages.create(
-        model=MODEL, max_tokens=16000, betas=[FALLBACK_BETA],
+        model=model, max_tokens=16000, betas=[FALLBACK_BETA],
         fallbacks="default", **kw)
 
 
@@ -122,7 +124,7 @@ Skriv för varje match:
     except anthropic.APIError as e:
         log.error("Claude-anropet för analyser misslyckades: %s", e)
         return None
-    _log_cost(resp, "analyser")
+    _log_cost(resp, "analyser", MODEL)
     if resp.stop_reason != "end_turn":
         log.error("Claude avbröt analyserna (%s)", resp.stop_reason)
         return None
@@ -192,7 +194,7 @@ med bara de fält som efterfrågats."""
     tools = [{"type": "web_search_20260209", "name": "web_search", "max_uses": RESEARCH_MAX_SEARCHES}]
     try:
         for _ in range(5):
-            resp = _create(tools=tools, output_config={"effort": "medium"}, messages=messages)
+            resp = _create(model=RESEARCH_MODEL, tools=tools, output_config={"effort": "medium"}, messages=messages)
             if resp.stop_reason != "pause_turn":
                 break
             messages = [messages[0], {"role": "assistant", "content": resp.content}]
@@ -202,7 +204,7 @@ med bara de fält som efterfrågats."""
     except anthropic.APIError as e:
         log.error("Claude-researchen misslyckades: %s", e)
         return {}
-    _log_cost(resp, "research")
+    _log_cost(resp, "research", RESEARCH_MODEL)
     text = "".join(b.text for b in resp.content if b.type == "text")
     try:
         rows = _extract_json(text)
