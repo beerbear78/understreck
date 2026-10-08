@@ -6,9 +6,10 @@
 window.STRYK_ROUNDS = [
  {
   "id": 7763,
+  "draw": "4974",
   "date": "2026-10-10",
   "deadline": "15:59",
-  "turnover": 1608649,
+  "turnover": 1961134,
   "updated": "2026-10-08",
   "lineupUpdate": null,
   "matches": [
@@ -25,13 +26,10 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      1.7,
-     4.1,
+     4.2,
      4.4
     ],
-    "table": {
-     "home": "12:a, 5 p",
-     "away": "20:e, 2 p"
-    },
+    "table": null,
     "form": {
      "home": "FVOFO",
      "away": "FFOOF"
@@ -47,27 +45,17 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Ugarte (korsband)",
-      "Sesko (osäker)",
-      "Dorgu (osäker)"
-     ],
-     "away": [
-      "Mudryk",
-      "van de Ven (osäker)",
-      "Porro (osäker)"
-     ],
-     "impact": [
-      1,
-      1
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Tottenham har gjort 2 mål på 5 matcher och väntar på första ligasegern.",
-    "note": "United skapar klart mest av de två (2,1 xG per match mot Tottenhams 1,2) och möter ett lag som bara gjort två mål och ligger sist. Ettan är troligast med 55 % enligt modellen, men 63 % streckat är lite för mycket. Kryss och tvåa är svagt understreckade.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T18:30:00+02:00"
-    }
+     "kickoff": "2026-10-10T18:30:00+02:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Modellen ger 1 55 % mot folkets 63 %. X är understreckat: 23 % enligt modellen, 20 % hos folket. xG för och emot per match: Manchester United 2,1 och 1,4, Tottenham 1,2 och 1,8.",
+    "valueNote": ""
    },
    {
     "n": 2,
@@ -76,19 +64,16 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     62,
+     63,
      21,
-     17
+     16
     ],
     "odds": [
-     1.67,
-     4.15,
-     4.55
+     1.7,
+     4.1,
+     4.5
     ],
-    "table": {
-     "home": "10:a, 7 p",
-     "away": "17:e, 3 p"
-    },
+    "table": null,
     "form": {
      "home": "VVFOF",
      "away": "FOOOF"
@@ -104,29 +89,17 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "João Pedro",
-      "Palmer (osäker)",
-      "Reece James (osäker)"
-     ],
-     "away": [
-      "Kluivert",
-      "Adli",
-      "Milosavljević",
-      "Araujo",
-      "Scott (osäker)"
-     ],
-     "impact": [
-      2,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Chelsea har släppt in mål i 21 raka PL-matcher. De tre senaste mötena slutade 2–2, 0–0, 2–2.",
-    "note": "Chelsea är favorit på pappret, men försvaret läcker: 2,06 xG emot per match och mål emot i 21 raka ligamatcher. Bournemouth är utan seger men har bättre xG-balans än Chelsea, och de tre senaste mötena slutade oavgjort. Ettan är troligast, men 62 % streckat är för mycket och tvåan har värde.",
-    "valueNote": "Chelsea släpper till över 2 xG per match och har haft mål emot i 21 raka. De tre senaste mötena slutade oavgjort, ändå har bara 17 % streckat tvåan.",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Modellen ger 1 51 % mot folkets 63 %. 2 är understreckat: 25 % enligt modellen, 16 % hos folket. 1 är överstreckat. xG för och emot per match: Chelsea 1,8 och 2,1, Bournemouth 1,6 och 1,4.",
+    "valueNote": "Modellen ger 2 25 % mot folkets 16 %."
    },
    {
     "n": 3,
@@ -135,19 +108,16 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     43,
+     42,
      26,
-     31
+     32
     ],
     "odds": [
-     2.6,
-     3.5,
-     2.58
+     2.62,
+     3.55,
+     2.55
     ],
-    "table": {
-     "home": "16:e, 4 p",
-     "away": "4:e, 9 p"
-    },
+    "table": null,
     "form": {
      "home": "FFOFV",
      "away": "VOOOV"
@@ -163,27 +133,17 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Goretzka (obekräftat)",
-      "Onana (obekräftat)"
-     ],
-     "away": [
-      "Dasilva",
-      "Jensen",
-      "Van den Berg",
-      "Damsgaard (osäker)"
-     ],
-     "impact": [
-      1,
-      1
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Villa har förlorat båda hemmamatcherna. Brentford vann båda mötena förra säsongen med 1–0.",
-    "note": "Villa har sämst xG-balans på kupongen (1,00 för, 2,17 emot) och har förlorat båda hemmamatcherna. Brentford är obesegrade på sju matcher och vann båda mötena förra säsongen. Oddsen ser matchen som jämn, men xG pekar mot Brentford, och folket streckar ändå Villa högst. Tvåan hamnar precis utanför topp tre.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Modellen ger 2 40 % mot folkets 32 %. 2 är understreckat: 40 % enligt modellen, 32 % hos folket. 1 är överstreckat. xG för och emot per match: Aston Villa 1,0 och 2,2, Brentford 2,1 och 1,5.",
+    "valueNote": ""
    },
    {
     "n": 4,
@@ -192,19 +152,16 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     28,
+     27,
      24,
-     48
+     49
     ],
     "odds": [
-     2.95,
-     3.58,
-     2.32
+     3.0,
+     3.5,
+     2.3
     ],
-    "table": {
-     "home": "14:e, 4 p",
-     "away": "3:e, 10 p"
-    },
+    "table": null,
     "form": {
      "home": "FVOFF",
      "away": "VFOVV"
@@ -220,34 +177,17 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Roefs",
-      "Mundle",
-      "Mukiele",
-      "Reinildo",
-      "Traoré",
-      "Ta Bi",
-      "Brobbey (osäker)"
-     ],
-     "away": [
-      "Wieffer",
-      "Hinshelwood",
-      "Minteh",
-      "Mitoma",
-      "Ayari",
-      "Dunk (osäker)"
-     ],
-     "impact": [
-      3,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Brighton slog Arsenal med 3–0 före landslagsuppehållet. Uppgifterna om Brightons skador går isär mellan källorna.",
-    "note": "Brighton är i bra form och slog Arsenal med 3–0 senast, så tvåan är troligast. Men Sunderland skapar mycket på hemmaplan (2,0 xG per match) och Brightons försvar släpper till nästan lika mycket. 48 % på Brighton är i överkant, så ettan är understreckad trots Sunderlands långa skadelista.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Modellen ger 2 40 % mot folkets 49 %. 1 är understreckat: 34 % enligt modellen, 27 % hos folket. 2 är överstreckat. xG för och emot per match: Sunderland 2,0 och 1,8, Brighton 2,6 och 1,7.",
+    "valueNote": ""
    },
    {
     "n": 5,
@@ -262,13 +202,10 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      2.75,
-     3.45,
-     2.47
+     3.5,
+     2.45
     ],
-    "table": {
-     "home": "11:e, 6 p",
-     "away": "19:e, 2 p"
-    },
+    "table": null,
     "form": {
      "home": "VFFVF",
      "away": "FFFOO"
@@ -284,24 +221,17 @@ window.STRYK_ROUNDS = [
      ]
     },
     "injuries": {
-     "home": [
-      "Fatawu (avstängd)",
-      "Jack Taylor"
-     ],
-     "away": [
-      "Cairney"
-     ],
-     "impact": [
-      1,
-      1
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Fulham är utan seger men har bättre xG än resultaten visar. 11 av de 12 senaste mötena hade minst två mål.",
-    "note": "Två lag med svaga försvar som båda släpper till över 2 xG per match. Oddsen lutar svagt åt Fulham, xG åt Ipswich på hemmaplan. Folket har streckat ungefär rätt, så här finns inget tydligt spelvärde. En typisk helgardering.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Modellen ger 1 38 % mot folkets 40 %. xG för och emot per match: Ipswich 1,4 och 2,1, Fulham 1,6 och 2,1.",
+    "valueNote": ""
    },
    {
     "n": 6,
@@ -315,59 +245,62 @@ window.STRYK_ROUNDS = [
      24
     ],
     "odds": [
-     2.45,
+     2.62,
      3.55,
-     2.55
+     2.45
     ],
-    "table": {
-     "home": "16:e, 9 p",
-     "away": "21:a, 7 p"
-    },
-    "form": {
-     "home": "OFFVO",
-     "away": "FFOFV"
-    },
-    "xg": {
-     "home": [
-      1.33,
-      1.62
-     ],
-     "away": [
-      2.13,
-      1.37
-     ]
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
-     "home": [
-      "Miller",
-      "Ohashi",
-      "Litherland",
-      "Ribeiro",
-      "Jørgensen (osäker)"
-     ],
-     "away": [
-      "Fish",
-      "Chambers",
-      "Isaak Davies",
-      "Bielik (avstängd)",
-      "Colwill (osäker)"
-     ],
-     "impact": [
-      2,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Cardiff har ligans högsta xG framåt men har tagit 1 poäng på 4 bortamatcher.",
-    "note": "Folket har gjort Blackburn till klar favorit, men bookmakers ser en jämn match. Cardiff har högst xG framåt i hela Championship (2,13 per match) men har slarvat bort chanserna och har svagt bortafacit. Modellen ger tvåan 37 % mot 24 % streckat, vilket gör den till veckans största spelvärde.",
-    "valueNote": "Bookmakers ser en jämn match, men folket har satt 52 % på Blackburn. Cardiff skapar flest chanser i hela Championship och borde få ut mer av dem.",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Modellen ger 2 38 % mot folkets 24 %. 2 är understreckat: 38 % enligt modellen, 24 % hos folket. 1 är överstreckat.",
+    "valueNote": "Modellen ger 2 38 % mot folkets 24 %."
    },
    {
     "n": 7,
     "home": "Bolton",
     "away": "Stoke",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     34,
+     28,
+     38
+    ],
+    "odds": [
+     2.63,
+     3.35,
+     2.5
+    ],
+    "table": null,
+    "form": {},
+    "xg": null,
+    "injuries": {
+     "home": [],
+     "away": [],
+     "impact": null
+    },
+    "facts": null,
+    "_src": {
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Modellen ger 2 37 % mot folkets 38 %.",
+    "valueNote": ""
+   },
+   {
+    "n": 8,
+    "home": "Derby",
+    "away": "Wrexham",
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
@@ -377,107 +310,24 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      2.65,
-     3.45,
-     2.52
+     3.29,
+     2.56
     ],
-    "table": {
-     "home": "15:e, 10 p",
-     "away": "7:e, 13 p"
-    },
-    "form": {
-     "home": "FFFVV",
-     "away": "VVOVV"
-    },
-    "xg": {
-     "home": [
-      1.41,
-      1.5
-     ],
-     "away": [
-      1.3,
-      1.53
-     ]
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
-     "home": [
-      "Stephenson",
-      "Brunt"
-     ],
-     "away": [
-      "Lawal",
-      "Ingelsson",
-      "Cresswell",
-      "Ampah",
-      "Galbraith (osäker)"
-     ],
-     "impact": [
-      1,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Stoke har 4 segrar på de 5 senaste efter tre raka förluster i starten. Borta har de släppt in 9 mål på 4 matcher.",
-    "note": "Stoke har fyra segrar på fem, men xG-siffrorna är jämna och Stoke har släppt in 9 mål på 4 bortamatcher. Bolton får en knuff av hemmaplan och Stokes skadelista. En öppen match där ettan är svagt understreckad.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
-   },
-   {
-    "n": 8,
-    "home": "Derby",
-    "away": "Wrexham",
-    "league": "Championship",
-    "kickoff": "16:00",
-    "folk": [
-     36,
-     28,
-     36
-    ],
-    "odds": [
-     2.8,
-     3.4,
-     2.4
-    ],
-    "table": {
-     "home": "22:a, 5 p",
-     "away": "14:e, 10 p"
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
     },
-    "form": {
-     "home": "VFFFO",
-     "away": "VOOFV"
-    },
-    "xg": {
-     "home": [
-      1.29,
-      1.76
-     ],
-     "away": [
-      1.27,
-      1.3
-     ]
-    },
-    "injuries": {
-     "home": [
-      "Charlie Taylor"
-     ],
-     "away": [
-      "Thomason",
-      "Cacace",
-      "Cleworth",
-      "Broadhead",
-      "Revan"
-     ],
-     "impact": [
-      1,
-      2
-     ]
-    },
-    "facts": "Derby har inte vunnit hemma den här säsongen (0–1–3). Derbys xG-siffror är osäkra.",
-    "note": "Derby ligger näst sist och har inte vunnit hemma i år. Wrexham har ett stabilt försvar (1,30 xG emot) men fem spelare borta. Modellen och folket är nästan överens, så matchen saknar värde åt något håll. Tvåan är hårfin favorit.",
-    "valueNote": "",
-    "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+    "note": "Modellen ger 2 36 % mot folkets 37 %.",
+    "valueNote": ""
    },
    {
     "n": 9,
@@ -491,45 +341,25 @@ window.STRYK_ROUNDS = [
      25
     ],
     "odds": [
-     2.1,
+     2.21,
      3.62,
-     3.08
+     2.9
     ],
-    "table": {
-     "home": "3:e, 15 p",
-     "away": "4:e, 14 p (7 matcher)"
-    },
-    "form": {
-     "home": "OVVOO",
-     "away": "VFOVV"
-    },
-    "xg": {
-     "home": [
-      1.9,
-      1.35
-     ],
-     "away": [
-      1.64,
-      1.25
-     ]
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
      "home": [],
-     "away": [
-      "Jiménez",
-      "Fer López (osäker)"
-     ],
-     "impact": [
-      0,
-      2
-     ]
+     "away": [],
+     "impact": null
     },
-    "facts": "Middlesbrough är obesegrade hemma (3–1–0). Två uppflyttningskandidater möts.",
-    "note": "Två uppflyttningskandidater möts. Middlesbrough är obesegrade hemma och skapar mest av de två. Wolves saknar troligen Jiménez och kanske Fer López. Ettan är troligast men något överstreckad, och tvåan har ett litet värde som gardering.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Modellen ger 1 42 % mot folkets 51 %. 2 är understreckat: 32 % enligt modellen, 25 % hos folket. 1 är överstreckat.",
+    "valueNote": ""
    },
    {
     "n": 10,
@@ -538,52 +368,30 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     30,
+     29,
      27,
-     43
+     44
     ],
     "odds": [
-     2.77,
+     2.75,
      3.4,
-     2.35
+     2.42
     ],
-    "table": {
-     "home": "23:e, 4 p",
-     "away": "11:e, 11 p"
-    },
-    "form": {
-     "home": "FVFFO",
-     "away": "FVOFO"
-    },
-    "xg": {
-     "home": [
-      1.36,
-      1.68
-     ],
-     "away": [
-      1.55,
-      1.54
-     ]
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
-     "home": [
-      "McCann",
-      "Wiley (osäker)"
-     ],
-     "away": [
-      "Flera på väg tillbaka efter skadekris"
-     ],
-     "impact": [
-      1,
-      1
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Graham Alexander leder Preston för första gången efter att Heckingbottom fått gå. Preston har inte slagit Millwall i ligan på cirka 13 möten.",
-    "note": "Preston ligger näst sist men har fått ny tränare, och xG-siffrorna är bättre än tabellen. Millwall är favoriter och har ett starkt facit mot Preston. Ändå är 43 % på tvåan mer än oddsen motiverar, så ettan är understreckad som gardering.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Modellen ger 2 39 % mot folkets 44 %. 1 är understreckat: 34 % enligt modellen, 29 % hos folket.",
+    "valueNote": ""
    },
    {
     "n": 11,
@@ -597,46 +405,25 @@ window.STRYK_ROUNDS = [
      22
     ],
     "odds": [
-     2.1,
-     3.4,
+     2.08,
+     3.37,
      3.4
     ],
-    "table": {
-     "home": "18:e, 9 p",
-     "away": "12:e, 11 p"
-    },
-    "form": {
-     "home": "VFVFF",
-     "away": "OOVVF"
-    },
-    "xg": {
-     "home": [
-      1.02,
-      1.76
-     ],
-     "away": [
-      1.31,
-      1.68
-     ]
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
-     "home": [
-      "Seriki",
-      "Burrows (osäker)",
-      "One (osäker)"
-     ],
+     "home": [],
      "away": [],
-     "impact": [
-      1,
-      0
-     ]
+     "impact": null
     },
-    "facts": "Lincoln har vunnit tre raka bortamatcher utan insläppt mål. Sheffield United har 4 poäng på 4 hemmamatcher.",
-    "note": "Sheffield United skapar bara 1,0 xG per match och har 4 poäng på fyra hemmamatcher. Lincoln har vunnit tre raka bortamatcher utan insläppt mål. Ettan är fortfarande troligast, men folket har överdrivit den kraftigt. Både kryss och tvåa är understreckade.",
-    "valueNote": "57 % har streckat Sheffield United trots lagets svaga xG. Lincoln har vunnit tre raka bortamatcher utan att släppa in mål.",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Modellen ger 1 45 % mot folkets 57 %. X är understreckat: 28 % enligt modellen, 21 % hos folket. 1 är överstreckat.",
+    "valueNote": ""
    },
    {
     "n": 12,
@@ -651,48 +438,24 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      2.9,
-     3.48,
-     2.3
+     3.49,
+     2.27
     ],
-    "table": {
-     "home": "20:e, 8 p",
-     "away": "24:e, 4 p"
-    },
-    "form": {
-     "home": "FFVFF",
-     "away": "OFOFO"
-    },
-    "xg": {
-     "home": [
-      1.26,
-      1.64
-     ],
-     "away": [
-      1.38,
-      1.55
-     ]
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
-     "home": [
-      "Ytterbackar skadade tidigt"
-     ],
-     "away": [
-      "Cullen (osäker)",
-      "Agyei",
-      "Satpayev",
-      "Beyer"
-     ],
-     "impact": [
-      1,
-      2
-     ]
+     "home": [],
+     "away": [],
+     "impact": null
     },
-    "facts": "Burnley är utan seger men favoriter hos bookmakers. Burnley har 11 segrar mot Watfords 5 i de 24 senaste mötena.",
-    "note": "Burnley är sist och utan seger men ändå favorit hos bookmakers, tack vare starkare trupp och bättre xG-balans. Watford har förlorat fyra av sina fem senaste. Folket tror mer på Watford än oddsen gör, så tvåan har värde.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Modellen ger 2 41 % mot folkets 30 %. 2 är understreckat: 41 % enligt modellen, 30 % hos folket. 1 är överstreckat.",
+    "valueNote": "Modellen ger 2 41 % mot folkets 30 %."
    },
    {
     "n": 13,
@@ -701,48 +464,31 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     54,
+     55,
      25,
-     21
+     20
     ],
     "odds": [
-     2.0,
-     3.6,
-     3.3
+     1.7,
+     4.0,
+     4.2
     ],
-    "table": {
-     "home": "3:e, 15 p",
-     "away": "4:e, 14 p (7 matcher)"
-    },
-    "form": {
-     "home": "VOOFV",
-     "away": "VVOOO"
-    },
-    "xg": {
-     "home": [
-      1.75,
-      1.02
-     ],
-     "away": null
-    },
+    "table": null,
+    "form": {},
+    "xg": null,
     "injuries": {
      "home": [],
-     "away": [
-      "Max Lowe"
-     ],
-     "impact": [
-      0,
-      1
-     ]
+     "away": [],
+     "impact": null
     },
-    "facts": "Yorkshirederby. Wednesday har tre raka 0–0 och är obesegrade på sex matcher. Oddsen är inte helt verifierade.",
-    "note": "Yorkshirederby mellan trean och fyran i League One. Huddersfield har bäst försvar av de två sett till xG och spelar hemma, så ettan är troligast. Wednesday har inte förlorat på sex matcher och har spelat tre raka 0–0. Tvåan är något understreckad. Oddsen här är inte fullt verifierade.",
-    "valueNote": "",
+    "facts": null,
     "_src": {
-     "kickoff": "2026-10-10T16:00:00+02:00"
-    }
+     "kickoff": "2026-10-10T16:00:00+02:00",
+     "sport": "soccer_england_league1"
+    },
+    "note": "Modellen ger 1 55 % mot folkets 55 %.",
+    "valueNote": ""
    }
-  ],
-  "draw": "4974"
+  ]
  }
 ];
