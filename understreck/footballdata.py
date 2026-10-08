@@ -57,6 +57,35 @@ def _find(name, rows):
     return None
 
 
+def _tables_from_matches(played) -> dict:
+    """Räknar fram TOTAL/HOME/AWAY-tabeller ur spelade matcher (reserv om tabellanropet inte räcker)."""
+    rows = {"TOTAL": {}, "HOME": {}, "AWAY": {}}
+    for x in played:
+        ft = x["score"]["fullTime"]
+        if ft.get("home") is None or ft.get("away") is None:
+            continue
+        for side, team, gf, ga in (("HOME", x["homeTeam"], ft["home"], ft["away"]),
+                                   ("AWAY", x["awayTeam"], ft["away"], ft["home"])):
+            for typ in ("TOTAL", side):
+                r = rows[typ].setdefault(team["id"], {"team": team, "won": 0, "draw": 0, "lost": 0,
+                                                      "points": 0, "playedGames": 0, "gd": 0, "gf": 0})
+                r["playedGames"] += 1
+                r["gf"] += gf
+                r["gd"] += gf - ga
+                if gf > ga:
+                    r["won"] += 1; r["points"] += 3
+                elif gf == ga:
+                    r["draw"] += 1; r["points"] += 1
+                else:
+                    r["lost"] += 1
+    out = {}
+    for typ, d in rows.items():
+        out[typ] = sorted(d.values(), key=lambda r: (-r["points"], -r["gd"], -r["gf"]))
+        for i, r in enumerate(out[typ], 1):
+            r["position"] = i
+    return out
+
+
 def enrich(fd: FootballData, matches: list) -> None:
     """Fyller i tabell, form och fakta för matcher som saknar dem."""
     by_code = {}
@@ -72,13 +101,22 @@ def enrich(fd: FootballData, matches: list) -> None:
         except Exception as e:  # en liga som strular ska inte stoppa resten
             log.warning("football-data.org %s misslyckades: %s", code, e)
             continue
-        tables = {s["type"]: s["table"] for s in st.get("standings", []) if s.get("group") is None}
-        total = tables.get("TOTAL", [])
-        by_id = lambda typ: {r["team"]["id"]: r for r in tables.get(typ, [])}
-        home_rows, away_rows = by_id("HOME"), by_id("AWAY")
+        tables = {}
+        for s in st.get("standings", []):
+            if s.get("type") and s.get("table") and s["type"] not in tables:
+                tables[s["type"]] = s["table"]
+        log.info("football-data.org %s: tabeller %s, %d spelade matcher",
+                 code, {k: len(v) for k, v in tables.items()} or "inga", len(played))
+        computed = _tables_from_matches(played)
         played.sort(key=lambda x: x["utcDate"])
         for m in ms:
-            th, ta = _find(m["home"], total), _find(m["away"], total)
+            src = tables
+            th, ta = _find(m["home"], tables.get("TOTAL", [])), _find(m["away"], tables.get("TOTAL", []))
+            if not th or not ta:
+                src = computed
+                th, ta = _find(m["home"], computed["TOTAL"]), _find(m["away"], computed["TOTAL"])
+            by_id = lambda typ: {r["team"]["id"]: r for r in src.get(typ, [])}
+            home_rows, away_rows = by_id("HOME"), by_id("AWAY")
             if not th or not ta:
                 log.warning("football-data.org hittade inte %s – %s i %s", m["home"], m["away"], code)
                 continue
