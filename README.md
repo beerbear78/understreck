@@ -56,8 +56,8 @@ en felstavad nyckel.
 * The Odds API: 4–6 krediter per körning av 500 gratis i månaden.
 * API-Football: cirka 25 anrop per körning av 100 gratis per dag.
 * understat.com (xG för Premier League) och tipsrader.se (folkets streck): gratis.
-* Claude: analyserna kostar några cent per körning. Webbsökningen (om API-Football inte täcker säsongen,
-  eller för xG utanför Premier League) kostar cirka 0,1–0,5 dollar per körning. Följ förbrukningen på
+* Claude: analyserna kostar cirka 0,10 dollar per körning. Webbsökningen används bara som reserv när
+  API-Football saknar uppgifter och kan då kosta 1–2 dollar per körning. Följ förbrukningen på
   platform.claude.com.
 
 ## Bra att veta

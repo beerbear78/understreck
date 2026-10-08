@@ -98,6 +98,71 @@ class TestApiFootball(unittest.TestCase):
         self.assertEqual(lu["away_formation"], "3-5-2")
 
 
+class TestFootballData(unittest.TestCase):
+    def test_enrich(self):
+        from understreck import footballdata
+        team = lambda i, n, s: {"id": i, "name": n, "shortName": s}
+        SU, LI, X = team(1, "Sheffield United FC", "Sheffield Utd"), team(2, "Lincoln City FC", "Lincoln"), team(3, "Other FC", "Other")
+        row = lambda t, pos, pts, w, d, l: {"position": pos, "team": t, "points": pts, "playedGames": w + d + l,
+                                             "won": w, "draw": d, "lost": l}
+        standings = {"standings": [
+            {"type": "TOTAL", "group": None, "table": [row(SU, 18, 9, 2, 3, 3), row(LI, 12, 11, 3, 2, 3)]},
+            {"type": "HOME", "group": None, "table": [row(SU, 18, 4, 1, 1, 2), row(LI, 9, 4, 1, 1, 2)]},
+            {"type": "AWAY", "group": None, "table": [row(SU, 18, 5, 1, 2, 1), row(LI, 3, 9, 3, 0, 1)]}]}
+        mk = lambda d, h, a, gh, ga: {"utcDate": d, "homeTeam": h, "awayTeam": a, "score": {"fullTime": {"home": gh, "away": ga}}}
+        played = {"matches": [mk("2026-09-20T14:00:00Z", X, LI, 0, 3), mk("2026-09-01T14:00:00Z", SU, X, 2, 0),
+                              mk("2026-09-08T14:00:00Z", X, SU, 1, 1), mk("2026-09-15T14:00:00Z", LI, X, 0, 1)]}
+        fd = footballdata.FootballData(None, "k")
+        fd.get = lambda path, **kw: played if path.endswith("/matches") else standings
+        m = {"n": 11, "home": "Sheffield United", "away": "Lincoln", "table": None, "form": {},
+             "_src": {"sport": "soccer_efl_champ", "kickoff": "2026-10-10T16:00:00+02:00"}}
+        footballdata.enrich(fd, [m])
+        self.assertEqual(m["table"]["home"], "18:e, 9 p (8 matcher)")
+        self.assertEqual(m["form"], {"home": "VO", "away": "FV"})
+        self.assertIn("Lincoln borta: 3–0–1", m["facts"])
+
+    def test_only_total_table(self):
+        """Gratisnivån skickar bara TOTAL – hemma/borta ska räknas fram ur matcherna."""
+        from understreck import footballdata
+        A, B = {"id": 1, "name": "Arsenal FC", "shortName": "Arsenal"}, {"id": 2, "name": "Chelsea FC", "shortName": "Chelsea"}
+        mk = lambda d, h, a, gh, ga: {"utcDate": d, "homeTeam": h, "awayTeam": a, "score": {"fullTime": {"home": gh, "away": ga}}}
+        played = {"matches": [mk("2026-09-01T14:00:00Z", A, B, 2, 1), mk("2026-09-08T14:00:00Z", B, A, 0, 0)]}
+        total = [{"position": 1, "team": A, "points": 4, "playedGames": 2, "won": 1, "draw": 1, "lost": 0},
+                 {"position": 2, "team": B, "points": 1, "playedGames": 2, "won": 0, "draw": 1, "lost": 1}]
+        fd = footballdata.FootballData(None, "k")
+        fd.get = lambda path, **kw: played if path.endswith("/matches") else {"standings": [{"type": "TOTAL", "table": total}]}
+        m = {"n": 1, "home": "Arsenal", "away": "Chelsea", "table": None, "form": {},
+             "_src": {"sport": "soccer_epl", "kickoff": "2026-10-10T16:00:00+02:00"}}
+        footballdata.enrich(fd, [m])
+        self.assertEqual(m["facts"], "Arsenal hemma: 1–0–0 (V–O–F). Chelsea borta: 0–0–1.")
+
+    def test_without_standings(self):
+        from understreck import footballdata
+        A, B = {"id": 1, "name": "Arsenal FC", "shortName": "Arsenal"}, {"id": 2, "name": "Chelsea FC", "shortName": "Chelsea"}
+        mk = lambda d, h, a, gh, ga: {"utcDate": d, "homeTeam": h, "awayTeam": a, "score": {"fullTime": {"home": gh, "away": ga}}}
+        played = {"matches": [mk("2026-09-01T14:00:00Z", A, B, 2, 1), mk("2026-09-08T14:00:00Z", B, A, 0, 0)]}
+        fd = footballdata.FootballData(None, "k")
+        fd.get = lambda path, **kw: played if path.endswith("/matches") else {"standings": []}
+        m = {"n": 1, "home": "Arsenal", "away": "Chelsea", "table": None, "form": {},
+             "_src": {"sport": "soccer_epl", "kickoff": "2026-10-10T16:00:00+02:00"}}
+        footballdata.enrich(fd, [m])
+        self.assertEqual(m["table"], {"home": "1:a, 4 p (2 matcher)", "away": "2:a, 1 p (2 matcher)"})
+        self.assertEqual(m["form"], {"home": "VO", "away": "FO"})
+        self.assertIn("Arsenal hemma: 1–0–0", m["facts"])
+
+
+class TestResearchClean(unittest.TestCase):
+    def test_tolerant(self):
+        from understreck.claude import _clean
+        got = _clean({"n": 13, "table": {"home": "3rd, 15 pts", "away": "4:e, 14 p"},
+                      "form": {"home": "W D L W W", "away": "V-O-O-F-V"},
+                      "injuries": {"home": ["A (skadad)"], "away": [], "impact": [1, 0]}})
+        self.assertEqual(got["form"], {"home": "VOFVV", "away": "VOOFV"})
+        self.assertEqual(got["table"]["home"], "3rd, 15 pts")
+        self.assertEqual(got["injuries"]["impact"], [1, 0])
+        self.assertEqual(_clean({"n": 1, "form": {"home": None, "away": "WW"}}), {})
+
+
 class TestModel(unittest.TestCase):
     def test_round_matches_page(self):
         r = store.load()
