@@ -9,7 +9,7 @@ window.STRYK_ROUNDS = [
   "draw": "4974",
   "date": "2026-10-10",
   "deadline": "15:59",
-  "turnover": 1977178,
+  "turnover": 1988922,
   "updated": "2026-10-08",
   "lineupUpdate": null,
   "matches": [
@@ -342,7 +342,7 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      2.21,
-     3.62,
+     3.63,
      2.9
     ],
     "table": null,
