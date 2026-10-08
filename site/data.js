@@ -9,7 +9,7 @@ window.STRYK_ROUNDS = [
   "draw": "4974",
   "date": "2026-10-10",
   "deadline": "15:59",
-  "turnover": 2007479,
+  "turnover": 2038822,
   "updated": "2026-10-08",
   "lineupUpdate": null,
   "matches": [
@@ -57,7 +57,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T18:30:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Manchester United är favorit med 55 procent hos modellen och skapar 2.12 xG per match, medan Tottenham bara når 1.16 xG och släpper in 1.84. Tottenham står utan vinst i formen FFOOF och ligger sist med 2 poäng. Folket spelar ettan till 64 procent mot modellens 55, så ettan är överstreckad med spelvärde 0.86. Tvåan är understreckad med 16 procent hos folket mot 22 hos modellen.",
+    "note": "Manchester United är favorit med 55 procent hos modellen och har bättre xG, 2,12 framåt mot Tottenhams 1,16. Tottenham är sist med 2 poäng och saknar vinst i formen FFOOF. Folket har däremot 64 procent på etta, så tecknet är överstreckat med spelvärde 0,86, medan tvåan på 22 procent mot folkets 16 är understreckad.",
     "valueNote": ""
    },
    {
@@ -73,7 +73,7 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      1.7,
-     4.1,
+     4.19,
      4.5
     ],
     "table": {
@@ -104,8 +104,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Chelsea är favorit med 51 procent hos modellen och troligaste resultatet är 2-1. Chelsea släpper dock in 2.06 xG per match, och Bournemouth skapar 1.62 xG. Folket spelar ettan till 63 procent, vilket gör den överstreckad med spelvärde 0.80. Tvåan har bara 16 procent av folket mot 25 procent hos modellen.",
-    "valueNote": "Bournemouth spelas av 16 procent men har 25 procent hos modellen, vilket ger spelvärde 1.58 mot ett Chelsea som släpper in 2.06 xG per match."
+    "note": "Chelsea är favorit med 51 procent hos modellen, men släpper in 2,06 xG per match, vilket är mer än de skapar. Bournemouth har 1,62 xG framåt och 1,40 bakåt, och de siffrorna är bättre än tabellplatsen 17 antyder. Folket har 63 procent på etta mot modellens 51, så ettan är tydligt överstreckad.",
+    "valueNote": "Modellen ger Bournemouth 25 procent mot folkets 16, vilket ger spelvärde 1,58 på tvåan."
    },
    {
     "n": 3,
@@ -151,7 +151,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen tror mest på Brentford med 39 procent, och Brentford har 2.1 xG framåt mot Villas 1.0. Villa släpper in 2.17 xG per match, medan Brentford är obesegrade i formen VOOOV. Folket spelar ettan till 42 procent mot modellens 34, så ettan är överstreckad. Tvåan är understreckad med 32 procent mot 39 och har spelvärde 1.22.",
+    "note": "Brentford är troligast med 39 procent hos modellen och ligger fyra med 9 poäng, medan Aston Villa är sextonde med 4 poäng. Villa skapar bara 1,00 xG per match och släpper in 2,17, mot Brentfords 2,10 framåt och 1,50 bakåt. Folket tror mer på Villa med 42 procent mot modellens 34, så tvåan är understreckad med spelvärde 1,22.",
     "valueNote": ""
    },
    {
@@ -198,7 +198,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Brighton är troligast med 40 procent hos modellen, och laget skapar 2.58 xG per match och har formen VFOVV. Folket spelar tvåan till 50 procent, så den är överstreckad med spelvärde 0.79. Sunderland skapar 2.01 xG per match och ettan har bara 27 procent av folket mot modellens 34, spelvärde 1.27.",
+    "note": "Brighton är troligast med 40 procent hos modellen, ligger trea med 10 poäng och har formen VFOVV. Folket har dock 50 procent på tvåan, så den är överstreckad med spelvärde 0,79. Sunderland skapar 2,01 xG per match och får 34 procent hos modellen mot folkets 27, vilket ger etta spelvärde 1,27.",
     "valueNote": ""
    },
    {
@@ -245,7 +245,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ser en jämn match med 38 procent etta och 36 procent tvåa. Båda lagen släpper in mycket, Ipswich 2.06 xG och Fulham 2.09 xG per match. Fulham är utan vinst i formen FFFOO och har 2 poäng, men oddsen ger dem 39 procent. Folket ligger nära modellen, och tvåan är svagt understreckad med 33 procent mot 36.",
+    "note": "Matchen är jämn, modellen ger Ipswich 38 procent och Fulham 36, medan oddsen lutar åt Fulham med 39 procent. Båda lagen släpper in över 2 xG per match, 2,06 för Ipswich och 2,09 för Fulham. Fulham är nittonde med 2 poäng och har formen FFFOO, och folket ligger nära modellen på alla tre tecken.",
     "valueNote": ""
    },
    {
@@ -268,20 +268,23 @@ window.STRYK_ROUNDS = [
      "home": "16:e, 9 p (8 matcher)",
      "away": "21:a, 7 p (8 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "OFFVO",
+     "away": "FFOFV"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Blackburn hemma: – (V–O–F). Cardiff borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ger Cardiff 38 procent och Blackburn 36 procent, i linje med oddsen. Blackburn är 16:e med 9 poäng och Cardiff 21:a med 7 poäng efter 8 matcher, så skillnaden är liten. Folket spelar ettan till 52 procent, vilket ger spelvärde 0.68. Tvåan har bara 24 procent av folket.",
-    "valueNote": "Cardiff spelas av 24 procent men har 38 procent hos modellen, vilket ger spelvärde 1.59."
+    "note": "Modellen har Cardiff som knapp favorit med 38 procent mot Blackburns 36, i linje med oddsen. Folket har hela 52 procent på Blackburn, så ettan är kraftigt överstreckad med spelvärde 0,69. Lagen ligger nära i tabellen med 9 mot 7 poäng och har båda bara en vinst på de fem senaste.",
+    "valueNote": "Modellen ger Cardiff 38 procent mot folkets 24, vilket ger spelvärde 1,58 på tvåan."
    },
    {
     "n": 7,
@@ -303,19 +306,22 @@ window.STRYK_ROUNDS = [
      "home": "15:e, 10 p (8 matcher)",
      "away": "7:e, 13 p (8 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "FFFVV",
+     "away": "VVOVV"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Bolton hemma: – (V–O–F). Stoke borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Stoke är knapp favorit med 37 procent hos modellen mot Boltons 35. Stoke är 7:e med 13 poäng och Bolton 15:e med 10 poäng efter 8 matcher. Folket ligger nästan exakt som modellen, så inget tecken är tydligt fel streckat.",
+    "note": "Stoke är knapp favorit med 38 procent och har stark form med VVOVV, sjunde plats och 13 poäng. Bolton har vunnit sina två senaste efter tre raka förluster och ligger femtonde med 10 poäng. Folket och modellen har exakt samma fördelning, så inget tecken är under- eller överstreckat.",
     "valueNote": ""
    },
    {
@@ -338,19 +344,22 @@ window.STRYK_ROUNDS = [
      "home": "22:a, 5 p (8 matcher)",
      "away": "14:e, 10 p (8 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "VFFFO",
+     "away": "VOOFV"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Derby hemma: – (V–O–F). Wrexham borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen ser matchen som helt öppen med 35 procent etta och 36 procent tvåa. Wrexham är 14:e med 10 poäng medan Derby är 22:a med 5 poäng efter 8 matcher. Folket streckar 35, 28 och 37 procent, i princip samma som modellen.",
+    "note": "Wrexham är knapp favorit med 37 procent mot Derbys 35. Derby ligger tjugoandra med 5 poäng och har formen VFFFO, medan Wrexham är fjortonde med 10 poäng. Folket och modellen har samma siffror, så alla tre tecken är rätt streckade.",
     "valueNote": ""
    },
    {
@@ -360,9 +369,9 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     51,
+     52,
      24,
-     25
+     24
     ],
     "odds": [
      2.21,
@@ -373,19 +382,22 @@ window.STRYK_ROUNDS = [
      "home": "3:e, 15 p (8 matcher)",
      "away": "4:e, 14 p (7 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "OVVOO",
+     "away": "VFOVV"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Middlesbrough hemma: – (V–O–F). Wolverhampton borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Middlesbrough är favorit med 42 procent hos modellen i ett möte mellan 3:an med 15 poäng och 4:an Wolverhampton med 14 poäng på en match mindre. Folket spelar ettan till 51 procent, så den är överstreckad med spelvärde 0.83. Tvåan har 25 procent av folket mot 32 hos modellen, spelvärde 1.29.",
+    "note": "Middlesbrough är troligast med 42 procent hos modellen, ligger trea med 15 poäng och har inte förlorat på de fem senaste. Wolverhampton ligger fyra med 14 poäng på en match mindre och har formen VFOVV. Folket har 52 procent på etta, så den är överstreckad, medan tvåan med 32 procent mot folkets 24 har spelvärde 1,35.",
     "valueNote": ""
    },
    {
@@ -408,19 +420,22 @@ window.STRYK_ROUNDS = [
      "home": "23:e, 4 p (8 matcher)",
      "away": "11:e, 11 p (8 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "FVFFO",
+     "away": "FVFOO"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Preston hemma: – (V–O–F). Millwall borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Millwall är troligast med 39 procent hos modellen. Millwall är 11:e med 11 poäng och Preston 23:e med 4 poäng efter 8 matcher. Folket spelar tvåan till 44 procent, så den är något överstreckad med spelvärde 0.88. Ettan har 29 procent av folket mot 34 hos modellen.",
+    "note": "Millwall är troligast med 39 procent hos modellen och ligger elva med 11 poäng, medan Preston är näst sist med 4 poäng. Folket har 44 procent på tvåan, så den är något överstreckad. Preston får 34 procent hos modellen mot folkets 29, vilket ger ettan spelvärde 1,17.",
     "valueNote": ""
    },
    {
@@ -443,19 +458,22 @@ window.STRYK_ROUNDS = [
      "home": "18:e, 9 p (8 matcher)",
      "away": "12:e, 11 p (8 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "VFVFF",
+     "away": "OOVVF"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Sheffield United hemma: – (V–O–F). Lincoln borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Sheffield United är favorit med 45 procent hos modellen trots att laget är 18:e med 9 poäng mot Lincolns 11 poäng på 12:e plats. Folket spelar ettan till 57 procent, vilket ger spelvärde 0.79. Krysset är understreckat med 21 procent mot modellens 28, spelvärde 1.32.",
+    "note": "Sheffield United är favorit med 45 procent hos modellen, men ligger artonde med 9 poäng och har förlorat de två senaste. Lincoln är tolva med 11 poäng. Folket har 57 procent på etta, så den är överstreckad med spelvärde 0,78, medan krysset har 1,32 och tvåan 1,26.",
     "valueNote": ""
    },
    {
@@ -470,28 +488,31 @@ window.STRYK_ROUNDS = [
      30
     ],
     "odds": [
-     2.95,
-     3.47,
-     2.26
+     2.9,
+     3.49,
+     2.27
     ],
     "table": {
      "home": "20:e, 8 p (8 matcher)",
      "away": "24:e, 4 p (8 matcher)"
     },
-    "form": {},
+    "form": {
+     "home": "FFVFF",
+     "away": "OFOFO"
+    },
     "xg": null,
     "injuries": {
      "home": [],
      "away": [],
      "impact": null
     },
-    "facts": null,
+    "facts": "Watford hemma: – (V–O–F). Burnley borta: –.",
     "_src": {
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Modellen tror mest på Burnley med 41 procent, i linje med oddsen 2.26. Burnley är sist med 4 poäng och Watford 20:e med 8 poäng efter 8 matcher. Folket spelar ändå ettan till 44 procent mot modellens 32, spelvärde 0.72. Tvåan har bara 30 procent av folket.",
-    "valueNote": "Burnley spelas av 30 procent men har 41 procent hos modellen, vilket ger spelvärde 1.38."
+    "note": "Modellen har Burnley som favorit med 41 procent, i linje med oddsen 2,27, trots att Burnley är sist med 4 poäng och saknar vinst i formen OFOFO. Watford ligger tjugonde med 8 poäng och har förlorat fyra av fem. Folket har 44 procent på Watford mot modellens 32, så ettan är överstreckad.",
+    "valueNote": "Modellen ger Burnley 41 procent mot folkets 30, vilket ger spelvärde 1,37 på tvåan."
    },
    {
     "n": 13,
@@ -522,7 +543,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Huddersfield är klar favorit med 55 procent hos modellen och oddset 1.70 på ettan. Folket spelar ettan till 56 procent, nästan exakt som modellen. Tvåan är lite understreckad med 19 procent mot 22, spelvärde 1.16.",
+    "note": "Huddersfield är klar favorit med 55 procent hos modellen och oddset 1,70. Folket ligger nära med 56 procent på etta, så den är rätt streckad. Sheffield Wednesday får 22 procent hos modellen mot folkets 19, vilket ger tvåan spelvärde 1,16.",
     "valueNote": ""
    }
   ]
