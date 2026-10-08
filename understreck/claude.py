@@ -175,7 +175,9 @@ def research(needs: list[dict], day, lineups: bool) -> dict:
         return {}
     prompt = f"""Ta reda på aktuell data för de här fotbollsmatcherna som spelas {day:%Y-%m-%d}
 (säsongen {day.year if day.month >= 7 else day.year - 1}/{(day.year + 1 if day.month >= 7 else day.year) % 100:02d}).
-Sök bara efter fälten i "fields" för respektive match.
+Du vet inte de här uppgifterna sedan tidigare, eftersom säsongen pågår just nu. Använd verktyget web_search
+för att ta reda på fälten i "fields" för varje match, och svara inte förrän du har sökt.
+Sök bara efter de fälten.
 
 {json.dumps(needs, ensure_ascii=False)}
 

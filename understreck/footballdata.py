@@ -115,7 +115,8 @@ def enrich(fd: FootballData, matches: list) -> None:
             if not th or not ta:
                 src = computed
                 th, ta = _find(m["home"], computed["TOTAL"]), _find(m["away"], computed["TOTAL"])
-            by_id = lambda typ: {r["team"]["id"]: r for r in src.get(typ, [])}
+            # Gratisnivån skickar bara TOTAL-tabellen; hemma/borta räknas då fram ur matcherna.
+            by_id = lambda typ: {r["team"]["id"]: r for r in (src.get(typ) or computed[typ])}
             home_rows, away_rows = by_id("HOME"), by_id("AWAY")
             if not th or not ta:
                 log.warning("football-data.org hittade inte %s – %s i %s", m["home"], m["away"], code)
