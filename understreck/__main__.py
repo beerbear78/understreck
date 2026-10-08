@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 
 import requests
 
-from . import claude, footballdata, model, odds, store, tipsrader, understat
+from . import claude, footballdata, model, odds, skador, store, tipsrader, understat
 from .apifootball import ApiFootball, ApiFootballError, enrich_friday, lineups as af_lineups, set_injuries
 from .util import TZ, http, log, now, set_output, team_sim
 
@@ -78,6 +78,7 @@ def run_friday(s) -> dict:
     if FD_KEY:
         footballdata.enrich(footballdata.FootballData(s, FD_KEY), matches)
     understat.enrich(s, matches, day)
+    skador.enrich(s, matches)
 
     # Webbsökningen görs som standard bara på lördagen (ett anrop i veckan). RESEARCH_FRIDAY=1 slår på den här.
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
@@ -161,11 +162,16 @@ def run_lineups(s, rounds, force=False) -> dict | None:
                     lineup_data[m["n"]] = lu
             except (ApiFootballError, requests.RequestException) as e:
                 log.warning("API-Football, startelva %s – %s: %s", m["home"], m["away"], e)
-    # Tidiga matcher: startelva + skador. Senare matcher: bara skador (deras startelvor släpps efter spelstopp).
-    # Ett enda sökanrop i veckan: startelvor (tidiga matcher), skador (alla) och tabell/form där det saknas.
+    # Färsk skadelista för alla matcher (gratis). Färska odds ovan fångar marknadens reaktion på startelvorna.
+    skador.enrich(s, matches)
+    # Ett enda sökanrop i veckan, så litet som möjligt:
+    #  - bekräftade startelvor bara för veckans tre spelvärda matcher (om de startar vid första avspark)
+    #  - tabell, form och skador för matcher som de gratis källorna inte täcker (oftast League One)
+    top_n = {matches[p["i"]]["n"] for p in model.top_picks([model.analyse(m) for m in matches])}
+    no_injuries = lambda m: (m.get("injuries") or {}).get("impact") is None
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
-              "fields": (["lineup"] if m in early and m["n"] not in lineup_data else [])
-              + (["injuries"] if m["n"] not in lineup_data else [])
+              "fields": (["lineup"] if m in early and m["n"] in top_n and m["n"] not in lineup_data else [])
+              + (["injuries"] if no_injuries(m) and m["n"] not in lineup_data else [])
               + [f for f in ("table", "form") if _missing(m, f)]}
              for m in matches]
     needs = [x for x in needs if x["fields"]]
@@ -175,7 +181,7 @@ def run_lineups(s, rounds, force=False) -> dict | None:
             if m:
                 if found.get("lineup"):
                     m["lineup"] = found["lineup"]
-                if found.get("injuries"):
+                if found.get("injuries") and no_injuries(m):
                     m["injuries"] = found["injuries"]
                 for f in ("table", "form"):
                     if found.get(f) and _missing(m, f):

@@ -12,7 +12,7 @@ import re
 import anthropic
 
 from .model import SIGNS
-from .util import log
+from .util import impact_level, log
 
 MODEL = os.environ.get("CLAUDE_MODEL") or "claude-opus-5-5"              # skriver analyserna
 RESEARCH_MODEL = os.environ.get("RESEARCH_MODEL") or "claude-sonnet-5-5"  # webbsökning, halva priset
@@ -22,7 +22,8 @@ PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "cla
 
 STYLE = """Skriv på enkel, rak svenska för en tippare. Använd bara siffror och fakta som finns i underlaget,
 hitta aldrig på spelare, resultat eller statistik. Inga tankstreck-inskott, inga klyschor, inga utropstecken.
-Skriv "folket" för svenska folkets streck och "modellen" för sidans sannolikheter."""
+Skriv "folket" för svenska folkets streck och "modellen" för sidans sannolikheter.
+Är ett lags skadelista tom betyder det bara att inga skador är kända. Skriv då inget om lagets skador."""
 
 NOTES_SCHEMA = {
     "type": "object",
@@ -243,11 +244,15 @@ def _clean(r: dict) -> dict:
     if isinstance(x, dict) and ok(x.get("home")) and ok(x.get("away")):
         out["xg"] = {"home": [float(v) for v in x["home"]], "away": [float(v) for v in x["away"]]}
     inj = r.get("injuries")
-    if isinstance(inj, dict):
+    if isinstance(inj, dict) and (inj.get("home") or inj.get("away")):
+        # Även delvis ifyllda svar används. Saknas påverkan räknas den fram ur listan.
+        home = [str(s) for s in inj.get("home") or []]
+        away = [str(s) for s in inj.get("away") or []]
         imp = inj.get("impact")
-        if isinstance(imp, list) and len(imp) == 2 and all(isinstance(i, int) and 0 <= i <= 3 for i in imp):
-            out["injuries"] = {"home": [str(s) for s in inj.get("home") or []],
-                               "away": [str(s) for s in inj.get("away") or []], "impact": imp}
+        if not (isinstance(imp, list) and len(imp) == 2 and all(isinstance(i, int) and 0 <= i <= 3 for i in imp)):
+            weigh = lambda names: impact_level(sum(0.5 if "osäker" in n.lower() else 1.0 for n in names))
+            imp = [weigh(home), weigh(away)]
+        out["injuries"] = {"home": home, "away": away, "impact": imp}
     if isinstance(r.get("lineup"), str) and r["lineup"].strip():
         out["lineup"] = r["lineup"].strip()
     return out

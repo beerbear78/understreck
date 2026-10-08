@@ -73,6 +73,11 @@ def best_pair(home: str, away: str, candidates, get_home, get_away, min_each=0.8
     return best
 
 
+def impact_level(weight: float) -> int:
+    """Summerad frånvarovikt -> påverkan 0–3 (0 ingen, 1 liten, 2 märkbar, 3 stor)."""
+    return 0 if weight < 0.3 else (1 if weight <= 1.2 else (2 if weight <= 2.5 else 3))
+
+
 def ordinal(n: int) -> str:
     """1:a, 2:a, 3:e … 21:a, 22:a."""
     return f"{n}:a" if n % 10 in (1, 2) and n % 100 not in (11, 12) else f"{n}:e"
