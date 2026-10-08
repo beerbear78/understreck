@@ -6,6 +6,7 @@ Läser bara startsidan (tillåten i deras robots.txt). Adresserna /external/,
 from __future__ import annotations
 
 import re
+import time
 from datetime import datetime
 
 from bs4 import BeautifulSoup
@@ -31,14 +32,31 @@ def _text(soup, selector):
     return el.get_text(strip=True) if el else ""
 
 
-def fetch_coupon(http) -> dict:
-    r = http.get(URL, timeout=30)
-    r.raise_for_status()
-    soup = BeautifulSoup(_decode(r.content), "html.parser")
+def _load(http, attempts=3, pause=30):
+    """Hämtar startsidan. Försöker igen om svaret saknar kupong (t.ex. en tillfällig spärrsida)."""
+    for i in range(1, attempts + 1):
+        try:
+            r = http.get(URL, timeout=30)
+            soup = BeautifulSoup(_decode(r.content), "html.parser")
+            kind = _text(soup, "#roundtype")
+            if r.ok and kind:
+                return soup, kind
+            title = soup.title.get_text(strip=True) if soup.title else ""
+            log.warning("tipsrader.se försök %d: status %s, %d byte, titel '%s', början: %s", i, r.status_code,
+                        len(r.content), title[:80], soup.get_text(" ", strip=True)[:160])
+        except Exception as e:  # nätverksfel räknas som ett misslyckat försök
+            log.warning("tipsrader.se försök %d: %s", i, e)
+        if i < attempts:
+            time.sleep(pause)
+    return None, ""
 
-    kind = _text(soup, "#roundtype")
+
+def fetch_coupon(http) -> dict:
+    soup, kind = _load(http)
+    if soup is None:
+        raise CouponError("tipsrader.se svarade inte med någon kupong efter tre försök (se loggen ovan).")
     if kind.lower() != "stryktipset":
-        raise CouponError(f"tipsrader.se visar '{kind or 'okänt'}', inte Stryktipset just nu.")
+        raise CouponError(f"tipsrader.se visar '{kind}', inte Stryktipset just nu.")
     try:
         round_id = int(_text(soup, "#roundid"))
         close_at = datetime.fromtimestamp(int(_text(soup, "#closeat")), TZ)
