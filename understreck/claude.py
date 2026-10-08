@@ -160,9 +160,6 @@ def template_note(m, a) -> str:
 
 # ---------------------------------------------------------------- webbresearch
 
-FORM_RE = re.compile(r"^[VOF]{1,5}$")
-
-
 def _extract_json(text: str):
     m = re.search(r"```(?:json)?\s*(\[.*?\])\s*```", text, re.S)
     raw = m.group(1) if m else text[text.find("["): text.rfind("]") + 1]
@@ -213,19 +210,34 @@ med bara de fält som efterfrågats."""
     try:
         rows = _extract_json(text)
     except ValueError:
-        log.error("Kunde inte läsa researchsvaret")
+        log.error("Kunde inte läsa researchsvaret: %s", text[-400:].replace("\n", " "))
         return {}
-    return {r["n"]: _clean(r) for r in rows if isinstance(r, dict) and isinstance(r.get("n"), int)}
+    out = {}
+    for r in rows:
+        if isinstance(r, dict) and isinstance(r.get("n"), int):
+            out[r["n"]] = _clean(r)
+            log.info("Research match %d: hittade %s", r["n"], ", ".join(out[r["n"]]) or "inget användbart")
+            if not out[r["n"]]:
+                log.info("  rått svar: %s", json.dumps(r, ensure_ascii=False)[:300])
+    return out
+
+
+def _form(s):
+    """'W D L' / 'WDL' / 'V-O-F' -> 'VOF' (högst fem, äldst först)."""
+    if not isinstance(s, str):
+        return None
+    letters = "".join({"W": "V", "D": "O", "L": "F"}.get(c, c) for c in s.upper() if c in "WDLVOF")
+    return letters[-5:] if letters else None
 
 
 def _clean(r: dict) -> dict:
     out = {}
     t = r.get("table")
-    if isinstance(t, dict) and isinstance(t.get("home"), str) and isinstance(t.get("away"), str):
-        out["table"] = {"home": t["home"], "away": t["away"]}
+    if isinstance(t, dict) and t.get("home") and t.get("away"):
+        out["table"] = {"home": str(t["home"]), "away": str(t["away"])}
     f = r.get("form")
-    if isinstance(f, dict) and all(isinstance(f.get(s), str) and FORM_RE.match(f[s]) for s in ("home", "away")):
-        out["form"] = {"home": f["home"], "away": f["away"]}
+    if isinstance(f, dict) and _form(f.get("home")) and _form(f.get("away")):
+        out["form"] = {"home": _form(f["home"]), "away": _form(f["away"])}
     x = r.get("xg")
     ok = lambda v: isinstance(v, list) and len(v) == 2 and all(isinstance(n, (int, float)) and 0 <= n <= 5 for n in v)
     if isinstance(x, dict) and ok(x.get("home")) and ok(x.get("away")):

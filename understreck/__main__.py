@@ -27,6 +27,7 @@ RESEARCH = os.environ.get("RESEARCH", "1") != "0"
 # xG utanför de stora ligorna finns inte gratis. Att låta Claude söka upp det kostar ca 1 dollar per körning,
 # så det är avstängt som standard. Modellen klarar sig då på odds, form och skador för de matcherna.
 RESEARCH_XG = os.environ.get("RESEARCH_XG", "0") == "1"
+RESEARCH_FRIDAY = os.environ.get("RESEARCH_FRIDAY", "0") == "1"
 
 
 def kickoff(m) -> datetime:
@@ -78,12 +79,12 @@ def run_friday(s) -> dict:
         footballdata.enrich(footballdata.FootballData(s, FD_KEY), matches)
     understat.enrich(s, matches, day)
 
+    # Webbsökningen görs som standard bara på lördagen (ett anrop i veckan). RESEARCH_FRIDAY=1 slår på den här.
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
-              # Skador söks inte på fredagen; lördagskörningen hämtar dem tillsammans med startelvorna.
               "fields": [f for f in ("table", "form", "xg")
                          if _missing(m, f) and (f != "xg" or RESEARCH_XG)]} for m in matches]
     needs = [x for x in needs if x["fields"]]
-    if needs and RESEARCH and claude.available():
+    if needs and RESEARCH and RESEARCH_FRIDAY and claude.available():
         log.info("Claude söker uppgifter som saknas för %d matcher", len(needs))
         for n, found in claude.research(needs, day, lineups=False).items():
             m = next((x for x in matches if x["n"] == n), None)
@@ -105,6 +106,11 @@ def run_friday(s) -> dict:
 def run_lineups(s, rounds, force=False) -> dict | None:
     today = now().date().isoformat()
     rnd = next((r for r in rounds if r["date"] == today), None)
+    if rnd is None and force:
+        # Testläge: kör mot nästa kommande omgång, utan att markera startelvorna som inlagda.
+        rnd = next((r for r in sorted(rounds, key=lambda r: r["date"]) if r["date"] > today), None)
+        if rnd:
+            log.info("Testläge: kör lördagsflödet för omgång %s (%s) i förväg", rnd["id"], rnd["date"])
     if rnd is None:
         log.info("Dagens omgång saknas i data.js, gör grundanalysen först")
         rnd = run_friday(s)
@@ -156,9 +162,13 @@ def run_lineups(s, rounds, force=False) -> dict | None:
             except (ApiFootballError, requests.RequestException) as e:
                 log.warning("API-Football, startelva %s – %s: %s", m["home"], m["away"], e)
     # Tidiga matcher: startelva + skador. Senare matcher: bara skador (deras startelvor släpps efter spelstopp).
+    # Ett enda sökanrop i veckan: startelvor (tidiga matcher), skador (alla) och tabell/form där det saknas.
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
-              "fields": ["lineup", "injuries"] if m in early else ["injuries"]}
-             for m in matches if m["n"] not in lineup_data]
+              "fields": (["lineup"] if m in early and m["n"] not in lineup_data else [])
+              + (["injuries"] if m["n"] not in lineup_data else [])
+              + [f for f in ("table", "form") if _missing(m, f)]}
+             for m in matches]
+    needs = [x for x in needs if x["fields"]]
     if needs and RESEARCH and claude.available():
         for n, found in claude.research(needs, first, lineups=True).items():
             m = next((x for x in matches if x["n"] == n), None)
@@ -167,12 +177,18 @@ def run_lineups(s, rounds, force=False) -> dict | None:
                     m["lineup"] = found["lineup"]
                 if found.get("injuries"):
                     m["injuries"] = found["injuries"]
+                for f in ("table", "form"):
+                    if found.get(f) and _missing(m, f):
+                        m[f] = found[f]
     for m in matches:
         if m not in early:
             m["lineup"] = f"Startelvan släpps cirka {(kickoff(m) - timedelta(hours=1)):%H:%M}, efter spelstopp."
 
     finalize(rnd, lineup_data)
-    rnd["lineupUpdate"] = now().strftime("%Y-%m-%dT%H:%M")
+    if rnd["date"] == today:
+        rnd["lineupUpdate"] = now().strftime("%Y-%m-%dT%H:%M")
+    else:
+        log.info("Testläge: lördagens riktiga körning gör ändå sin uppdatering")
     rnd["updated"] = today
     return rnd
 
