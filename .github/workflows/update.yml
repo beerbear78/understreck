@@ -49,9 +49,12 @@ jobs:
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL || 'claude-opus-5-5' }}
+          RESEARCH_MODEL: ${{ vars.RESEARCH_MODEL || 'claude-sonnet-5-5' }}
           RESEARCH: ${{ vars.RESEARCH || '1' }}
+          RESEARCH_XG: ${{ vars.RESEARCH_XG || '0' }}
           EVENT: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}
           MODE_INPUT: ${{ inputs.mode }}
