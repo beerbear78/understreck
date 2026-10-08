@@ -22,7 +22,7 @@ PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "cla
 
 STYLE = """Skriv på enkel, rak svenska för en tippare. Använd bara siffror och fakta som finns i underlaget,
 hitta aldrig på spelare, resultat eller statistik. Inga tankstreck-inskott, inga klyschor, inga utropstecken.
-Skriv "folket" för svenska folkets streck och "modellen" för sidans sannolikheter.
+Skriv "folket" för svenska folkets streck och "beräknad chans" för sidans sannolikheter. Använd aldrig ordet "modellen".
 Är ett lags skadelista tom betyder det bara att inga skador är kända. Skriv då inget om lagets skador."""
 
 NOTES_SCHEMA = {
@@ -83,7 +83,7 @@ def _payload(m, a, pick, lineup):
     return {
         "n": m["n"], "match": f"{m['home']} – {m['away']}", "liga": m.get("league"),
         "folket_1X2_procent": [_pct(x) for x in a["folk"]],
-        "modellen_1X2_procent": [_pct(x) for x in a["p"]],
+        "beraknad_chans_1X2_procent": [_pct(x) for x in a["p"]],
         "odds_1X2": m.get("odds"),
         "oddsens_1X2_procent": [_pct(x) for x in a["market"]] if a.get("market") else None,
         "spelvarde_1X2": [round(v, 2) for v in a["value"]],
@@ -104,13 +104,13 @@ def write_notes(matches, analyses, picks, lineups=None) -> dict | None:
     by_match = {p["i"]: p for p in picks}
     lineups = lineups or {}
     data = [_payload(m, a, by_match.get(i), lineups.get(m["n"])) for i, (m, a) in enumerate(zip(matches, analyses))]
-    prompt = f"""Här är veckans 13 Stryktipsmatcher med modellens beräkningar (JSON):
+    prompt = f"""Här är veckans 13 Stryktipsmatcher med sidans beräknade chanser (JSON):
 
 {json.dumps(data, ensure_ascii=False)}
 
 Skriv för varje match:
 - note: 2–4 meningar. Förklara varför det troliga utfallet är troligast och om något tecken är under- eller
-  överstreckat, med konkreta siffror ur underlaget (xG, form, skador, modell mot folk).
+  överstreckat, med konkreta siffror ur underlaget (xG, form, skador, beräknad chans mot folkets streck).
 - valueNote: en mening om varför tecknet är spelvärt, men bara för matcher där veckans_spelvarda_tecken
   inte är null. Annars tom sträng.
 - lineup: om startelvor finns, en mening om det som påverkar matchen (vilka i skadelistan som saknas,
@@ -143,10 +143,10 @@ Skriv för varje match:
 def template_note(m, a) -> str:
     """Enkel text utan AI, används om Claude inte är tillgängligt."""
     s = SIGNS[a["likely"]]
-    parts = [f"Modellen ger {s} {_pct(a['p'][a['likely']])} % mot folkets {_pct(a['folk'][a['likely']])} %."]
+    parts = [f"Beräknad chans för {s} är {_pct(a['p'][a['likely']])} % mot folkets {_pct(a['folk'][a['likely']])} %."]
     best = max(range(3), key=lambda k: a["value"][k] if a["p"][k] >= 0.22 else 0)
     if a["value"][best] >= 1.15:
-        parts.append(f"{SIGNS[best]} är understreckat: {_pct(a['p'][best])} % enligt modellen, "
+        parts.append(f"{SIGNS[best]} är understreckat: {_pct(a['p'][best])} % beräknad chans, "
                      f"{_pct(a['folk'][best])} % hos folket.")
     worst = min(range(3), key=lambda k: a["value"][k])
     if a["value"][worst] <= 0.85:

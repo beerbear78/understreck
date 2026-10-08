@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: tipskupongen som ryggrad. Överst veckans tre spelvärda tecken, sedan kupongens 13 rader med 1X2-rutor (modell mot folket), sist en föreslagen systemrad. */
+/* Layout: tipskupongen som ryggrad. Överst veckans tre spelvärda tecken, sedan kupongens 13 rader med 1X2-rutor (beräknad chans mot folket), sist en föreslagen systemrad. */
 :root{
   --bg:#F1F4F2;
   --surface:#FFFFFF;
@@ -195,7 +195,16 @@ section{margin-top:40px}
 .mini-foot{margin:6px 0 0;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
 .favdot{width:6px;height:6px;border-radius:50%;background:var(--bad);flex:none}
 .sys-text{width:100%;min-height:220px;margin-top:8px;font-family:var(--font-mono);font-size:12.5px;padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);resize:vertical}
-.lineup-ok b{color:var(--good)}
+.howto{margin:0 0 12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.howto summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600}
+.howto summary::-webkit-details-marker{display:none}
+.howto summary::before{content:"i";flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-family:var(--font-mono);font-size:11px;font-weight:600}
+.howto summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s ease}
+.howto[open] summary::after{transform:rotate(-135deg)}
+.howto-body{padding:0 14px 14px 40px;font-size:13.5px;color:var(--muted);max-width:78ch}
+.howto-body ol{margin:0 0 8px;padding-left:18px;display:grid;gap:6px}
+.howto-body b{color:var(--ink)}
+.howto-body p{margin:0}
 .mini-row .mn{font-family:var(--font-mono);font-size:12px;color:var(--muted);text-align:right}
 .mini-row .mt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .box{height:24px;border:1.5px solid var(--line);border-radius:5px;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--muted)}
@@ -225,7 +234,7 @@ footer a{color:inherit}
       <div class="logo" aria-hidden="true"><span>1</span><span>X</span><span>2</span></div>
       <div>
         <h1>Understreck</h1>
-        <p class="sub">Modellens sannolikheter mot svenska folkets streck. Hitta tecknen som är underspelade och se vad som troligast händer.</p>
+        <p class="sub">Beräknad chans för varje tecken mot svenska folkets streck. Hitta tecknen som är understreckade och se vad som troligast händer.</p>
       </div>
     </div>
     <div class="round-pick">
@@ -239,7 +248,7 @@ footer a{color:inherit}
   <section aria-labelledby="h-top">
     <div class="sec-head">
       <h2 id="h-top">Veckans spelvärda</h2>
-      <p>Tecken där modellen ger högre chans än andelen som streckat. Ett tecken måste ha minst 22 % chans enligt modellen för att räknas.</p>
+      <p>Tecken där den beräknade chansen är högre än andelen som streckat. Ett tecken måste ha minst 22 % beräknad chans för att räknas.</p>
     </div>
     <div class="top3" id="top3"></div>
   </section>
@@ -247,20 +256,32 @@ footer a{color:inherit}
   <section aria-labelledby="h-coupon">
     <div class="sec-head">
       <h2 id="h-coupon">Kupongen</h2>
-      <p>Stora siffran är modellens chans, under den står folkets streck och spelvärdet (modell delat med folk). Klicka på en match för form, xG, skador och analys.</p>
+      <p>Stora siffran är den beräknade chansen. Under den står folkets streck och spelvärdet (beräknad chans delat med folkets streck). Klicka på en match för form, xG, skador och analys.</p>
     </div>
     <div class="legend">
       <span><i class="sw l"></i>Troligt utfall</span>
       <span><i class="sw g"></i>Spelvärt (värde 1,15 eller mer)</span>
       <span><i class="sw b"></i>Överspelat (värde 0,85 eller mindre)</span>
     </div>
+    <details class="howto">
+      <summary>Så räknas den beräknade chansen</summary>
+      <div class="howto-body">
+        <ol>
+          <li><b>Odds, 65 %.</b> Spelbolagens odds görs om till procent och deras vinstmarginal tas bort. Marknaden väger redan in det mesta och väger därför tyngst.</li>
+          <li><b>xG, 35 %.</b> Lagens xG för och emot den här säsongen ger förväntat antal mål. En Poissonfördelning gör om dem till chans för 1, X och 2, med en Dixon–Coles-korrigering som ger rimligare kryss. Tidigt på säsongen dras xG en bit mot ligasnittet.</li>
+          <li><b>Form och skador.</b> Poäng per match de senaste fem och skadeläget (0–3) justerar målförväntan några procent åt ena hållet.</li>
+          <li><b>Spelvärde.</b> Beräknad chans delat med folkets streck. Ger beräkningen 39 % och folket 24 % blir spelvärdet 39 / 24 ≈ 1,6. Över 1 betyder att tecknet är understreckat och ger mer i utdelning än chansen motiverar.</li>
+        </ol>
+        <p>Matcher utan xG, till exempel i League One, räknas på odds, form och skador. Det är sannolikheter, ingen garanti.</p>
+      </div>
+    </details>
     <div class="coupon" id="coupon"></div>
   </section>
 
   <section aria-labelledby="h-sys">
     <div class="sec-head">
       <h2 id="h-sys">Föreslagen systemrad</h2>
-      <p>M-system med 1 kr per rad. 64 rader motsvarar 6 halvgarderingar och 7 spikar. Garderingarna läggs där de höjer chansen för 13 rätt mest, och understreckade tecken väger lite tyngre. Med Auto får raden minst så många kryss som modellen väntar sig i omgången, avrundat nedåt. Profilen Skräll går emot folkets favorit i fler matcher än den spikar favoriten och väljer de skrällar modellen tror mest på.</p>
+      <p>M-system med 1 kr per rad. 64 rader motsvarar 6 halvgarderingar och 7 spikar. Garderingarna läggs där de höjer chansen för 13 rätt mest, och understreckade tecken väger lite tyngre. Med Auto får raden minst så många kryss som väntas i omgången, avrundat nedåt. Profilen Skräll går emot folkets favorit i fler matcher än den spikar favoriten och väljer de skrällar som har bäst beräknad chans.</p>
     </div>
     <div class="controls">
       <div class="ctl"><span class="lbl">Systemstorlek</span><div class="seg" role="radiogroup" aria-label="Systemstorlek" id="seg"></div></div>
@@ -271,18 +292,8 @@ footer a{color:inherit}
       <div class="mini" id="mini"></div>
       <div>
         <dl class="sum" id="sum"></dl>
-        <p class="sum-note">Kostnaden räknas med 1 kr per rad. Chansen för 13 rätt bygger på modellens sannolikheter och är en uppskattning.</p>
+        <p class="sum-note">Kostnaden räknas med 1 kr per rad. Chansen för 13 rätt bygger på de beräknade chanserna och är en uppskattning.</p>
       </div>
-    </div>
-  </section>
-
-  <section aria-labelledby="h-method">
-    <div class="sec-head"><h2 id="h-method">Så räknar modellen</h2></div>
-    <div class="method">
-      <div><h3>Oddsmarknaden</h3><p>Bookmakerns odds görs om till sannolikheter och marginalen tas bort. Marknaden väger tyngst, 65 %.</p></div>
-      <div><h3>xG och Poisson</h3><p>Lagens xG för och emot ger förväntat antal mål. xG dras en bit mot ligasnittet eftersom säsongen är ung, och en Dixon–Coles-korrigering ger rimligare kryss (0–0, 1–1). Väger 35 %.</p></div>
-      <div><h3>Form och skador</h3><p>Poäng per match de senaste fem och bedömd skadepåverkan (0–3) justerar målförväntan med några procent åt ena hållet.</p></div>
-      <div><h3>Spelvärde</h3><p>Modellens chans delat med folkets streck. Över 1 betyder att tecknet är understreckat och ger mer i utdelning om det går in.</p></div>
     </div>
   </section>
 
@@ -389,7 +400,7 @@ footer a{color:inherit}
       a.lambda = [lh, la];
       a.scoreBy = stats.scoreBy;
       a.stats = stats.p;
-      a.factors.push(`xG-modellen väntar ${dec(lh,1)}–${dec(la,1)} i mål och ger 1 ${pct(stats.p[0])} %, X ${pct(stats.p[1])} %, 2 ${pct(stats.p[2])} %.`);
+      a.factors.push(`xG-beräkningen väntar ${dec(lh,1)}–${dec(la,1)} i mål och ger 1 ${pct(stats.p[0])} %, X ${pct(stats.p[1])} %, 2 ${pct(stats.p[2])} %.`);
     }
     let p;
     if (market && stats) p = market.map((x,i)=> W_MARKET*x + (1-W_MARKET)*stats.p[i]);
@@ -549,7 +560,7 @@ footer a{color:inherit}
         <span class="pick-meta">Match ${m.n} · ${esc(m.league)}</span>
         <h3>${esc(m.home)} – ${esc(m.away)}</h3>
         <dl class="pick-stats">
-          <div><dt>Modell</dt><dd>${pct(pk.p)} %</dd></div>
+          <div><dt>Beräknad</dt><dd>${pct(pk.p)} %</dd></div>
           <div><dt>Folket</dt><dd>${pct(pk.f)} %</dd></div>
           <div><dt>Spelvärde</dt><dd class="good-t">${dec(pk.v)}</dd></div>
         </dl>
@@ -602,7 +613,7 @@ footer a{color:inherit}
     return [0,1,2].map(k => {
       const v = a.value[k];
       const cls = ['cell', v >= 1.15 ? 'good' : (v <= 0.85 ? 'bad' : ''), a.likely===k ? 'likely' : ''].filter(Boolean).join(' ');
-      return `<div class="${cls}" aria-label="${SIGNS[k]}: modell ${pct(a.p[k])} procent, folket ${pct(a.folk[k])} procent, spelvärde ${dec(v)}">
+      return `<div class="${cls}" aria-label="${SIGNS[k]}: beräknad chans ${pct(a.p[k])} procent, folket ${pct(a.folk[k])} procent, spelvärde ${dec(v)}">
         <span class="sg">${SIGNS[k]}</span>
         <span class="p">${pct(a.p[k])}<small>%</small></span>
         <span class="f">folk ${pct(a.folk[k])}</span>
@@ -646,7 +657,7 @@ footer a{color:inherit}
         </dl>
         <div class="side">
           <div class="bars">
-            ${barHTML('Modell', a.p, 'model')}
+            ${barHTML('Beräknad', a.p, 'model')}
             ${a.market ? barHTML('Odds', a.market, 'alt') : ''}
             ${barHTML('Folket', a.folk, 'alt')}
           </div>

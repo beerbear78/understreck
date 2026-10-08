@@ -215,7 +215,7 @@ def finalize(rnd, lineup_data=None) -> None:
         m["note"] = nt.get("note") or claude.template_note(m, a)
         pk = pick_by_n.get(m["n"])
         m["valueNote"] = (nt.get("valueNote") or (
-            f"Modellen ger {model.SIGNS[pk['k']]} {round(pk['p'] * 100)} % mot folkets {round(pk['f'] * 100)} %.")) if pk else ""
+            f"Beräknad chans för {model.SIGNS[pk['k']]} är {round(pk['p'] * 100)} % mot folkets {round(pk['f'] * 100)} %.")) if pk else ""
         if lineup_data and m["n"] in lineup_data:
             lu = lineup_data[m["n"]]
             m["lineup"] = nt.get("lineup") or f"Startelvorna är släppta ({lu.get('home_formation') or '?'} mot {lu.get('away_formation') or '?'})."
@@ -226,7 +226,7 @@ def report(rnd, matches, an, picks) -> None:
     lines = [f"## Understreck – omgång {rnd['id']}, {rnd['date']}", "", "### Veckans spelvärda"]
     for p in picks:
         m = matches[p["i"]]
-        lines.append(f"- {m['home']} – {m['away']}: **{model.SIGNS[p['k']]}**, modell {round(p['p']*100)} %, "
+        lines.append(f"- {m['home']} – {m['away']}: **{model.SIGNS[p['k']]}**, beräknad chans {round(p['p']*100)} %, "
                      f"folket {round(p['f']*100)} %, spelvärde {p['v']:.2f}".replace(".", ","))
     for prof in ("balans", "skrall"):
         sysm = model.build_system(an, 64, profile=prof)

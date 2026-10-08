@@ -165,10 +165,10 @@ class TestResearchClean(unittest.TestCase):
 
 class TestModel(unittest.TestCase):
     def test_round_matches_page(self):
-        r = store.load()
-        if not r or r[0]["id"] != 7763:
-            self.skipTest("referensomgången finns inte längre")
-        an = [model.analyse(m) for m in r[0]["matches"]]
+        # Fast kopia av omgång 7763; siffrorna kontrollerades mot sidans JavaScript.
+        import json, pathlib
+        rnd = json.loads((pathlib.Path(__file__).parent / "fixtures" / "round_7763.json").read_text(encoding="utf-8"))
+        an = [model.analyse(m) for m in rnd["matches"]]
         self.assertEqual([round(x * 100) for x in an[0]["p"]], [55, 24, 22])
         s = model.build_system(an, 64, profile="balans")
         self.assertEqual(round(1 / s["hit"]), 2754)
