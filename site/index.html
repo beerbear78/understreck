@@ -608,7 +608,9 @@ footer a{color:inherit}
           <dt>Form<br><span style="text-transform:none;letter-spacing:0;font-weight:400">nyast sist</span></dt><dd class="two"><span><span class="who">Hemma</span>${formHTML(m.form && m.form.home)}</span><span><span class="who">Borta</span>${formHTML(m.form && m.form.away)}</span></dd>
           <dt>xG</dt><dd class="two mono">${m.xg && ok(m.xg.home) ? `<span><span class="who">${esc(m.home)}</span>${dec(m.xg.home[0])} för / ${dec(m.xg.home[1])} mot</span>` : '<span>Ej hittat</span>'}${m.xg && ok(m.xg.away) ? `<span><span class="who">${esc(m.away)}</span>${dec(m.xg.away[0])} för / ${dec(m.xg.away[1])} mot</span>` : ''}</dd>
           <dt>Odds</dt><dd class="mono">${m.odds ? m.odds.map((o,k)=>`${SIGNS[k]} ${dec(o)}`).join(' &nbsp; ') : 'Ej hittat'}</dd>
-          <dt>Skador</dt><dd class="two"><span><span class="who">${esc(m.home)}</span>${listOr(m.injuries && m.injuries.home)}</span><span><span class="who">${esc(m.away)}</span>${listOr(m.injuries && m.injuries.away)}</span></dd>
+          <dt>Skador</dt>${m.injuries && Array.isArray(m.injuries.impact)
+            ? `<dd class="two"><span><span class="who">${esc(m.home)}</span>${listOr(m.injuries.home)}</span><span><span class="who">${esc(m.away)}</span>${listOr(m.injuries.away)}</span></dd>`
+            : `<dd>Läggs in cirka en timme före första match, tillsammans med startelvorna.</dd>`}
           ${m.lineup ? `<dt>Startelvor</dt><dd>${esc(m.lineup)}</dd>` : ''}
           ${m.facts ? `<dt>Fakta</dt><dd>${esc(m.facts)}</dd>` : ''}
         </dl>
