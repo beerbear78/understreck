@@ -9,7 +9,7 @@ window.STRYK_ROUNDS = [
   "draw": "4974",
   "date": "2026-10-10",
   "deadline": "15:59",
-  "turnover": 1961134,
+  "turnover": 1977178,
   "updated": "2026-10-08",
   "lineupUpdate": null,
   "matches": [
@@ -20,9 +20,9 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "18:30",
     "folk": [
-     63,
+     64,
      20,
-     17
+     16
     ],
     "odds": [
      1.7,
@@ -54,7 +54,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T18:30:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 1 55 % mot folkets 63 %. X är understreckat: 23 % enligt modellen, 20 % hos folket. xG för och emot per match: Manchester United 2,1 och 1,4, Tottenham 1,2 och 1,8.",
+    "note": "Modellen ger 1 55 % mot folkets 64 %. X är understreckat: 23 % enligt modellen, 20 % hos folket. xG för och emot per match: Manchester United 2,1 och 1,4, Tottenham 1,2 och 1,8.",
     "valueNote": ""
    },
    {
@@ -114,8 +114,8 @@ window.STRYK_ROUNDS = [
     ],
     "odds": [
      2.62,
-     3.55,
-     2.55
+     3.5,
+     2.6
     ],
     "table": null,
     "form": {
@@ -142,7 +142,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Modellen ger 2 40 % mot folkets 32 %. 2 är understreckat: 40 % enligt modellen, 32 % hos folket. 1 är överstreckat. xG för och emot per match: Aston Villa 1,0 och 2,2, Brentford 2,1 och 1,5.",
+    "note": "Modellen ger 2 39 % mot folkets 32 %. 2 är understreckat: 39 % enligt modellen, 32 % hos folket. 1 är överstreckat. xG för och emot per match: Aston Villa 1,0 och 2,2, Brentford 2,1 och 1,5.",
     "valueNote": ""
    },
    {
@@ -464,9 +464,9 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     55,
+     56,
      25,
-     20
+     19
     ],
     "odds": [
      1.7,
@@ -486,7 +486,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-10T16:00:00+02:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Modellen ger 1 55 % mot folkets 55 %.",
+    "note": "Modellen ger 1 55 % mot folkets 56 %. 2 är understreckat: 22 % enligt modellen, 19 % hos folket.",
     "valueNote": ""
    }
   ]
