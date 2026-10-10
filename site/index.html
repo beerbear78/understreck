@@ -66,8 +66,7 @@ h1{font-size:clamp(34px,6vw,50px);text-transform:uppercase;letter-spacing:.01em}
 select{font:inherit;font-family:var(--font-mono);font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
 .roundbar{display:flex;flex-wrap:wrap;gap:6px 22px;padding-block:12px 0;color:var(--muted);font-size:13.5px}
 .roundbar b{color:var(--ink);font-weight:600}
-.updates{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-@media (max-width:680px){.updates{grid-template-columns:1fr}}
+.updates{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
 .updates li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
 .upd-n{grid-row:1 / span 2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-mono);font-size:12px;font-weight:600;background:var(--surface-2);color:var(--muted)}
 .updates li.done .upd-n{background:var(--good);color:var(--on-strong)}
@@ -195,6 +194,36 @@ section{margin-top:40px}
 .mini-foot{margin:6px 0 0;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
 .favdot{width:6px;height:6px;border-radius:50%;background:var(--bad);flex:none}
 .sys-text{width:100%;min-height:220px;margin-top:8px;font-family:var(--font-mono);font-size:12.5px;padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);resize:vertical}
+.results{margin-top:24px}
+.res-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:grid;gap:16px}
+.res-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.res-head h2{font-size:26px;text-transform:uppercase}
+.res-head p{margin:0;font-size:13px;color:var(--muted)}
+.res-chip{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.res-chip.final{background:var(--good-soft);color:var(--good)}
+.res-row{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:4px}
+@media (max-width:640px){.res-row{grid-template-columns:repeat(7,minmax(0,1fr));row-gap:8px}}
+.res-row div{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.res-row .rn,.res-row small{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+.res-sign{width:100%;max-width:34px;height:30px;display:grid;place-items:center;border-radius:6px;background:var(--ink);color:var(--bg);font-family:var(--font-display);font-weight:700;font-size:16px}
+.res-sign.none{background:var(--surface-2);color:var(--muted)}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.res-box{border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-width:0}
+.res-box h3{font-size:16px;text-transform:uppercase;margin-bottom:6px}
+.res-box p{margin:0;font-size:13px;color:var(--muted)}
+.res-table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.res-table th{text-align:left;font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding-bottom:4px}
+.res-table td{padding:4px 0;border-top:1px solid var(--line)}
+.res-table td+td,.res-table th+th{text-align:right;font-family:var(--font-mono)}
+.res-sys{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:4px 0;border-top:1px solid var(--line)}
+.res-sys:first-of-type{border-top:0}
+.res-sys b{font-family:var(--font-mono);white-space:nowrap}
+.res-sys .good-t{color:var(--good)}
+.cell.hit{border-color:var(--good);box-shadow:inset 0 0 0 2px var(--good)}
+.cell.hit .sg::after{content:" \2713";color:var(--good)}
+.box.hit{background:var(--good);border-color:var(--good);color:var(--on-strong)}
+.box.miss{border-color:var(--bad);color:var(--bad)}
+.meta .res{color:var(--ink);font-weight:600}
 .howto{margin:0 0 12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
 .howto summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600}
 .howto summary::-webkit-details-marker{display:none}
@@ -244,6 +273,7 @@ footer a{color:inherit}
   </header>
   <div class="roundbar" id="roundbar"></div>
   <ol class="updates" id="updates" aria-label="Uppdateringar av omgången"></ol>
+  <section class="results" id="results" aria-labelledby="h-res" hidden></section>
 
   <section aria-labelledby="h-top">
     <div class="sec-head">
@@ -520,6 +550,9 @@ footer a{color:inherit}
     const r = currentRound();
     if (!r){ $('#coupon').innerHTML = '<p class="empty">Ingen omgång inlagd ännu.</p>'; return; }
     const an = r.matches.map(m => analyse(m, state.overrides[m.n]));
+    const res = r.results && Array.isArray(r.results.row) ? r.results : null;
+    const rowIdx = res ? res.row.map(x => SIGNS.indexOf(x)) : null;
+    const picks = topPicks(r.matches, an);
 
     $('#roundbar').innerHTML = [
       `<span><b>${esc(dateLabel(r.date))}</b></span>`,
@@ -549,10 +582,56 @@ footer a{color:inherit}
         <span class="upd-t">${preTime ? `Lördag ca ${preTime}` : 'Lördag'}, en timme före första match</span>
         <span class="upd-s">${lu ? `Klar ${esc(lu)}` : 'Väntar'}</span>
         <span class="upd-d">Startelvor, färska skador, odds och folkets streck. Allt räknas om.</span>
+      </li>
+      <li class="${res && res.final ? 'done' : ''}">
+        <span class="upd-n" aria-hidden="true">3</span>
+        <span class="upd-t">Lördag kväll</span>
+        <span class="upd-s">${res ? (res.final ? 'Klar' : 'Preliminär') : 'Väntar'}</span>
+        <span class="upd-d">Rätt rad när matcherna är slut, utdelningen när Svenska Spel publicerat den.</span>
       </li>`;
 
+    // Rätt rad och utdelning
+    const resEl = $('#results');
+    if (res){
+      const autoX0 = Math.floor(sum(an.map(a => a.p[1])));
+      const payouts = res.payouts || [];
+      const sysRows = [['Balanserad 64 rader', buildSystem(an, SYSTEMS[1], autoX0, PROFILES.balans)],
+                       ['Skräll 64 rader', buildSystem(an, SYSTEMS[1], autoX0, PROFILES.skrall)],
+                       ['Enkelrad', buildSystem(an, SYSTEMS[0], autoX0, PROFILES.balans)]];
+      const picksHit = picks.filter(pk => rowIdx[pk.i] === pk.k).length;
+      const done = rowIdx.filter(k => k >= 0).length;
+      resEl.innerHTML = `<div class="res-card">
+        <div class="res-head">
+          <h2 id="h-res">Rätt rad</h2>
+          <span class="res-chip ${res.final ? 'final' : ''}">${res.final ? 'Officiell' : 'Preliminär'}</span>
+          <p>${res.final ? 'Från Svenska Spel' : 'Från liverättningen. Den officiella raden och utdelningen kommer från Svenska Spel senare under kvällen.'}${res.updated ? ` · uppdaterad ${esc(String(res.updated).slice(11,16))}` : ''}</p>
+        </div>
+        <div class="res-row">${r.matches.map((m,i) => `<div title="${esc(m.home)} – ${esc(m.away)}">
+          <span class="rn">${m.n}</span>
+          <span class="res-sign ${rowIdx[i] < 0 ? 'none' : ''}">${rowIdx[i] < 0 ? '–' : SIGNS[rowIdx[i]]}</span>
+          <small>${esc((res.scores && res.scores[i]) || '')}</small></div>`).join('')}</div>
+        <div class="res-grid">
+          <div class="res-box"><h3>Utdelning</h3>${payouts.length ? `<table class="res-table">
+            <tr><th>Rätt</th><th>Per rad</th><th>Vinnare</th></tr>
+            ${payouts.map(p => `<tr><td>${esc(p.name)}</td><td>${p.amount ? money(p.amount) : '–'}</td><td>${(p.winners ?? 0).toLocaleString('sv-SE')}</td></tr>`).join('')}
+          </table>` : '<p>Publiceras av Svenska Spel när omgången är avgjord. Sidan uppdateras automatiskt.</p>'}</div>
+          <div class="res-box"><h3>Så gick det</h3>
+            ${sysRows.map(([label, sy]) => {
+              const w = systemWin(sy.sel, rowIdx, payouts);
+              return `<div class="res-sys"><span>${label}</span><b>${w.best} rätt${payouts.length ? ` · <span class="${w.win > sy.rows ? 'good-t' : ''}">${money(w.win)}</span>` : ''}</b></div>`;
+            }).join('')}
+            <div class="res-sys"><span>Veckans spelvärda</span><b>${picksHit} av ${picks.length} gick in</b></div>
+            ${done < 13 ? `<p>${13 - done} matcher saknar resultat än.</p>` : ''}
+          </div>
+        </div>
+      </div>`;
+      resEl.hidden = false;
+    } else {
+      resEl.hidden = true;
+      resEl.innerHTML = '';
+    }
+
     // Topp 3
-    const picks = topPicks(r.matches, an);
     $('#top3').innerHTML = picks.length ? picks.map((pk, idx) => {
       const m = r.matches[pk.i];
       return `<article class="pick">
@@ -569,7 +648,7 @@ footer a{color:inherit}
     }).join('') : '<p class="empty">Inga tecken med tydligt spelvärde den här veckan.</p>';
 
     // Kupong
-    $('#coupon').innerHTML = r.matches.map((m,i) => matchHTML(m, an[i])).join('');
+    $('#coupon').innerHTML = r.matches.map((m,i) => matchHTML(m, an[i], res ? {k: rowIdx[i], score: res.scores && res.scores[i]} : null)).join('');
 
     // System
     const cfg = SYSTEMS.find(s => s.rows === state.budget) || SYSTEMS[1];
@@ -589,7 +668,7 @@ footer a{color:inherit}
         return `<div class="mini-row">
         <span class="mn">${m.n}</span><span class="mt">${esc(m.home)} – ${esc(m.away)}</span>
         ${tag}
-        ${[0,1,2].map(k => `<span class="box${sys.sel[i].includes(k) ? ' on' : ''}${k===fav ? ' fav' : ''}"${k===fav ? ' title="Folkets favorit"' : ''}>${SIGNS[k]}</span>`).join('')}
+        ${[0,1,2].map(k => `<span class="box${sys.sel[i].includes(k) ? ' on' : ''}${k===fav ? ' fav' : ''}${rowIdx && rowIdx[i] === k ? (sys.sel[i].includes(k) ? ' hit' : ' miss') : ''}"${k===fav ? ' title="Folkets favorit"' : ''}>${SIGNS[k]}</span>`).join('')}
       </div>`;
       }).join('') +
       `<p class="mini-foot"><span class="favdot" aria-hidden="true"></span>Prick = folkets favorit. Skräll = favoriten är bortvald.</p>` +
@@ -609,10 +688,26 @@ footer a{color:inherit}
       <div><dt>Radens spelvärde</dt><dd>×${sys.rowValue >= 10 ? Math.round(sys.rowValue) : dec(sys.rowValue,1)}</dd></div>`;
   }
 
-  function cellsHTML(a){
+  // Antal rader i ett system per antal rätt, och vinsten enligt utdelningen.
+  function systemWin(sel, rowIdx, payouts){
+    let poly = [1];
+    sel.forEach((s, i) => {
+      const c = rowIdx[i] >= 0 && s.includes(rowIdx[i]) ? 1 : 0, w = s.length - c;
+      const next = new Array(poly.length + 1).fill(0);
+      poly.forEach((v, j) => { next[j] += v * w; next[j + 1] += v * c; });
+      poly = next;
+    });
+    const best = poly.reduce((b, v, j) => v > 0 ? j : b, 0);
+    const amount = j => (payouts.find(p => p.name === `${j} rätt`) || {}).amount || 0;
+    let win = 0;
+    for (let j = 10; j <= 13; j++) win += (poly[j] || 0) * amount(j);
+    return { best, win };
+  }
+
+  function cellsHTML(a, hitK){
     return [0,1,2].map(k => {
       const v = a.value[k];
-      const cls = ['cell', v >= 1.15 ? 'good' : (v <= 0.85 ? 'bad' : ''), a.likely===k ? 'likely' : ''].filter(Boolean).join(' ');
+      const cls = ['cell', v >= 1.15 ? 'good' : (v <= 0.85 ? 'bad' : ''), a.likely===k ? 'likely' : '', hitK===k ? 'hit' : ''].filter(Boolean).join(' ');
       return `<div class="${cls}" aria-label="${SIGNS[k]}: beräknad chans ${pct(a.p[k])} procent, folket ${pct(a.folk[k])} procent, spelvärde ${dec(v)}">
         <span class="sg">${SIGNS[k]}</span>
         <span class="p">${pct(a.p[k])}<small>%</small></span>
@@ -630,7 +725,7 @@ footer a{color:inherit}
   }
   function listOr(arr){ return (arr && arr.length) ? arr.map(esc).join(', ') : 'Inga kända'; }
 
-  function matchHTML(m, a){
+  function matchHTML(m, a, out){
     const open = state.open.has(m.n);
     const edited = !!state.overrides[m.n];
     const fv = state.overrides[m.n] || m.folk;
@@ -638,8 +733,8 @@ footer a{color:inherit}
     return `<article class="match">
       <button type="button" class="row" aria-expanded="${open}" aria-controls="d-${m.n}" data-n="${m.n}">
         <span class="n">${m.n}</span>
-        <span class="teams"><span class="t">${esc(m.home)} – ${esc(m.away)}</span><span class="meta">${esc(m.league)}${m.kickoff ? ' · ' + esc(m.kickoff) : ''}${edited ? ' · <span class="edited">egna streck</span>' : ''}</span></span>
-        <span class="cells">${cellsHTML(a)}</span>
+        <span class="teams"><span class="t">${esc(m.home)} – ${esc(m.away)}</span><span class="meta">${esc(m.league)}${m.kickoff ? ' · ' + esc(m.kickoff) : ''}${edited ? ' · <span class="edited">egna streck</span>' : ''}${out && out.score ? ` · <span class="res">Resultat ${esc(out.score)}</span>` : ''}</span></span>
+        <span class="cells">${cellsHTML(a, out ? out.k : -1)}</span>
         <span class="verdict"><span class="badge ${a.verdict.kind}">${a.verdict.text}</span>${score ? `<span class="score">${score}</span>` : ''}</span>
         <svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>

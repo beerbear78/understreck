@@ -92,3 +92,35 @@ def fetch_coupon(http) -> dict:
         raise CouponError(f"Hittade {len(matches)} matcher på tipsrader.se, väntade 13.")
     log.info("tipsrader.se: omgång %s, spelstopp %s, %d matcher", round_id, close_at.strftime("%a %H:%M"), len(matches))
     return {"id": round_id, "draw": draw, "close_at": close_at, "turnover": turnover, "matches": matches}
+
+
+FINISHED = {"FT", "AET", "PEN", "SLUT"}
+
+
+def parse_live(soup) -> list:
+    """Ställning, status och aktuellt tecken per match (tipsraders liverättning)."""
+    out = []
+    for tr in soup.select("#matchestable tbody tr"):
+        tds = tr.find_all("td", recursive=False)
+        if not tds or not tds[0].get_text(strip=True).isdigit():
+            continue
+        score = _text(tr, "td.scorecell .score")
+        status = tds[3].get_text(" ", strip=True) if len(tds) > 3 else ""
+        sign = _text(tr, "td.sign .sign-choice.active")
+        played = bool(re.fullmatch(r"\d+\s*-\s*\d+", score))
+        out.append({"n": int(tds[0].get_text(strip=True)),
+                    "score": score.replace("-", "–").replace(" ", "") if played else None,
+                    "sign": sign if played and sign in ("1", "X", "2") else None,
+                    "finished": played and status.upper() in FINISHED})
+    return out
+
+
+def fetch_live(http) -> dict | None:
+    soup, kind = _load(http)
+    if soup is None or kind.lower() != "stryktipset":
+        return None
+    try:
+        round_id = int(_text(soup, "#roundid"))
+    except ValueError:
+        return None
+    return {"id": round_id, "matches": parse_live(soup)}

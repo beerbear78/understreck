@@ -174,5 +174,70 @@ class TestModel(unittest.TestCase):
         self.assertEqual(round(1 / s["hit"]), 2754)
 
 
+class TestResults(unittest.TestCase):
+    def test_svenskaspel_parse(self):
+        import json, pathlib
+        from understreck import svenskaspel
+        data = json.loads((pathlib.Path(__file__).parent / "fixtures" / "svs_result_4973.json").read_text(encoding="utf-8"))
+        r = svenskaspel.parse_result(data)
+        self.assertTrue(r["final"])
+        self.assertEqual("".join(r["row"]), "22122X111X211")
+        self.assertEqual(r["scores"][0], "0–7")
+        self.assertEqual(r["payouts"][0], {"name": "13 rätt", "winners": 77, "amount": 59266.0})
+        self.assertEqual([p["name"] for p in r["payouts"]], ["13 rätt", "12 rätt", "11 rätt", "10 rätt"])
+
+    def test_tipsrader_live(self):
+        from bs4 import BeautifulSoup
+        from understreck import tipsrader
+        row = lambda n, score, status, sign: f"""<tr><td>{n}</td><td class="teams"></td>
+            <td class="scorecell"><span><span class="score">{score}</span></span></td><td>{status}</td>
+            <td class="sign"><span class="sign-choice{' active' if sign == '1' else ''}">1</span>
+            <span class="sign-choice{' active' if sign == 'X' else ''}">X</span>
+            <span class="sign-choice{' active' if sign == '2' else ''}">2</span></td></tr>"""
+        html = "<table id='matchestable'><tbody>" + row(1, "0-0", "49", "X") + row(2, "5-1", "FT", "1") +                row(3, "10/10 18:30", "Inte startat", "X") + "</tbody></table>"
+        live = tipsrader.parse_live(BeautifulSoup(html, "html.parser"))
+        self.assertEqual(live[0], {"n": 1, "score": "0–0", "sign": "X", "finished": False})
+        self.assertEqual(live[1], {"n": 2, "score": "5–1", "sign": "1", "finished": True})
+        self.assertEqual(live[2], {"n": 3, "score": None, "sign": None, "finished": False})
+
+    def _round(self):
+        import json, pathlib
+        return json.loads((pathlib.Path(__file__).parent / "fixtures" / "round_7763.json").read_text(encoding="utf-8"))
+
+    def test_run_results_preliminary_then_final(self):
+        import understreck.__main__ as M
+        rnd = self._round()
+        rnd["draw"] = "4974"
+        live = {"id": 7763, "matches": [{"n": i + 1, "score": "1–0", "sign": "1", "finished": True} for i in range(13)]}
+        sat_evening = datetime(2026, 10, 10, 20, 30, tzinfo=TZ)
+        with mock.patch.object(M, "now", lambda: sat_evening),              mock.patch.object(M.svenskaspel, "fetch_result", lambda s, d: None),              mock.patch.object(M.tipsrader, "fetch_live", lambda s: live):
+            out = M.run_results(None, [rnd])
+        self.assertFalse(out["results"]["final"])
+        self.assertEqual("".join(out["results"]["row"]), "1" * 13)
+        final = {"final": True, "row": ["X"] * 13, "scores": ["0–0"] * 13,
+                 "payouts": [{"name": "13 rätt", "winners": 1, "amount": 100.0}]}
+        with mock.patch.object(M, "now", lambda: sat_evening),              mock.patch.object(M.svenskaspel, "fetch_result", lambda s, d: dict(final)):
+            out = M.run_results(None, [out])
+        self.assertTrue(out["results"]["final"])
+        with mock.patch.object(M, "now", lambda: sat_evening):
+            self.assertIsNone(M.run_results(None, [out]))  # redan klar
+
+    def test_lineups_waits_until_one_hour_before(self):
+        import understreck.__main__ as M
+        rnd = self._round()
+        rnd["lineupUpdate"] = None
+        slept = []
+        morning = datetime(2026, 10, 10, 10, 0, tzinfo=TZ)
+        with mock.patch.object(M, "now", lambda: morning),              mock.patch.object(M.time, "sleep", lambda s: slept.append(s) or (_ for _ in ()).throw(StopIteration)):
+            with self.assertRaises(StopIteration):
+                M.run_lineups(None, [rnd], wait=True)
+        self.assertAlmostEqual(slept[0] / 3600, 5 + 5 / 60, places=2)  # 10:00 -> 15:05
+        with mock.patch.object(M, "now", lambda: morning):
+            self.assertIsNone(M.run_lineups(None, [rnd], wait=False))  # utan --wait avbryts den
+        early = datetime(2026, 10, 10, 8, 0, tzinfo=TZ)
+        with mock.patch.object(M, "now", lambda: early):
+            self.assertIsNone(M.run_lineups(None, [rnd], wait=True))  # mer än 5,2 h kvar: senare körning tar över
+
+
 if __name__ == "__main__":
     unittest.main()
