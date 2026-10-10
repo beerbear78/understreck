@@ -668,6 +668,62 @@ window.STRYK_ROUNDS = [
     "note": "Huddersfield är favorit med 54 procents beräknad chans och oddset 1,73. Folket streckar 57 procent på ettan, nära den beräknade chansen. Tvåan har 22 procents beräknad chans mot 18 procent hos folket och är något understreckad.",
     "valueNote": ""
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "X",
+    "1",
+    "X",
+    "2",
+    "1",
+    "1",
+    "2",
+    "X",
+    "1",
+    "2",
+    "1",
+    "2",
+    "X"
+   ],
+   "scores": [
+    "1–1",
+    "5–1",
+    "2–2",
+    "0–2",
+    "2–1",
+    "2–1",
+    "1–2",
+    "1–1",
+    "1–0",
+    "0–1",
+    "3–0",
+    "0–4",
+    "2–2"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 145,
+     "amount": 46731.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 3070,
+     "amount": 827.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 30271,
+     "amount": 67.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 179248,
+     "amount": 23.0
+    }
+   ],
+   "updated": "2026-10-11T01:46"
+  }
  }
 ];
