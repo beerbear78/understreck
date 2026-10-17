@@ -621,7 +621,63 @@ window.STRYK_ROUNDS = [
     "note": "Plymouth har ettan som troligast med 39 % beräknad chans, men tvåan ligger nära på 35 %. Folket lägger 50 % på ettan och bara 22 % på tvåan. Ettan är klart överstreckad och tvåan understreckad.",
     "valueNote": "Huddersfield har 35 % beräknad chans men bara 22 % av folkets streck, vilket ger spelvärde 1,58 på tvåan."
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "2",
+    "2",
+    "1",
+    "1",
+    "1",
+    "2",
+    "2",
+    "2",
+    "X",
+    "2",
+    "1",
+    "1",
+    "2"
+   ],
+   "scores": [
+    "0–1",
+    "1–2",
+    "3–2",
+    "1–0",
+    "3–0",
+    "0–1",
+    "0–1",
+    "0–1",
+    "0–0",
+    "0–1",
+    "3–2",
+    "4–1",
+    "0–2"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 107,
+     "amount": 60840.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 2833,
+     "amount": 861.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 31661,
+     "amount": 61.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 203958,
+     "amount": 19.0
+    }
+   ],
+   "updated": "2026-10-17T21:33"
+  }
  },
  {
   "id": 7763,
