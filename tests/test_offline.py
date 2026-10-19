@@ -239,5 +239,15 @@ class TestResults(unittest.TestCase):
             self.assertIsNone(M.run_lineups(None, [rnd], wait=True))  # mer än 5,2 h kvar: senare körning tar över
 
 
+    def test_friday_backup_skips_when_done(self):
+        import understreck.__main__ as M
+        coupon = {"id": 7811, "draw": "4976", "turnover": 1, "matches": [],
+                  "close_at": datetime(2026, 10, 24, 15, 59, tzinfo=TZ)}
+        friday = datetime(2026, 10, 23, 13, 0, tzinfo=TZ)
+        done = [{"id": 7811, "date": "2026-10-24", "fridayUpdate": "2026-10-23T11:02", "matches": []}]
+        with mock.patch.object(M, "now", lambda: friday),              mock.patch.object(M.tipsrader, "fetch_coupon", lambda s: coupon):
+            self.assertIsNone(M.run_friday(None, done, scheduled=True))
+
+
 if __name__ == "__main__":
     unittest.main()

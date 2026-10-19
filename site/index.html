@@ -570,11 +570,12 @@ footer a{color:inherit}
       preTime = `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
     }
     const lu = r.lineupUpdate ? String(r.lineupUpdate).slice(11, 16) : '';
+    const fu = r.fridayUpdate ? String(r.fridayUpdate).slice(11, 16) : '';
     $('#updates').innerHTML = `
       <li class="done">
         <span class="upd-n" aria-hidden="true">1</span>
-        <span class="upd-t">Fredag kväll</span>
-        <span class="upd-s">Klar</span>
+        <span class="upd-t">Fredag, senast 17:00</span>
+        <span class="upd-s">${fu ? `Klar ${esc(fu)}` : 'Klar'}</span>
         <span class="upd-d">Veckans kupong, odds, tabell, form, skador och analys.</span>
       </li>
       <li class="${lu ? 'done' : ''}">

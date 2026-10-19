@@ -7,7 +7,7 @@ Allt uppdateras automatiskt av GitHub Actions:
 
 | När | Vad |
 |---|---|
-| Fredag 19:00 (18:00 vintertid) | Hämtar lördagens kupong, odds, form, tabell, xG och skador. Claude skriver analyserna. |
+| Fredag, klar senast 17:00 | Hämtar lördagens kupong, odds, form, tabell, xG och skador. Claude skriver analyserna. |
 | Lördag, cirka en timme före första match | Lägger in startelvor, färska odds och folkets senaste streck. Räknar om allt. |
 
 ## Kom igång (en gång)

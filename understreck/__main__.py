@@ -48,10 +48,15 @@ def _missing(m, field):
 
 # ---------------------------------------------------------------- fredag
 
-def run_friday(s) -> dict:
+def run_friday(s, rounds=(), scheduled=False) -> dict | None:
     c = tipsrader.fetch_coupon(s)
     if c["close_at"] < now():
         raise tipsrader.CouponError("Kupongen på tipsrader.se har redan passerat spelstopp.")
+    done = next((r.get("fridayUpdate") for r in rounds if r["id"] == c["id"] and r.get("fridayUpdate")), None)
+    if scheduled and done:
+        # Fredagen har flera reservstarter; analysen görs (och kostar) bara en gång per omgång.
+        log.info("Grundanalysen för omgång %s är redan gjord (%s)", c["id"], done)
+        return None
     day = c["close_at"]
     matches = []
     for cm in c["matches"]:
@@ -102,7 +107,8 @@ def run_friday(s) -> dict:
         m["injuries"] = m["injuries"] or {"home": [], "away": [], "impact": None}
 
     rnd = {"id": c["id"], "draw": c["draw"], "date": day.date().isoformat(), "deadline": day.strftime("%H:%M"),
-           "turnover": c["turnover"], "updated": now().date().isoformat(), "lineupUpdate": None, "matches": matches}
+           "turnover": c["turnover"], "updated": now().date().isoformat(),
+           "fridayUpdate": now().strftime("%Y-%m-%dT%H:%M"), "lineupUpdate": None, "matches": matches}
     finalize(rnd)
     return rnd
 
@@ -304,6 +310,8 @@ def main() -> int:
     ap.add_argument("--mode", choices=["friday", "lineups", "results", "auto", "deploy"], default="auto")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--wait", action="store_true")
+    ap.add_argument("--scheduled", action="store_true",
+                    help="schemalagd körning: hoppa över om fredagsanalysen redan är gjord, avsluta utan fel om kupongen inte är klar")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -320,7 +328,7 @@ def main() -> int:
     rounds = store.load()
     try:
         if mode == "friday":
-            rnd = run_friday(s)
+            rnd = run_friday(s, rounds, args.scheduled)
         elif mode == "lineups":
             rnd = run_lineups(s, rounds, args.force, args.wait)
         else:
@@ -328,7 +336,9 @@ def main() -> int:
     except tipsrader.CouponError as e:
         log.error("Avbryter: %s", e)
         set_output("changed", "false")
-        return 1 if mode == "friday" else 0
+        # En manuell fredagskörning som misslyckas ska synas (GitHub mejlar). Schemalagda har reserver
+        # och lördagens körning gör grundanalysen själv om den saknas.
+        return 1 if mode == "friday" and not args.scheduled else 0
     if rnd is None:
         set_output("changed", "false")
         return 0

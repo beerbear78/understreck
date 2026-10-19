@@ -4,10 +4,14 @@ on:
   schedule:
     # GitHub räknar i UTC och startar ofta schemalagda körningar flera timmar för sent.
     # Därför startar lördagens körningar tidigt och VÄNTAR själva till rätt tid (--wait).
-    # Fredag 17:00 UTC (19:00 sommartid, 18:00 vintertid): grundanalys.
-    - cron: "0 17 * * 5"
-    # Lördag 08, 10 och 12 UTC: startelvor. Den första som hinner väntar tills ~55 min före
+    # Fredag 07, 09 och 11 UTC (09/11/13 svensk sommartid): grundanalys, klar före 17:00 även om
+    # GitHub är flera timmar sent. Reserverna hoppar över om analysen redan är gjord (--scheduled).
+    - cron: "0 7 * * 5"
+    - cron: "0 9 * * 5"
+    - cron: "0 11 * * 5"
+    # Lördag 06, 08, 10 och 12 UTC: startelvor. Den första som hinner väntar tills ~55 min före
     # första avspark; de andra är reserver och avslutas direkt om jobbet redan är gjort.
+    - cron: "0 6 * * 6"
     - cron: "0 8 * * 6"
     - cron: "0 10 * * 6"
     - cron: "0 12 * * 6"
@@ -72,8 +76,8 @@ jobs:
           WAIT=""
           if [ "$EVENT" = "schedule" ]; then
             case "$SCHEDULE" in
-              "0 17 * * 5") MODE=friday ;;
-              "0 8 * * 6"|"0 10 * * 6"|"0 12 * * 6") MODE=lineups; WAIT="--wait" ;;
+              "0 7 * * 5"|"0 9 * * 5"|"0 11 * * 5") MODE=friday; WAIT="--scheduled" ;;
+              "0 6 * * 6"|"0 8 * * 6"|"0 10 * * 6"|"0 12 * * 6") MODE=lineups; WAIT="--wait" ;;
               *) MODE=results; WAIT="--wait" ;;
             esac
           fi
