@@ -20,7 +20,7 @@ from datetime import date, datetime, timedelta
 
 import requests
 
-from . import claude, footballdata, model, odds, skador, store, svenskaspel, tipsrader, understat
+from . import claude, footballdata, model, odds, skador, store, svenskaspel, tipsrader, transfermarkt, understat
 from .apifootball import ApiFootball, ApiFootballError, enrich_friday, lineups as af_lineups, set_injuries
 from .util import TZ, http, log, now, set_output, team_sim
 
@@ -32,7 +32,10 @@ RESEARCH = os.environ.get("RESEARCH", "1") != "0"
 # så det är avstängt som standard. Modellen klarar sig då på odds, form och skador för de matcherna.
 RESEARCH_XG = os.environ.get("RESEARCH_XG", "0") == "1"
 RESEARCH_FRIDAY = os.environ.get("RESEARCH_FRIDAY", "0") == "1"
-MAX_WAIT = 5.2 * 3600  # GitHub avbryter jobb efter 6 timmar
+MAX_WAIT = 5.5 * 3600  # GitHub avbryter jobb efter 6 timmar (timeout-minutes: 355)
+# Lördagens uppdatering görs ~40 min före första avspark. Startelvorna släpps ~60 min före och behöver
+# en stund för att synas i sökningar; sidan publiceras ändå ~25 min före spelstopp.
+LINEUP_LEAD = 40
 
 
 def kickoff(m) -> datetime:
@@ -89,6 +92,7 @@ def run_friday(s, rounds=(), scheduled=False) -> dict | None:
         footballdata.enrich(footballdata.FootballData(s, FD_KEY), matches)
     understat.enrich(s, matches, day)
     skador.enrich(s, matches)
+    transfermarkt.enrich(s, matches)  # League One m.fl., som sportsgambler inte täcker
 
     # Webbsökningen görs som standard bara på lördagen (ett anrop i veckan). RESEARCH_FRIDAY=1 slår på den här.
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
@@ -139,12 +143,12 @@ def run_lineups(s, rounds, force=False, wait=False) -> dict | None:
         if mins < 20:
             log.info("För sent: första avspark %s var för nära eller har passerat", first.strftime("%H:%M"))
             return None
-        if mins > 80:
-            target = first - timedelta(minutes=55)
+        if not wait and mins > 80:
+            log.info("Inte dags: första avspark %s, om %.0f minuter", first.strftime("%H:%M"), mins)
+            return None
+        if wait and mins > LINEUP_LEAD + 2:
+            target = first - timedelta(minutes=LINEUP_LEAD)
             secs = (target - now()).total_seconds()
-            if not wait:
-                log.info("Inte dags: första avspark %s, om %.0f minuter", first.strftime("%H:%M"), mins)
-                return None
             if secs > MAX_WAIT:
                 log.info("För tidigt (%.1f timmar kvar), en senare körning tar över", secs / 3600)
                 return None
@@ -187,6 +191,7 @@ def run_lineups(s, rounds, force=False, wait=False) -> dict | None:
                 log.warning("API-Football, startelva %s – %s: %s", m["home"], m["away"], e)
     # Färsk skadelista för alla matcher (gratis). Färska odds ovan fångar marknadens reaktion på startelvorna.
     skador.enrich(s, matches)
+    transfermarkt.enrich(s, matches)
     # Ett enda sökanrop i veckan, så litet som möjligt:
     #  - bekräftade startelvor bara för veckans tre spelvärda matcher (om de startar vid första avspark)
     #  - tabell, form och skador för matcher som de gratis källorna inte täcker (oftast League One)
@@ -209,6 +214,17 @@ def run_lineups(s, rounds, force=False, wait=False) -> dict | None:
                 for f in ("table", "form"):
                     if found.get(f) and _missing(m, f):
                         m[f] = found[f]
+    # Saknas startelvor för veckans spelvärda kan de ha släppts för nyss: vänta 6 minuter och sök en gång till.
+    lacking = [m for m in early if m["n"] in top_n and m["n"] not in lineup_data and not m.get("lineup")]
+    if wait and lacking and RESEARCH and claude.available() and (first - now()).total_seconds() / 60 > 32:
+        log.info("Startelvor saknas för %d av veckans spelvärda, söker igen om 6 minuter", len(lacking))
+        time.sleep(360)
+        retry = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"],
+                  "kickoff": m["kickoff"], "fields": ["lineup"]} for m in lacking]
+        for n, found in claude.research(retry, first, lineups=True).items():
+            m = next((x for x in matches if x["n"] == n), None)
+            if m and found.get("lineup"):
+                m["lineup"] = found["lineup"]
     for m in matches:
         if m not in early:
             m["lineup"] = f"Startelvan släpps cirka {(kickoff(m) - timedelta(hours=1)):%H:%M}, efter spelstopp."

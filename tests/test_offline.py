@@ -231,12 +231,12 @@ class TestResults(unittest.TestCase):
         with mock.patch.object(M, "now", lambda: morning),              mock.patch.object(M.time, "sleep", lambda s: slept.append(s) or (_ for _ in ()).throw(StopIteration)):
             with self.assertRaises(StopIteration):
                 M.run_lineups(None, [rnd], wait=True)
-        self.assertAlmostEqual(slept[0] / 3600, 5 + 5 / 60, places=2)  # 10:00 -> 15:05
+        self.assertAlmostEqual(slept[0] / 3600, 5 + 20 / 60, places=2)  # 10:00 -> 15:20 (40 min före 16:00)
         with mock.patch.object(M, "now", lambda: morning):
             self.assertIsNone(M.run_lineups(None, [rnd], wait=False))  # utan --wait avbryts den
         early = datetime(2026, 10, 10, 8, 0, tzinfo=TZ)
         with mock.patch.object(M, "now", lambda: early):
-            self.assertIsNone(M.run_lineups(None, [rnd], wait=True))  # mer än 5,2 h kvar: senare körning tar över
+            self.assertIsNone(M.run_lineups(None, [rnd], wait=True))  # mer än 5,5 h kvar: senare körning tar över
 
 
     def test_friday_backup_skips_when_done(self):
@@ -247,6 +247,19 @@ class TestResults(unittest.TestCase):
         done = [{"id": 7811, "date": "2026-10-24", "fridayUpdate": "2026-10-23T11:02", "matches": []}]
         with mock.patch.object(M, "now", lambda: friday),              mock.patch.object(M.tipsrader, "fetch_coupon", lambda s: coupon):
             self.assertIsNone(M.run_friday(None, done, scheduled=True))
+
+
+class TestTransfermarkt(unittest.TestCase):
+    def test_summarize(self):
+        from datetime import date
+        from understreck import transfermarkt as tm
+        rows = [{"name": "A", "reason": "Knee injury", "until": date(2026, 11, 1), "missed": 1},
+                {"name": "B", "reason": "Red card suspension", "until": None, "missed": 0},
+                {"name": "C", "reason": "Hamstring injury", "until": date(2026, 10, 15), "missed": 3},
+                {"name": "D", "reason": "Cruciate ligament tear", "until": None, "missed": 14}]
+        names, level = tm._summarize(rows, date(2026, 10, 17))
+        self.assertEqual(names, ["B (avstängd)", "A (knä)", "D (korsband)"])  # C är tillbaka före matchen
+        self.assertEqual(level, 2)  # 1,0 + 1,0 + 0,2
 
 
 if __name__ == "__main__":

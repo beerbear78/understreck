@@ -566,7 +566,7 @@ footer a{color:inherit}
     let preTime = '';
     if (firstKick){
       const [hh, mm] = firstKick.split(':').map(Number);
-      const t = hh * 60 + mm - 60;
+      const t = hh * 60 + mm - 40;
       preTime = `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
     }
     const lu = r.lineupUpdate ? String(r.lineupUpdate).slice(11, 16) : '';
@@ -580,7 +580,7 @@ footer a{color:inherit}
       </li>
       <li class="${lu ? 'done' : ''}">
         <span class="upd-n" aria-hidden="true">2</span>
-        <span class="upd-t">${preTime ? `Lördag ca ${preTime}` : 'Lördag'}, en timme före första match</span>
+        <span class="upd-t">${preTime ? `Lördag ca ${preTime}` : 'Lördag'}, när startelvorna är släppta</span>
         <span class="upd-s">${lu ? `Klar ${esc(lu)}` : 'Väntar'}</span>
         <span class="upd-d">Startelvor, färska skador, odds och folkets streck. Allt räknas om.</span>
       </li>

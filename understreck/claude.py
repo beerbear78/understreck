@@ -186,7 +186,8 @@ Fält:
 - injuries: {{"home": ["Namn (skadad)", "Namn (avstängd)", "Namn (osäker)"], "away": [...], "impact": [0-3, 0-3]}}
   impact: 0 inga frånvarande, 1 liten, 2 märkbar, 3 stor påverkan på laget
 - lineup: en mening på svenska om den bekräftade startelvan, t.ex. vilka nyckelspelare som saknas{
-" (startelvorna släpps cirka en timme före avspark)" if lineups else ""}
+" (startelvorna släpps cirka en timme före avspark; sök t.ex. på lagnamnen plus 'confirmed line-up' eller "
+"'team news' – klubbarnas egna sidor, BBC Sport och Sky Sports publicerar dem direkt)" if lineups else ""}
 
 Regler: använd bara källor för innevarande säsong och se upp för förhandssidor med förra säsongens data.
 Gissa aldrig. Sätt null för det du inte hittar säkert.

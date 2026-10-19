@@ -8,7 +8,7 @@ Allt uppdateras automatiskt av GitHub Actions:
 | När | Vad |
 |---|---|
 | Fredag, klar senast 17:00 | Hämtar lördagens kupong, odds, form, tabell, xG och skador. Claude skriver analyserna. |
-| Lördag, cirka en timme före första match | Lägger in startelvor, färska odds och folkets senaste streck. Räknar om allt. |
+| Lördag, cirka 40 minuter före första match | Lägger in startelvor, färska skador, odds och folkets senaste streck. Räknar om allt. |
 
 ## Kom igång (en gång)
 
@@ -61,7 +61,8 @@ en felstavad nyckel.
   platform.claude.com.
 
 ## Bra att veta
-* GitHub kan fördröja schemalagda körningar 5–20 minuter. Lördagskörningen har marginal för det.
+* GitHub startar ofta schemalagda körningar 2–4 timmar för sent. Därför startar körningarna tidigt,
+  med reserver, och lördagens körning väntar själv in rätt tid.
 * Startelvor läggs bara in för matcher som startar vid första avspark. Spelstoppet är vid första matchen,
   så senare startelvor kan ändå inte påverka raden.
 * Om tipsrader.se är nere eller har ändrat sidan avbryts fredagskörningen och GitHub mejlar dig.
