@@ -9,10 +9,10 @@ window.STRYK_ROUNDS = [
   "draw": "4976",
   "date": "2026-10-24",
   "deadline": "15:59",
-  "turnover": 3912051,
-  "updated": "2026-10-23",
+  "turnover": 19391204,
+  "updated": "2026-10-24",
   "fridayUpdate": "2026-10-23T14:15",
-  "lineupUpdate": null,
+  "lineupUpdate": "2026-10-24T15:27",
   "matches": [
    {
     "n": 1,
@@ -21,14 +21,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "18:30",
     "folk": [
-     63,
-     22,
+     62,
+     23,
      15
     ],
     "odds": [
-     1.7,
-     4.2,
-     4.3
+     1.91,
+     3.88,
+     3.74
     ],
     "table": {
      "home": "4:e, 13 p (7 matcher)",
@@ -54,21 +54,19 @@ window.STRYK_ROUNDS = [
       "Reece James (lår)",
       "Axel Disasi (avstängd)",
       "Mykhaylo Mudryk (fotled)",
-      "Emanuel Emegha (skadad)",
       "Jamie Gittens (fotled)",
       "Pep Chavarria (osäker)",
-      "Malo Gusto (osäker)"
+      "Malo Gusto (osäker)",
+      "Emanuel Emegha (osäker)"
      ],
      "away": [
       "Rodrigo Bentancur (avstängd)",
       "Kevin Danso (avstängd)",
       "Savio (muskel)",
       "Lucas Bergvall (knä)",
-      "Pedro Porro (lår)",
       "Xavi Simons (korsband)",
       "Wilson Odobert (knä)",
-      "Destiny Udogie (osäker)",
-      "och 1 till"
+      "Destiny Udogie (osäker)"
      ],
      "impact": [
       3,
@@ -80,8 +78,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T18:30:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Chelsea är troligast med 52 procents beräknad chans, och laget är obesegrat hemma med 2–1–0 medan Tottenham saknar seger på bortaplan med 0–2–1. Folket har ändå satt 63 procent på etta, vilket gör Chelsea klart överstreckat. Tottenham har 24 procents beräknad chans men bara 15 procent hos folket. Båda lagen har långa skadelistor med Reece James och Malo Gusto hos Chelsea och Pedro Porro och Lucas Bergvall hos Tottenham.",
-    "valueNote": "Tvåan har 24 procents beräknad chans men bara 15 procent av folkets streck, vilket ger spelvärde 1,61."
+    "note": "Chelsea har 48 procent i beräknad chans och är hemma obesegrade med 2–1–0, medan Tottenham saknar vinst på bortaplan (0–2–1). Folket har däremot satt 62 procent på 1, så ettan är överstreckad. Tvåan har 26 procent i beräknad chans men bara 15 procent hos folket. Båda lagen har en lång skadelista, där Chelsea saknar bland andra Reece James och Mudryk och Tottenham saknar Bentancur, Danso och Xavi Simons.",
+    "valueNote": "Tvåan ger 26 procent i beräknad chans men streckas bara av 15 procent av folket, vilket ger spelvärde 1.77.",
+    "lineup": "Startelvan släpps cirka 17:30, efter spelstopp."
    },
    {
     "n": 2,
@@ -90,14 +89,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     75,
-     17,
-     8
+     79,
+     16,
+     5
     ],
     "odds": [
-     1.42,
-     4.5,
-     7.7
+     1.4,
+     4.75,
+     7.75
     ],
     "table": {
      "home": "2:a, 18 p (7 matcher)",
@@ -119,14 +118,13 @@ window.STRYK_ROUNDS = [
     },
     "injuries": {
      "home": [
+      "Bukayo Saka (lår)",
       "Christos Tzolis (lår)",
-      "Piero Hincapie (fotled)",
-      "William Saliba (skadad)",
-      "Bukayo Saka (osäker)"
+      "William Saliba (skadad)"
      ],
      "away": [],
      "impact": [
-      3,
+      2,
       0
      ]
     },
@@ -135,7 +133,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Arsenal är hemma 3–0–0 och släpper bara till 1,06 i xG emot per match, så etta är troligast med 58 procents beräknad chans. Folket har 75 procent på Arsenal, vilket är klart mer än den beräknade chansen. Everton har spelat 0–3–0 borta och krysset har 23 procents beräknad chans mot 17 procent hos folket. Arsenal saknar William Saliba och Bukayo Saka är osäker.",
+    "note": "Arsenal är 2:a med 18 poäng, har vunnit alla tre hemmamatcher och släpper bara in 1.06 xG per match. Ettan är ändå överstreckad, med 79 procent hos folket mot 59 procent i beräknad chans. Arsenal saknar Saka och Saliba, och Everton är obesegrade borta med 0–3–0. Tvåan har 18 procent i beräknad chans men bara 5 procent hos folket.",
     "valueNote": ""
    },
    {
@@ -145,14 +143,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     34,
      27,
-     39
+     26,
+     47
     ],
     "odds": [
-     3.1,
+     3.18,
      3.5,
-     2.25
+     2.2
     ],
     "table": {
      "home": "17:e, 6 p (7 matcher)",
@@ -192,7 +190,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_epl"
     },
-    "note": "Fulham är svagt troligast med 40 procents beräknad chans och skapar mer framåt med 1,72 i xG per match mot Coventrys 1,11. Coventry släpper samtidigt till 1,68 i xG emot och saknar Haji Wright. Folket ligger nära den beräknade chansen på alla tre tecken, så inget tecken är tydligt fel streckat.",
+    "note": "Fulham är svag favorit med 41 procent i beräknad chans och skapar 1.72 xG per match, mot Coventrys 1.11. Folket har 47 procent på 2, så tvåan är något överstreckad. Ettan har 32 procent i beräknad chans mot 27 procent hos folket. Coventry saknar fyra spelare, bland andra Haji Wright, medan Fulham saknar den avstängde Sessegnon.",
     "valueNote": ""
    },
    {
@@ -202,14 +200,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     45,
-     27,
-     28
+     39,
+     29,
+     32
     ],
     "odds": [
-     2.67,
-     3.2,
-     2.6
+     2.9,
+     3.23,
+     2.42
     ],
     "table": {
      "home": "10:e, 15 p (11 matcher)",
@@ -235,7 +233,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Den beräknade chansen är 35 procent för både etta och tvåa, och Blackburn anges som troligt utfall tack vare 3–0–2 hemma och formen VOVVF. Folket har 45 procent på Blackburn, vilket gör ettan överstreckad. Wrexham har 35 procents beräknad chans men bara 28 procent hos folket.",
+    "note": "Wrexham har 38 procent i beräknad chans och är svag favorit, trots att folket streckar dem på 32 procent. Blackburn är överstreckat med 39 procent hos folket mot 33 procent i beräknad chans. Blackburn har vunnit 3 av 5 hemmamatcher, och Wrexham har gått 1–3–1 borta. Blackburn saknar Lewis Miller.",
     "valueNote": ""
    },
    {
@@ -245,14 +243,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     30,
-     27,
-     43
+     28,
+     26,
+     46
     ],
     "odds": [
-     2.65,
-     3.67,
-     2.38
+     2.5,
+     3.7,
+     2.5
     ],
     "table": {
      "home": "19:e, 11 p (11 matcher)",
@@ -278,7 +276,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Birmingham är troligast med 40 procents beräknad chans efter formen VOVVV och 3–1–1 på bortaplan. Folket har 43 procent på tvåan, alltså lite mer än den beräknade chansen. Cardiff är obesegrat hemma med 2–3–0 och har 34 procents beräknad chans mot 30 procent hos folket, så ettan är något understreckad.",
+    "note": "Birmingham är 4:a med 20 poäng och formen VOVVV, så tvåan är troligast med 38 procent i beräknad chans. Folket har 46 procent på 2, vilket gör tvåan överstreckad. Cardiff är obesegrade hemma med 2–3–0 och har 36 procent i beräknad chans mot bara 28 procent hos folket.",
     "valueNote": ""
    },
    {
@@ -288,14 +286,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     31,
+     25,
      27,
-     42
+     48
     ],
     "odds": [
-     2.88,
+     2.75,
      3.4,
-     2.31
+     2.45
     ],
     "table": {
      "home": "18:e, 12 p (11 matcher)",
@@ -319,7 +317,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Burnley är troligast med 40 procents beräknad chans, trots att laget ligger 22:a med 8 poäng och har 1–1–3 borta. Lincoln har ingen hemmaseger med 0–2–3 och har förlorat tre av de fem senaste. Folket ligger i linje med den beräknade chansen på alla tecken.",
+    "note": "Burnley är troligast med 38 procent i beräknad chans, men laget ligger 22:a med 8 poäng och har gått 1–1–3 borta. Folket har 48 procent på 2, så tvåan är tydligt överstreckad. Lincoln saknar hemmavinst (0–2–3) men har 34 procent i beräknad chans mot 25 procent hos folket.",
     "valueNote": ""
    },
    {
@@ -329,14 +327,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
+     13,
      18,
-     19,
-     63
+     69
     ],
     "odds": [
-     3.62,
-     3.54,
-     1.95
+     3.8,
+     3.5,
+     1.94
     ],
     "table": {
      "home": "24:e, 4 p (11 matcher)",
@@ -360,8 +358,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "West Bromwich är troligast med 49 procents beräknad chans, eftersom Preston ligger sist med 4 poäng, har formen FOFFF och 1–0–4 hemma. Folket har 63 procent på tvåan, vilket gör den tydligt överstreckad. Krysset har 26 procents beräknad chans mot 19 procent hos folket och ettan 25 procent mot 18 procent.",
-    "valueNote": "Krysset har 26 procents beräknad chans men bara 19 procent av folkets streck, vilket ger spelvärde 1,39."
+    "note": "West Bromwich är 5:a med 20 poäng och har vunnit de två senaste, medan Preston ligger sist med 4 poäng och formen FOFFF. Tvåan har 49 procent i beräknad chans, men folket har 69 procent och tvåan är kraftigt överstreckad. Både ettan (24 mot 13 procent) och krysset (27 mot 18 procent) är understreckade.",
+    "valueNote": "Ettan har 24 procent i beräknad chans men bara 13 procent hos folket, vilket ger spelvärde 1.83.",
+    "lineup": "Preston startar med 4-2-3-1: Iversen i mål, Vukcevic, Hughes, Storey och Offiah i backlinjen, Leroy och Potts på mitten, Mills, Devine och Burgzorg bakom ensam anfallare Johnny Kenny (Jordan Thompson avstängd, Callum Lang på bänken). West Brom ställer upp med O'Leary, Molumby, Mepham, Styles, Myhre, Stewart, Diakité, Campbell, Whitwell, Pereira och Price."
    },
    {
     "n": 8,
@@ -370,13 +369,13 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     40,
-     27,
+     41,
+     26,
      33
     ],
     "odds": [
-     2.42,
-     3.35,
+     2.4,
+     3.4,
      2.8
     ],
     "table": {
@@ -403,7 +402,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Queens Park Rangers är svagt troligast med 38 procents beräknad chans och har 2–2–1 hemma. Swansea leder serien med 23 poäng och har vunnit fyra av fem bortamatcher, så tvåan ligger nära med 34 procent. Folket har 40, 27 och 33 procent, i stort sett samma som den beräknade chansen.",
+    "note": "QPR har 38 procent i beräknad chans och är svag favorit på hemmaplan med 2–2–1. Swansea leder serien med 23 poäng och har gått 4–0–1 borta, så matchen är jämn. Folkets streck ligger nära den beräknade chansen på alla tre tecken. QPR saknar Karamoko Dembele.",
     "valueNote": ""
    },
    {
@@ -413,14 +412,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     62,
-     21,
+     60,
+     23,
      17
     ],
     "odds": [
-     2.3,
-     3.31,
-     3.0
+     2.38,
+     3.25,
+     2.96
     ],
     "table": {
      "home": "6:e, 19 p (11 matcher)",
@@ -444,8 +443,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Stoke är troligast med 42 procents beräknad chans efter formen VVVFV och 3–0–2 hemma. Folket har hela 62 procent på ettan, vilket gör den kraftigt överstreckad. Bristol City har 2–2–1 borta och 30 procents beräknad chans men bara 17 procent hos folket.",
-    "valueNote": "Tvåan har 30 procents beräknad chans men bara 17 procent av folkets streck, vilket ger spelvärde 1,75."
+    "note": "Stoke har formen VVVFV och 41 procent i beräknad chans, vilket gör ettan troligast. Folket har däremot 60 procent på 1, så ettan är klart överstreckad. Bristol City har formen FVOFF men har gått 2–2–1 borta och har 30 procent i beräknad chans mot 17 procent hos folket.",
+    "valueNote": "Tvåan har 30 procent i beräknad chans men streckas av bara 17 procent av folket, vilket ger spelvärde 1.79.",
+    "lineup": "Bristol City startar i 4-2-3-1 med Collins i mål, backlinjen Eissat, Tanner, Pring och McNally, Yah och Knight på mittfältet samt Williams, Tolaj, Cardines bakom Ballard; Stokes startelva har jag inte kunnat bekräfta."
    },
    {
     "n": 10,
@@ -454,14 +454,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     66,
-     20,
-     14
+     69,
+     19,
+     12
     ],
     "odds": [
      1.67,
-     4.18,
-     4.33
+     4.2,
+     4.4
     ],
     "table": {
      "home": "2:a, 22 p (11 matcher)",
@@ -487,7 +487,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "West Ham är troligast med 56 procents beräknad chans som tvåa i tabellen med 22 poäng och 3–1–1 hemma. Southampton har bara 1–2–2 borta. Folket har 66 procent på ettan, vilket är mer än den beräknade chansen, medan tvåan har 21 procent mot folkets 14 procent.",
+    "note": "West Ham är 2:a med 22 poäng, har formen VOOVV och har gått 3–1–1 hemma, så ettan har 56 procent i beräknad chans. Folket har 69 procent på 1, så ettan är överstreckad. Southampton har 21 procent i beräknad chans mot 12 procent hos folket. Southamptons Mads Roerslev är osäker.",
     "valueNote": ""
    },
    {
@@ -497,14 +497,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     76,
-     14,
-     10
+     81,
+     12,
+     7
     ],
     "odds": [
-     1.36,
-     4.99,
-     8.0
+     1.4,
+     4.65,
+     6.8
     ],
     "table": {
      "home": "7:e, 18 p (11 matcher)",
@@ -528,7 +528,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Wolverhampton är stor favorit med 70 procents beräknad chans, och Watford har 0–1–4 borta och förlorade fyra raka före senaste segern. Folket har 76 procent på ettan, något mer än den beräknade chansen. Krysset har 19 procents beräknad chans mot 14 procent hos folket.",
+    "note": "Wolverhampton har 67 procent i beräknad chans och möter ett Watford som ligger 20:e och har förlorat 4 av 5 bortamatcher. Folket har 81 procent på 1, så ettan är överstreckad. Krysset har 20 procent i beräknad chans mot 12 procent hos folket.",
     "valueNote": ""
    },
    {
@@ -538,13 +538,13 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     45,
-     28,
+     47,
+     26,
      27
     ],
     "odds": [
-     2.33,
-     3.55,
+     2.4,
+     3.5,
      2.75
     ],
     "table": null,
@@ -560,7 +560,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Cambridge är troligast med 40 procents beräknad chans, i linje med oddsen. Folket har 45 procent på ettan, vilket gör den lite överstreckad. Plymouth har 34 procents beräknad chans men bara 27 procent hos folket.",
+    "note": "Cambridge har 39 procent i beräknad chans och är svag favorit. Folket har 47 procent på 1, så ettan är överstreckad. Plymouth har 34 procent i beräknad chans mot 27 procent hos folket, så tvåan är understreckad.",
     "valueNote": ""
    },
    {
@@ -570,14 +570,14 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     32,
-     34,
-     34
+     29,
+     35,
+     36
     ],
     "odds": [
-     2.69,
-     3.3,
-     2.5
+     2.55,
+     3.38,
+     2.62
     ],
     "table": null,
     "form": {},
@@ -592,7 +592,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-10-24T16:00:00+02:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Matchen är jämn och Bradford är svagt troligast med 37 procents beräknad chans mot Oxfords 35 procent. Folket har 34 procent på krysset trots att den beräknade chansen bara är 28 procent, så krysset är överstreckat. Både ettan och tvåan är något understreckade med 32 och 34 procent hos folket.",
+    "note": "Oxford har 37 procent i beräknad chans och är knapp favorit före Bradford på 36 procent. Folket har bara 29 procent på 1, så ettan är understreckad. Krysset är överstreckat med 35 procent hos folket mot 28 procent i beräknad chans.",
     "valueNote": ""
    }
   ]
