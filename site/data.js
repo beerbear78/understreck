@@ -595,7 +595,63 @@ window.STRYK_ROUNDS = [
     "note": "Oxford har 37 procent i beräknad chans och är knapp favorit före Bradford på 36 procent. Folket har bara 29 procent på 1, så ettan är understreckad. Krysset är överstreckat med 35 procent hos folket mot 28 procent i beräknad chans.",
     "valueNote": ""
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "2",
+    "1",
+    "2",
+    "1",
+    "1",
+    "1",
+    "X",
+    "1",
+    "X",
+    "2",
+    "1",
+    "2",
+    "X"
+   ],
+   "scores": [
+    "0–2",
+    "2–0",
+    "0–1",
+    "2–0",
+    "1–0",
+    "4–1",
+    "1–1",
+    "5–0",
+    "0–0",
+    "2–3",
+    "1–0",
+    "2–3",
+    "0–0"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 18,
+     "amount": 399293.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 446,
+     "amount": 6043.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 5811,
+     "amount": 371.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 45068,
+     "amount": 99.0
+    }
+   ],
+   "updated": "2026-10-24T21:35"
+  }
  },
  {
   "id": 7810,
