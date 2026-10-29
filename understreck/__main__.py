@@ -20,7 +20,7 @@ from datetime import date, datetime, timedelta
 
 import requests
 
-from . import claude, footballdata, model, odds, skador, store, svenskaspel, tipsrader, transfermarkt, understat
+from . import claude, footballdata, model, odds, skador, store, svenskaspel, tipsrader, understat
 from .apifootball import ApiFootball, ApiFootballError, enrich_friday, lineups as af_lineups, set_injuries
 from .util import TZ, http, log, now, set_output, team_sim
 
@@ -92,7 +92,6 @@ def run_friday(s, rounds=(), scheduled=False) -> dict | None:
         footballdata.enrich(footballdata.FootballData(s, FD_KEY), matches)
     understat.enrich(s, matches, day)
     skador.enrich(s, matches)
-    transfermarkt.enrich(s, matches)  # League One m.fl., som sportsgambler inte täcker
 
     # Webbsökningen görs som standard bara på lördagen (ett anrop i veckan). RESEARCH_FRIDAY=1 slår på den här.
     needs = [{"n": m["n"], "home": m["home"], "away": m["away"], "league": m["league"], "kickoff": m["kickoff"],
@@ -191,7 +190,6 @@ def run_lineups(s, rounds, force=False, wait=False) -> dict | None:
                 log.warning("API-Football, startelva %s – %s: %s", m["home"], m["away"], e)
     # Färsk skadelista för alla matcher (gratis). Färska odds ovan fångar marknadens reaktion på startelvorna.
     skador.enrich(s, matches)
-    transfermarkt.enrich(s, matches)
     # Ett enda sökanrop i veckan, så litet som möjligt:
     #  - bekräftade startelvor bara för veckans tre spelvärda matcher (om de startar vid första avspark)
     #  - tabell, form och skador för matcher som de gratis källorna inte täcker (oftast League One)

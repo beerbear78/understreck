@@ -184,7 +184,9 @@ Fält:
 - form: {{"home": "VOFVV", "away": ...}} de fem senaste ligamatcherna, äldst först, V/O/F
 - xg: {{"home": [xG för per match, xG emot per match], "away": [...]}} säsongssnitt (fbref, footystats, fotmob, understat)
 - injuries: {{"home": ["Namn (skadad)", "Namn (avstängd)", "Namn (osäker)"], "away": [...], "impact": [0-3, 0-3]}}
-  impact: 0 inga frånvarande, 1 liten, 2 märkbar, 3 stor påverkan på laget
+  impact: 0 inga frånvarande, 1 liten, 2 märkbar, 3 stor påverkan på laget. Sök t.ex. på lagnamnet plus
+  "team news" eller "injury news"; klubbens egen sida, BBC Sport och lokaltidningar har laguppdateringar
+  inför matchen (tränarens presskonferens dagen innan).
 - lineup: en mening på svenska om den bekräftade startelvan, t.ex. vilka nyckelspelare som saknas{
 " (startelvorna släpps cirka en timme före avspark; sök t.ex. på lagnamnen plus 'confirmed line-up' eller "
 "'team news' – klubbarnas egna sidor, BBC Sport och Sky Sports publicerar dem direkt)" if lineups else ""}

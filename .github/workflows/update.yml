@@ -50,7 +50,11 @@ jobs:
     outputs:
       changed: ${{ steps.run.outputs.changed }}
     steps:
+      # ref: main = senaste datan när jobbet startar. En reservkörning som stått i kö bakom en väntande
+      # körning ska se att jobbet redan är gjort, inte jobba vidare på en gammal data.js.
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
