@@ -248,6 +248,11 @@ section{margin-top:40px}
 .red-filters .mm{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400}
 .red-filters input{width:56px;font:inherit;font-family:var(--font-mono);font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
 .red-filters input.wide{width:100px}
+.red-filters .hint{font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)}
+.red-filters .hint.bad{color:var(--bad);font-weight:600}
+.red-how{grid-column:1/-1;margin:0;font-size:13px;color:var(--muted);max-width:90ch}
+.red-how b{color:var(--ink);font-weight:600}
+.red-clear{display:flex;align-items:flex-start;padding-top:19px}
 .red-box{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:grid;gap:10px;min-width:0}
 .red-btns{display:flex;flex-wrap:wrap;gap:6px}
 .btn.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
@@ -381,10 +386,12 @@ footer a{color:inherit}
       <div class="ctl" id="ctl-ram" hidden><span class="lbl">Ram</span><div class="seg" role="radiogroup" aria-label="Ram för egen reducering" id="segram"></div></div>
     </div>
     <div class="red-filters" id="red-filters" hidden>
-      <label>Ettor per rad<span class="mm"><input id="red-n1-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-n1-1" type="number" min="0" max="13" inputmode="numeric"></span></label>
-      <label>Kryss per rad<span class="mm"><input id="red-nx-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-nx-1" type="number" min="0" max="13" inputmode="numeric"></span></label>
-      <label>Tvåor per rad<span class="mm"><input id="red-n2-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-n2-1" type="number" min="0" max="13" inputmode="numeric"></span></label>
+      <p class="red-how"><b>Så gör du:</b> 1. Fyll i kupongen nedan med de tecken som får vara med (eller utgå från ett förslag, 64–1 296 rader). 2. Bestäm hur många ettor, kryss och tvåor en rad får ha. Raderna räknas fram direkt.</p>
+      <label>Ettor per rad<span class="mm"><input id="red-n1-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-n1-1" type="number" min="0" max="13" inputmode="numeric"></span><span class="hint" id="red-h-0"></span></label>
+      <label>Kryss per rad<span class="mm"><input id="red-nx-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-nx-1" type="number" min="0" max="13" inputmode="numeric"></span><span class="hint" id="red-h-1"></span></label>
+      <label>Tvåor per rad<span class="mm"><input id="red-n2-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-n2-1" type="number" min="0" max="13" inputmode="numeric"></span><span class="hint" id="red-h-2"></span></label>
       <label>Behåll högst<span class="mm"><input id="red-max" class="wide" type="number" min="0" inputmode="numeric" placeholder="alla"> mest sannolika rader</span></label>
+      <div class="red-clear"><button type="button" class="btn" id="red-clear">Rensa villkoren</button></div>
     </div>
     <div class="sys">
       <div class="mini" id="red-frame"></div>
@@ -608,7 +615,7 @@ footer a{color:inherit}
     // Egen ram för reducerat system: per match en lista med tecken (0 = 1, 1 = X, 2 = 2).
     const ram = store.get('stv:ram:' + r.id);
     state.ram = Array.isArray(ram) && ram.length === r.matches.length &&
-      ram.every(s => Array.isArray(s) && s.length >= 1 && s.length <= 3 && s.every(k => k === 0 || k === 1 || k === 2)) ? ram : null;
+      ram.every(s => Array.isArray(s) && s.length <= 3 && s.every(k => k === 0 || k === 1 || k === 2)) ? ram : null;
   }
   function saveOverrides(r){ store.set('stv:folk:' + r.id, state.overrides); }
 
@@ -818,28 +825,50 @@ footer a{color:inherit}
     return digits.map(r => { const row = base.slice(); r.forEach((d, c) => { row[assign[c]] = mp[c][d]; }); return row; });
   }
 
+  // Alla rader i ramen som uppfyller villkoren, mest sannolika först. Grenar som inte kan nå villkoren hoppas över,
+  // så en stor ram med snäva villkor går fort. Senaste svaret sparas, eftersom sidan ritas om vid varje klick.
+  let ownMemo = { key: null, val: null };
   function ownRows(an, sel, red){
-    const all = [], row = new Array(13);
-    (function rec(i){ if (i === 13){ all.push(row.slice()); return; } for (const k of sel[i]){ row[i] = k; rec(i + 1); } })(0);
-    const ok = r => { const c = [0, 0, 0]; r.forEach(k => c[k]++);
-      return c[0] >= red.n1[0] && c[0] <= red.n1[1] && c[1] >= red.nx[0] && c[1] <= red.nx[1] && c[2] >= red.n2[0] && c[2] <= red.n2[1]; };
-    let kept = all.filter(ok).map(r => ({ r, p: rowP(an, r) })).sort((a, b) => b.p - a.p);
-    if (red.max > 0) kept = kept.slice(0, red.max);
-    return { rows: kept.map(x => x.r), frameRows: all.length };
+    const key = JSON.stringify([sel, red.n1, red.nx, red.n2, red.max, an.map(a => a.p)]);
+    if (ownMemo.key === key) return ownMemo.val;
+    const lim = [red.n1, red.nx, red.n2], n = sel.length;
+    const minLeft = [[0, 0, 0]], maxLeft = [[0, 0, 0]];     // index n - i: spikade / ifyllda tecken från match i och framåt
+    for (let i = n - 1; i >= 0; i--){
+      const lo = minLeft[0].slice(), hi = maxLeft[0].slice();
+      sel[i].forEach(k => { hi[k]++; if (sel[i].length === 1) lo[k]++; });
+      minLeft.unshift(lo); maxLeft.unshift(hi);
+    }
+    const out = [], row = new Array(n), c = [0, 0, 0];
+    (function rec(i, p){
+      if (i === n){ out.push({ r: row.slice(), p }); return; }
+      for (const k of sel[i]){
+        c[k]++; row[i] = k;
+        let ok = true;
+        for (let s = 0; s < 3 && ok; s++) ok = c[s] + minLeft[i + 1][s] <= lim[s][1] && c[s] + maxLeft[i + 1][s] >= lim[s][0];
+        if (ok) rec(i + 1, p * an[i].p[k]);
+        c[k]--;
+      }
+    })(0, 1);
+    out.sort((a, b) => b.p - a.p);
+    const kept = red.max > 0 ? out.slice(0, red.max) : out;
+    ownMemo = { key, val: { rows: kept.map(x => x.r), matching: out.length } };
+    return ownMemo.val;
   }
 
-  // Ram som användaren valt själv genom att klicka i rutorna.
+  // Ram som användaren valt själv genom att klicka i rutorna. En tom match (inget tecken) ger inga rader.
   function customFrame(an, sel){
     sel = sel.map(s => s.slice().sort());
     return {
       sel, kinds: sel.map(s => KIND[s.length]),
-      skrall: an.map((a, i) => !sel[i].includes(favOf(a))),
+      skrall: an.map((a, i) => sel[i].length > 0 && !sel[i].includes(favOf(a))),
       rows: sel.reduce((t, s) => t * s.length, 1),
       hit: an.reduce((t, a, i) => t * sum(sel[i].map(j => a.p[j])), 1)
     };
   }
 
-  const OWN_MAX = 20000;   // största ram för egen reducering (alla rader räknas fram i webbläsaren)
+  const OWN_MAX = 200000;   // största ram för egen reducering (raderna räknas fram i webbläsaren)
+  const FILE_MAX = 20000;   // Svenska Spel tar högst 20 000 enkelrader per fil
+  const TABLE_MAX = 500;    // så många rader visas i tabellen; filen och kopian har alla
 
   function reducedSystem(an){
     const red = state.red, own = !!state.ram && state.ram.length === an.length;
@@ -848,15 +877,33 @@ footer a{color:inherit}
       const frame = own ? customFrame(an, state.ram) : frameFor(an, R.h, R.b);
       const code = (window.R_KODER || {})[R.key] || [];
       const hel = frame.sel.filter(s => s.length === 3).length, halv = frame.sel.filter(s => s.length === 2).length;
-      const fits = hel === R.h && halv === R.b;
+      const blank = frame.sel.filter(s => !s.length).length, fits = !blank && hel === R.h && halv === R.b;
       return { label: `R ${R.key}`, own, frame, rows: code.length && fits ? rSystemRows(an, frame.sel, code, R.h) : [],
-               frameRows: frame.rows, guarantee: true, need: { h: R.h, b: R.b, hel, halv, fits }, missing: !code.length };
+               frameRows: frame.rows, guarantee: true, need: { h: R.h, b: R.b, hel, halv, fits }, missing: !code.length, blank };
     }
     const F = FRAMES.find(x => x.rows === red.frame) || FRAMES[2];
     const frame = own ? customFrame(an, state.ram) : frameFor(an, F.h, F.b);
-    const big = frame.rows > OWN_MAX;
-    const out = big ? { rows: [] } : ownRows(an, frame.sel, red);
-    return { label: `Egen reducering av ${frame.rows.toLocaleString('sv-SE')} rader`, own, frame, rows: out.rows, frameRows: frame.rows, guarantee: false, big };
+    const blank = frame.sel.filter(s => !s.length).length, big = frame.rows > OWN_MAX;
+    const out = big || blank ? { rows: [] } : ownRows(an, frame.sel, red);
+    const tooMany = out.rows.length > FILE_MAX ? out.rows.length : 0;
+    return { label: `Egen reducering av ${rowsWord(frame.rows)}`, own, frame, rows: tooMany ? [] : out.rows, frameRows: frame.rows,
+             guarantee: false, big, blank, tooMany };
+  }
+
+  const rowsWord = n => n === 1 ? '1 rad' : `${n.toLocaleString('sv-SE')} rader`;
+  const FILTER_KEYS = ['n1', 'nx', 'n2'], FILTER_NAMES = ['ettor', 'kryss', 'tvåor'];
+
+  // Hur många ettor/kryss/tvåor en rad kan få med ramen: minst = spikade, högst = matcher där tecknet är ifyllt.
+  const signSpan = (sel, k) => [sel.filter(s => s.length === 1 && s[0] === k).length, sel.filter(s => s.includes(k)).length];
+
+  // Varför inga rader blev kvar efter villkoren.
+  function whyNone(sel, red){
+    for (let k = 0; k < 3; k++){
+      const [lo, hi] = signSpan(sel, k), [a, b] = red[FILTER_KEYS[k]];
+      if (a > hi) return `${hi === 0 ? 'Ingen match' : `Bara ${hi} ${hi === 1 ? 'match' : 'matcher'}`} har ${SIGNS[k]} ifyllt i kupongen, så ingen rad kan få ${a} ${FILTER_NAMES[k]} eller fler. Fyll i fler ${SIGNS[k]} eller sänk villkoret.`;
+      if (b < lo) return `${lo} matcher har ${SIGNS[k]} som spik, så varje rad får minst ${lo} ${FILTER_NAMES[k]}. Höj gränsen eller gardera några av dem.`;
+    }
+    return 'Inga rader uppfyller alla villkor samtidigt. Vidga intervallen eller fyll i fler tecken i kupongen.';
   }
 
   function rowsWin(rows, rowIdx, payouts){
@@ -873,7 +920,7 @@ footer a{color:inherit}
     $('#segrt').innerHTML = [['r', 'R-system'], ['own', 'Egen reducering']].map(([k, l]) => `<button type="button" role="radio" aria-checked="${st.type === k}" data-rt="${k}">${l}</button>`).join('');
     $('#segr').innerHTML = R_LIST.map(x => `<button type="button" role="radio" aria-checked="${st.rkey === x.key}" data-r="${x.key}">R ${x.key}</button>`).join('');
     $('#segram').innerHTML = FRAMES.map(f => `<button type="button" role="radio" aria-checked="${!red.own && st.frame === f.rows}" data-ram="${f.rows}">${f.rows.toLocaleString('sv-SE')}</button>`).join('') +
-      (red.own ? `<button type="button" role="radio" aria-checked="true" data-ram="egen">Egen, ${red.frameRows.toLocaleString('sv-SE')}</button>` : '');
+      (red.own ? `<button type="button" role="radio" aria-checked="true" data-ram="egen">Egen</button>` : '');
     $('#ctl-r').hidden = st.type !== 'r';
     $('#ctl-ram').hidden = st.type !== 'own';
     $('#red-filters').hidden = st.type !== 'own';
@@ -881,6 +928,11 @@ footer a{color:inherit}
       [['n1', 0], ['n1', 1], ['nx', 0], ['nx', 1], ['n2', 0], ['n2', 1]].forEach(([k, j]) => {
         const el = document.getElementById(`red-${k}-${j}`); if (el && document.activeElement !== el) el.value = st[k][j]; });
       const mx = document.getElementById('red-max'); if (document.activeElement !== mx) mx.value = st.max || '';
+      [0, 1, 2].forEach(k => {
+        const [lo, hi] = signSpan(red.frame.sel, k), [a, b] = st[FILTER_KEYS[k]], el = document.getElementById(`red-h-${k}`);
+        el.textContent = red.blank ? '' : `Kupongen ger ${lo === hi ? lo : `${lo}–${hi}`}`;
+        el.classList.toggle('bad', !red.blank && (a > hi || b < lo));
+      });
     }
     const sel = red.frame.sel;
     state.redSel = sel;
@@ -894,11 +946,11 @@ footer a{color:inherit}
     const chips = red.need
       ? `<span class="ram-chip ${nHel === red.need.h ? 'ok' : 'bad'}">Hel ${nHel} av ${red.need.h}</span><span class="ram-chip ${nHalv === red.need.b ? 'ok' : 'bad'}">Halv ${nHalv} av ${red.need.b}</span>`
       : `<span class="ram-chip">Hel ${nHel}</span><span class="ram-chip">Halv ${nHalv}</span>`;
-    $('#red-frame').innerHTML = `<div class="mini-head"><span class="lbl">Ramen · ${red.own ? 'egen' : esc(prof.label)}</span><span class="lbl">${red.frameRows.toLocaleString('sv-SE')} rader fullt</span></div>
-      <div class="ram-bar">${chips}<span class="ram-btns">${red.own ? '<button type="button" class="btn" data-ramreset="forslag">Förslaget</button>' : ''}<button type="button" class="btn" data-ramreset="spik">Bara spikar</button></span></div>` +
+    $('#red-frame').innerHTML = `<div class="mini-head"><span class="lbl">Ramen · ${red.own ? 'egen' : esc(prof.label)}</span><span class="lbl">${red.blank ? 'Inte klar' : rowsWord(red.frameRows) + ' fullt'}</span></div>
+      <div class="ram-bar">${chips}<span class="ram-btns">${red.own ? '<button type="button" class="btn" data-ramreset="forslag">Förslaget</button>' : ''}<button type="button" class="btn" data-ramreset="spik">Bara spikar</button><button type="button" class="btn" data-ramreset="tom">Töm kupongen</button></span></div>` +
       r.matches.map((m, i) => {
         const fav = favOf(an[i]), kind = KIND[sel[i].length];
-        const tag = red.frame.skrall[i] ? '<span class="kind skrall">Skräll</span>' : `<span class="kind ${kind}">${KL[kind]}</span>`;
+        const tag = !sel[i].length ? '<span class="kind">–</span>' : red.frame.skrall[i] ? '<span class="kind skrall">Skräll</span>' : `<span class="kind ${kind}">${KL[kind]}</span>`;
         return `<div class="mini-row">
         <span class="mn">${m.n}</span><span class="mt">${esc(m.home)} – ${esc(m.away)}</span>
         ${tag}
@@ -910,7 +962,7 @@ footer a{color:inherit}
     // Raderna som tabell: en kolumn per match, tonade kolumner är garderade.
     const g = sel.map(s => s.length > 1);
     const head = `<tr><th class="rn" scope="col">Rad</th>${r.matches.map((m, i) => `<th scope="col"${g[i] ? ' class="g"' : ''}>${m.n}</th>`).join('')}${rowIdx ? '<th class="rt" scope="col">Rätt</th>' : ''}</tr>`;
-    const body = red.rows.map((row, ri) => {
+    const body = red.rows.slice(0, TABLE_MAX).map((row, ri) => {
       const right = rowIdx ? row.reduce((t, k, j) => t + (rowIdx[j] === k ? 1 : 0), 0) : 0;
       const cells = row.map((k, j) => {
         const cls = [g[j] ? 'g' : 's'];
@@ -920,17 +972,19 @@ footer a{color:inherit}
       return `<tr${right >= 10 ? ' class="win"' : ''}><td class="rn">${ri + 1}</td>${cells}${rowIdx ? `<td class="rt">${right}</td>` : ''}</tr>`;
     }).join('');
     const n = red.need;
-    const empty = st.type === 'r'
+    const empty = red.blank ? `Fyll i minst ett tecken i varje match. ${red.blank === 1 ? '1 match saknar' : `${red.blank} matcher saknar`} tecken.`
+      : st.type === 'r'
       ? (red.missing ? 'Tabellen för R-systemet kunde inte läsas in. Ladda om sidan.'
         : `${esc(red.label)} behöver ${n.h} helgarderingar och ${n.b} halvgarderingar. Ramen har nu ${n.hel} hel och ${n.halv} halv. Klicka i rutorna för att ändra, eller välj ett annat R-system.`)
-      : (red.big ? `Ramen är för stor (${red.frameRows.toLocaleString('sv-SE')} rader). Högst ${OWN_MAX.toLocaleString('sv-SE')} rader går att reducera här.`
-        : 'Inga rader uppfyller villkoren. Vidga intervallen ovan.');
+      : red.big ? `Ramen är för stor (${rowsWord(red.frameRows)}). Högst ${OWN_MAX.toLocaleString('sv-SE')} rader går att räkna igenom här. Ta bort några tecken.`
+      : red.tooMany ? `${red.tooMany.toLocaleString('sv-SE')} rader uppfyller villkoren. Svenska Spel tar högst ${FILE_MAX.toLocaleString('sv-SE')} rader per fil. Skärp villkoren eller fyll i Behåll högst.`
+      : whyNone(sel, st);
     const best = rowIdx && red.rows.length ? Math.max(...red.rows.map(row => row.reduce((t, k, j) => t + (rowIdx[j] === k ? 1 : 0), 0))) : null;
-    $('#red-box').innerHTML = `<div class="mini-head"><span class="lbl">Raderna · ${red.rows.length} st · ${esc(red.label)}</span>${red.rows.length ? `<span class="red-btns"><button type="button" class="btn" id="copy-red">Kopiera</button><button type="button" class="btn primary" id="dl-red">Ladda ner fil till Svenska Spel</button></span>` : ''}</div>
+    $('#red-box').innerHTML = `<div class="mini-head"><span class="lbl">Raderna · ${red.rows.length.toLocaleString('sv-SE')} st · ${esc(red.label)}</span>${red.rows.length ? `<span class="red-btns"><button type="button" class="btn" id="copy-red">Kopiera</button><button type="button" class="btn primary" id="dl-red">Ladda ner fil till Svenska Spel</button></span>` : ''}</div>
       ${red.rows.length ? `<details class="red-fold" id="red-fold"${state.redOpen ? ' open' : ''}>
         <summary><span class="shut">Visa alla ${red.rows.length} rader</span><span class="opn">Dölj raderna</span>${best !== null ? `<span class="red-best">Bästa rad: ${best} rätt</span>` : ''}</summary>
         <div class="rm-wrap"><table class="rm"><thead>${head}</thead><tbody>${body}</tbody></table></div>
-        <p class="red-foot">Tonade kolumner är garderade matcher, där raderna skiljer sig åt.${rowIdx ? ' Grönt = rätt tecken.' : ''}</p>
+        <p class="red-foot">${red.rows.length > TABLE_MAX ? `Visar de ${TABLE_MAX} mest sannolika raderna; filen och kopian har alla ${red.rows.length.toLocaleString('sv-SE')}. ` : ''}Tonade kolumner är garderade matcher, där raderna skiljer sig åt.${rowIdx ? ' Grönt = rätt tecken.' : ''}</p>
       </details>
       <p class="red-foot"><span><b>Lämna in hos Svenska Spel:</b> ladda ner filen, logga in och gå till Stryktipset → Mer → Externa systemspel och ladda upp den.</span></p>`
       : `<p class="red-empty">${empty}</p>`}`;
@@ -944,9 +998,9 @@ footer a{color:inherit}
     $('#red-sum').innerHTML = `
       <div><dt>Rader</dt><dd>${red.rows.length}</dd></div>
       <div><dt>Kostnad</dt><dd>${red.rows.length} kr</dd></div>
-      <div><dt>Ramen, fullt</dt><dd>${red.frameRows.toLocaleString('sv-SE')} kr</dd></div>
+      <div><dt>Ramen, fullt</dt><dd>${red.blank ? '–' : red.frameRows.toLocaleString('sv-SE') + ' kr'}</dd></div>
       <div><dt>Chans 13 rätt</dt><dd>${red.rows.length ? fmtChance(p13) : '–'}</dd></div>
-      <div><dt>${red.guarantee ? 'Garanterat 12 rätt' : 'Ramen sitter'}</dt><dd>${fmtChance(red.frame.hit)}</dd></div>
+      <div><dt>${red.guarantee ? 'Garanterat 12 rätt' : 'Ramen sitter'}</dt><dd>${red.blank ? '–' : fmtChance(red.frame.hit)}</dd></div>
       <div><dt>Behållen chans</dt><dd>${red.rows.length ? Math.round(share * 100) + ' %' : '–'}</dd></div>`;
     $('#red-note').innerHTML = red.guarantee
       ? `Om alla 13 matcher slutar inom ramen (chans ${fmtChance(red.frame.hit)}) har minst en rad 12 rätt. Raderna ligger på de mest sannolika utfallen inom ramen. Du kan också välja samma ram och R-system direkt hos Svenska Spel; deras rader kan ligga annorlunda, men garantin är densamma.`
@@ -1066,14 +1120,18 @@ footer a{color:inherit}
       // Första klicket gör förslaget till en egen ram; sedan läggs tecknet till eller tas bort (minst ett per match).
       const [i, k] = fk.dataset.fk.split('-').map(Number);
       const ram = (state.ram || state.redSel).map(s => s.slice());
-      if (ram[i].includes(k)){ if (ram[i].length > 1) ram[i] = ram[i].filter(x => x !== k); }
-      else ram[i] = ram[i].concat([k]).sort();
+      ram[i] = ram[i].includes(k) ? ram[i].filter(x => x !== k) : ram[i].concat([k]).sort();
       saveRam(ram); render(); return;
     }
     const rr = e.target.closest('[data-ramreset]');
     if (rr){
-      saveRam(rr.dataset.ramreset === 'spik' ? state.redSpik : null);
+      const how = rr.dataset.ramreset;
+      saveRam(how === 'spik' ? state.redSpik : how === 'tom' ? state.redSpik.map(() => []) : null);
       render(); return;
+    }
+    if (e.target.closest('#red-clear')){
+      Object.assign(state.red, { n1: [0, 13], nx: [0, 13], n2: [0, 13], max: 0 });
+      saveRed(); render(); return;
     }
     if (e.target.closest('#dl-red')){
       const a = document.createElement('a');
