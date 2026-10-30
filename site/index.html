@@ -248,14 +248,28 @@ section{margin-top:40px}
 .red-filters .mm{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400}
 .red-filters input{width:56px;font:inherit;font-family:var(--font-mono);font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
 .red-filters input.wide{width:100px}
-.red-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:grid;gap:10px;min-width:0}
-.red-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 14px;max-height:340px;overflow:auto;font-family:var(--font-mono);font-size:13px;font-variant-numeric:tabular-nums;padding-right:4px}
-.red-rows span{white-space:nowrap}
-.red-rows small{color:var(--muted);margin-right:6px}
-.red-rows .w{color:var(--good);font-weight:600}
-.red-frame{display:flex;flex-wrap:wrap;gap:4px 10px;font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
-.red-frame b{color:var(--ink)}
+.red-box{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:grid;gap:10px;min-width:0}
+.red-btns{display:flex;flex-wrap:wrap;gap:6px}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:var(--ink);opacity:.85}
+.rm-wrap{max-height:440px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.rm{border-collapse:separate;border-spacing:0;width:100%;font-variant-numeric:tabular-nums}
+.rm th,.rm td{padding:0;height:27px;min-width:22px;text-align:center}
+.rm thead th{position:sticky;top:0;z-index:1;background:var(--surface-2);font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--muted);border-bottom:1px solid var(--line)}
+.rm thead th.g{color:var(--accent);font-weight:600}
+.rm td{font-family:var(--font-display);font-weight:700;font-size:15px;border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
+.rm td.s{color:color-mix(in srgb,var(--muted) 55%,var(--surface));font-weight:500}
+.rm td.g{background:color-mix(in srgb,var(--accent-soft) 55%,var(--surface))}
+.rm td.ok{color:var(--good)}
+.rm td.no{color:color-mix(in srgb,var(--muted) 55%,var(--surface));font-weight:500}
+.rm .rn{width:34px;padding-right:8px;text-align:right;font-family:var(--font-mono);font-size:11px;font-weight:400;color:var(--muted)}
+.rm .rt{width:44px;font-family:var(--font-mono);font-size:12px;font-weight:600}
+.rm tr.win td.rt{color:var(--good)}
+.rm tbody tr:last-child td{border-bottom:0}
+@media (max-width:480px){.red-box{padding:12px}.rm th,.rm td{min-width:20px}.rm .rn{width:26px;padding-right:5px}}
 .red-empty{margin:0;font-size:13.5px;color:var(--muted)}
+.red-foot{margin:0;font-size:12.5px;color:var(--muted);display:grid;gap:4px}
+.red-foot b{color:var(--ink);font-weight:600}
 .sum-sub{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--muted)}
 
 /* Metod */
@@ -357,12 +371,13 @@ footer a{color:inherit}
       <label>Behåll högst<span class="mm"><input id="red-max" class="wide" type="number" min="0" inputmode="numeric" placeholder="alla"> mest sannolika rader</span></label>
     </div>
     <div class="sys">
-      <div class="red-box" id="red-box"></div>
+      <div class="mini" id="red-frame"></div>
       <div>
         <dl class="sum" id="red-sum"></dl>
         <p class="sum-note" id="red-note"></p>
       </div>
     </div>
+    <div class="red-box" id="red-box"></div>
     <textarea id="red-text" class="sys-text" readonly hidden aria-label="Det reducerade systemets rader som text"></textarea>
   </section>
 
@@ -373,7 +388,7 @@ footer a{color:inherit}
 </div>
 
 <script src="data.js"></script>
-<script src="rkoder.js"></script>
+<script src="rkoder.js?v=2"></script>
 <script>
 (function(){
   const ROUNDS = (window.STRYK_ROUNDS || []).slice().sort((a,b)=>b.id-a.id);
@@ -829,16 +844,48 @@ footer a{color:inherit}
     }
     const sel = red.frame.sel;
     const p13 = red.rows.reduce((t, row) => t + rowP(an, row), 0);
-    const frameTxt = r.matches.map((m, i) => `<span>${m.n}:<b>${sel[i].map(k => SIGNS[k]).join('')}</b></span>`).join('');
-    const rowsTxt = red.rows.map((row, i) => {
-      const hit = rowIdx && row.every((k, j) => rowIdx[j] === k);
-      const s = row.map(k => SIGNS[k]).join('');
-      return `<span class="${hit ? 'w' : ''}"><small>${i + 1}.</small>${s.slice(0, 4)} ${s.slice(4, 8)} ${s.slice(8)}</span>`;
+    const prof = PROFILES[state.profile] || PROFILES.balans;
+    const KIND = ['', 'Spik', 'Halv', 'Hel'];
+
+    // Ramen som en liten kupong: ifyllda rutor = tecken som raderna får använda.
+    $('#red-frame').innerHTML = `<div class="mini-head"><span class="lbl">Ramen · ${esc(prof.label)}</span><span class="lbl">${red.frameRows.toLocaleString('sv-SE')} rader fullt</span></div>` +
+      r.matches.map((m, i) => {
+        const fav = favOf(an[i]), n = sel[i].length;
+        const tag = red.frame.skrall[i] ? '<span class="kind skrall">Skräll</span>' : `<span class="kind ${['', 'spik', 'halv', 'hel'][n]}">${KIND[n]}</span>`;
+        return `<div class="mini-row">
+        <span class="mn">${m.n}</span><span class="mt">${esc(m.home)} – ${esc(m.away)}</span>
+        ${tag}
+        ${[0,1,2].map(k => `<span class="box${sel[i].includes(k) ? ' on' : ''}${k===fav ? ' fav' : ''}${rowIdx && rowIdx[i] === k ? (sel[i].includes(k) ? ' hit' : ' miss') : ''}"${k===fav ? ' title="Folkets favorit"' : ''}>${SIGNS[k]}</span>`).join('')}
+      </div>`;
+      }).join('') +
+      `<p class="mini-foot"><span class="favdot" aria-hidden="true"></span>Ifyllda rutor = tecken som raderna får använda. Prick = folkets favorit.</p>`;
+
+    // Raderna som tabell: en kolumn per match, tonade kolumner är garderade.
+    const g = sel.map(s => s.length > 1);
+    const head = `<tr><th class="rn" scope="col">Rad</th>${r.matches.map((m, i) => `<th scope="col"${g[i] ? ' class="g"' : ''}>${m.n}</th>`).join('')}${rowIdx ? '<th class="rt" scope="col">Rätt</th>' : ''}</tr>`;
+    const body = red.rows.map((row, ri) => {
+      const right = rowIdx ? row.reduce((t, k, j) => t + (rowIdx[j] === k ? 1 : 0), 0) : 0;
+      const cells = row.map((k, j) => {
+        const cls = [g[j] ? 'g' : 's'];
+        if (rowIdx && rowIdx[j] >= 0) cls.push(rowIdx[j] === k ? 'ok' : 'no');
+        return `<td class="${cls.join(' ')}">${SIGNS[k]}</td>`;
+      }).join('');
+      return `<tr${right >= 10 ? ' class="win"' : ''}><td class="rn">${ri + 1}</td>${cells}${rowIdx ? `<td class="rt">${right}</td>` : ''}</tr>`;
     }).join('');
-    $('#red-box').innerHTML = `<div class="mini-head"><span class="lbl">Omgång ${esc(r.id)} · ${esc(red.label)} · ${esc((PROFILES[state.profile] || PROFILES.balans).label)}</span>${red.rows.length ? '<button type="button" class="btn" id="copy-red">Kopiera raderna</button>' : ''}</div>
-      <div class="red-frame">Ram: ${frameTxt}</div>
-      ${red.rows.length ? `<div class="red-rows">${rowsTxt}</div>` : '<p class="red-empty">Inga rader uppfyller villkoren. Vidga intervallen.</p>'}`;
+    const empty = st.type === 'r'
+      ? 'Tabellen för R-systemet kunde inte läsas in. Ladda om sidan.'
+      : 'Inga rader uppfyller villkoren. Vidga intervallen ovan.';
+    $('#red-box').innerHTML = `<div class="mini-head"><span class="lbl">Raderna · ${red.rows.length} st · ${esc(red.label)}</span>${red.rows.length ? `<span class="red-btns"><button type="button" class="btn" id="copy-red">Kopiera</button><button type="button" class="btn primary" id="dl-red">Ladda ner fil till Svenska Spel</button></span>` : ''}</div>
+      ${red.rows.length ? `<div class="rm-wrap"><table class="rm"><thead>${head}</thead><tbody>${body}</tbody></table></div>
+      <div class="red-foot"><span>Tonade kolumner är garderade matcher, där raderna skiljer sig åt.${rowIdx ? ' Grönt = rätt tecken.' : ''}</span>
+      <span><b>Lämna in hos Svenska Spel:</b> ladda ner filen, logga in och gå till Stryktipset → Mer → Externa systemspel och ladda upp den.</span></div>`
+      : `<p class="red-empty">${empty}</p>`}`;
     state.redText = `Stryktipset omgång ${r.id}, ${red.label}\n` + red.rows.map(row => row.map(k => SIGNS[k]).join('')).join('\n');
+    // Svenska Spels format för egna rader: produkt på första raden, sedan en enkelrad per rad (E,1,X,2,...).
+    state.redFile = {
+      name: `stryktipset-${r.id}-${st.type === 'r' ? 'R-' + red.label.slice(2) : 'egen-' + red.frameRows}.txt`,
+      text: 'Stryktipset\r\n' + red.rows.map(row => 'E,' + row.map(k => SIGNS[k]).join(',')).join('\r\n') + '\r\n',
+    };
     const share = red.frame.hit > 0 ? p13 / red.frame.hit : 0;
     $('#red-sum').innerHTML = `
       <div><dt>Rader</dt><dd>${red.rows.length}</dd></div>
@@ -848,8 +895,8 @@ footer a{color:inherit}
       <div><dt>${red.guarantee ? 'Garanterat 12 rätt' : 'Ramen sitter'}</dt><dd>${fmtChance(red.frame.hit)}</dd></div>
       <div><dt>Behållen chans</dt><dd>${Math.round(share * 100)} %</dd></div>`;
     $('#red-note').innerHTML = red.guarantee
-      ? `Om alla 13 matcher slutar inom ramen (chans ${fmtChance(red.frame.hit)}) har minst en rad 12 rätt. Raderna är placerade på de mest sannolika utfallen inom ramen. Lämna in dem som egna rader, eller välj samma ram och R-system hos Svenska Spel (deras rader kan vara placerade annorlunda, men garantin är densamma).`
-      : `Behållen chans = hur stor del av ramens chans för 13 rätt som finns kvar efter villkoren. Lämna in raderna som egna rader.`;
+      ? `Om alla 13 matcher slutar inom ramen (chans ${fmtChance(red.frame.hit)}) har minst en rad 12 rätt. Raderna ligger på de mest sannolika utfallen inom ramen. Du kan också välja samma ram och R-system direkt hos Svenska Spel; deras rader kan ligga annorlunda, men garantin är densamma.`
+      : `Behållen chans = hur stor del av ramens chans för 13 rätt som finns kvar efter villkoren.`;
   }
 
   // Antal rader i ett system per antal rätt, och vinsten enligt utdelningen.
@@ -957,6 +1004,14 @@ footer a{color:inherit}
     if (br){ state.red.rkey = br.dataset.r; saveRed(); render(); return; }
     const bram = e.target.closest('#segram button');
     if (bram){ state.red.frame = +bram.dataset.ram; saveRed(); render(); return; }
+    if (e.target.closest('#dl-red')){
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([state.redFile.text], { type: 'text/plain' }));
+      a.download = state.redFile.name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      return;
+    }
     if (e.target.closest('#copy-red')){
       const btn = e.target.closest('#copy-red');
       const fallback = () => {
