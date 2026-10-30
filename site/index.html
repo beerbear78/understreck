@@ -290,6 +290,7 @@ section{margin-top:40px}
 .ram-btns .btn{padding:3px 10px;font-size:12px}
 button.box{width:100%;padding:0;background:transparent;cursor:pointer}
 button.box:hover{border-color:var(--ink)}
+.box.on.unused{background:color-mix(in srgb,var(--ink) 18%,var(--surface));border-color:transparent;color:var(--ink)}
 .red-foot b{color:var(--ink);font-weight:600}
 .sum-sub{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--muted)}
 
@@ -866,6 +867,93 @@ footer a{color:inherit}
     };
   }
 
+  // Chansen att rätt rad ligger i ramen OCH uppfyller villkoren (fördelning över antal ettor och kryss).
+  function keptMass(an, sel, lim){
+    const n = sel.length, W = n + 1;
+    let d = new Float64Array(W * W); d[0] = 1;
+    for (let i = 0; i < n; i++){
+      const nd = new Float64Array(W * W), p = an[i].p;
+      for (let c1 = 0; c1 <= i; c1++) for (let cx = 0; c1 + cx <= i; cx++){
+        const v = d[c1 * W + cx]; if (!v) continue;
+        for (const k of sel[i]) nd[(c1 + (k === 0 ? 1 : 0)) * W + cx + (k === 1 ? 1 : 0)] += v * p[k];
+      }
+      d = nd;
+    }
+    let m = 0;
+    for (let c1 = lim[0][0]; c1 <= lim[0][1] && c1 <= n; c1++) for (let cx = lim[1][0]; cx <= lim[1][1] && c1 + cx <= n; cx++){
+      const c2 = n - c1 - cx; if (c2 >= lim[2][0] && c2 <= lim[2][1]) m += d[c1 * W + cx];
+    }
+    return m;
+  }
+
+  // Förslag på ram (egen reducering) efter villkoren. Start: dynamisk programmering som ser till att varje tecken är
+  // ifyllt i minst så många matcher som villkorets lägsta antal och har högst så många spikar som villkorets högsta
+  // (kryssregeln gäller om den går ihop). Sedan byten match för match så länge chansen bland raderna som klarar
+  // villkoren ökar (vägd med profilens lutning mot spelvärde, som buildSystem).
+  let condMemo = { key: null, val: null };
+  function frameWithCond(an, h, b, red){
+    const prof = PROFILES[state.profile] || PROFILES.balans;
+    const minX = state.minX === 'auto' ? Math.floor(sum(an.map(a => a.p[1]))) : state.minX;
+    const lim = [red.n1, red.nx, red.n2];
+    const key = JSON.stringify([an.map(a => a.p), h, b, lim, state.profile, minX]);
+    if (condMemo.key === key) return condMemo.val;
+    const valOf = (a, set) => sum(set.map(j => a.p[j] * a.value[j])) / sum(set.map(j => a.p[j]));
+    const score = (a, set) => Math.log(sum(set.map(j => a.p[j]))) + prof.tilt * Math.log(valOf(a, set));
+    const run = L => {
+      // tillstånd: hel, halv, ifyllda 1/X/2 (tak L), spikade 1/X/2
+      let dp = new Map([[0, { st: [0, 0, 0, 0, 0, 0, 0, 0], s: 0, pick: [] }]]);
+      an.forEach((a, i) => {
+        const left = an.length - i - 1, next = new Map();
+        for (const cur of dp.values()){
+          for (const set of SUBSETS){
+            const t = cur.st.slice();
+            if (set.length === 3) t[0]++; else if (set.length === 2) t[1]++;
+            if (t[0] > h || t[1] > b) continue;
+            let ok = true;
+            for (let k = 0; k < 3 && ok; k++){
+              if (set.includes(k)) t[2 + k] = Math.min(L[k], t[2 + k] + 1);
+              if (set.length === 1 && set[0] === k && ++t[5 + k] > lim[k][1]) ok = false;
+              if (t[2 + k] + left < L[k]) ok = false;
+            }
+            if (!ok) continue;
+            const id = t.reduce((acc, v) => acc * 14 + v, 0), s = cur.s + score(a, set), old = next.get(id);
+            if (!old || s > old.s) next.set(id, { st: t, s, pick: cur.pick.concat([set]) });
+          }
+        }
+        dp = next;
+      });
+      let best = null;
+      for (const c of dp.values()) if (c.st[0] === h && c.st[1] === b && (!best || c.s > best.s)) best = c;
+      return best;
+    };
+    let L = [lim[0][0], Math.max(lim[1][0], minX), lim[2][0]];
+    let fin = run(L);
+    if (!fin){ L = lim.map(l => l[0]); fin = run(L); }
+    if (!fin){ condMemo = { key, val: null }; return null; }
+
+    const n = an.length;
+    const okSpan = s => [0, 1, 2].every(k => s.filter(x => x.includes(k)).length >= L[k] &&
+                                            s.filter(x => x.length === 1 && x[0] === k).length <= lim[k][1]);
+    const obj = s => { const m = keptMass(an, s, lim);
+      return m > 0 ? Math.log(m) + prof.tilt * s.reduce((t, set, i) => t + Math.log(valOf(an[i], set)), 0) : -Infinity; };
+    const bySize = [[], SUBSETS.filter(s => s.length === 1), SUBSETS.filter(s => s.length === 2), SUBSETS.filter(s => s.length === 3)];
+    let sel = fin.pick, cur = obj(sel);
+    for (let it = 0; it < 40; it++){
+      let best = null, bestV = cur;
+      const tryIt = s => { if (!okSpan(s)) return; const v = obj(s); if (v > bestV + 1e-12){ bestV = v; best = s; } };
+      // andra tecken i samma match, eller byt garderingsnivå mellan två matcher (antal hel/halv består)
+      for (let i = 0; i < n; i++) for (const alt of bySize[sel[i].length]) if (alt.join() !== sel[i].join()){ const s = sel.slice(); s[i] = alt; tryIt(s); }
+      for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++){
+        if (sel[i].length === sel[j].length) continue;
+        for (const ai of bySize[sel[j].length]) for (const aj of bySize[sel[i].length]){ const s = sel.slice(); s[i] = ai; s[j] = aj; tryIt(s); }
+      }
+      if (!best) break;
+      sel = best; cur = bestV;
+    }
+    condMemo = { key, val: customFrame(an, sel) };
+    return condMemo.val;
+  }
+
   const OWN_MAX = 200000;   // största ram för egen reducering (raderna räknas fram i webbläsaren)
   const FILE_MAX = 20000;   // Svenska Spel tar högst 20 000 enkelrader per fil
   const TABLE_MAX = 500;    // så många rader visas i tabellen; filen och kopian har alla
@@ -882,12 +970,14 @@ footer a{color:inherit}
                frameRows: frame.rows, guarantee: true, need: { h: R.h, b: R.b, hel, halv, fits }, missing: !code.length, blank };
     }
     const F = FRAMES.find(x => x.rows === red.frame) || FRAMES[2];
-    const frame = own ? customFrame(an, state.ram) : frameFor(an, F.h, F.b);
+    const condOn = FILTER_KEYS.some(k => red[k][0] > 0 || red[k][1] < 13);
+    const fitted = !own && condOn ? frameWithCond(an, F.h, F.b, red) : null;
+    const frame = own ? customFrame(an, state.ram) : fitted || frameFor(an, F.h, F.b);
     const blank = frame.sel.filter(s => !s.length).length, big = frame.rows > OWN_MAX;
     const out = big || blank ? { rows: [] } : ownRows(an, frame.sel, red);
     const tooMany = out.rows.length > FILE_MAX ? out.rows.length : 0;
     return { label: `Egen reducering av ${rowsWord(frame.rows)}`, own, frame, rows: tooMany ? [] : out.rows, frameRows: frame.rows,
-             guarantee: false, big, blank, tooMany };
+             guarantee: false, big, blank, tooMany, fitted: !!fitted };
   }
 
   const rowsWord = n => n === 1 ? '1 rad' : `${n.toLocaleString('sv-SE')} rader`;
@@ -946,7 +1036,12 @@ footer a{color:inherit}
     const chips = red.need
       ? `<span class="ram-chip ${nHel === red.need.h ? 'ok' : 'bad'}">Hel ${nHel} av ${red.need.h}</span><span class="ram-chip ${nHalv === red.need.b ? 'ok' : 'bad'}">Halv ${nHalv} av ${red.need.b}</span>`
       : `<span class="ram-chip">Hel ${nHel}</span><span class="ram-chip">Halv ${nHalv}</span>`;
-    $('#red-frame').innerHTML = `<div class="mini-head"><span class="lbl">Ramen · ${red.own ? 'egen' : esc(prof.label)}</span><span class="lbl">${red.blank ? 'Inte klar' : rowsWord(red.frameRows) + ' fullt'}</span></div>
+    // Tecken som ingen kvarvarande rad använder (villkoren har sorterat bort dem) visas ljusare.
+    const used = sel.map(() => [false, false, false]);
+    red.rows.forEach(row => row.forEach((k, i) => { used[i][k] = true; }));
+    const unused = (i, k) => red.rows.length > 0 && sel[i].includes(k) && !used[i][k];
+    const anyUnused = sel.some((s, i) => s.some(k => unused(i, k)));
+    $('#red-frame').innerHTML = `<div class="mini-head"><span class="lbl">Ramen · ${red.own ? 'egen' : esc(prof.label) + (red.fitted ? ', efter villkoren' : '')}</span><span class="lbl">${red.blank ? 'Inte klar' : rowsWord(red.frameRows) + ' fullt'}</span></div>
       <div class="ram-bar">${chips}<span class="ram-btns">${red.own ? '<button type="button" class="btn" data-ramreset="forslag">Förslaget</button>' : ''}<button type="button" class="btn" data-ramreset="spik">Bara spikar</button><button type="button" class="btn" data-ramreset="tom">Töm kupongen</button></span></div>` +
       r.matches.map((m, i) => {
         const fav = favOf(an[i]), kind = KIND[sel[i].length];
@@ -954,10 +1049,10 @@ footer a{color:inherit}
         return `<div class="mini-row">
         <span class="mn">${m.n}</span><span class="mt">${esc(m.home)} – ${esc(m.away)}</span>
         ${tag}
-        ${[0,1,2].map(k => `<button type="button" class="box${sel[i].includes(k) ? ' on' : ''}${k===fav ? ' fav' : ''}${rowIdx && rowIdx[i] === k ? (sel[i].includes(k) ? ' hit' : ' miss') : ''}" data-fk="${i}-${k}" aria-pressed="${sel[i].includes(k)}" aria-label="Match ${m.n}, ${SIGNS[k]}${k===fav ? ', folkets favorit' : ''}">${SIGNS[k]}</button>`).join('')}
+        ${[0,1,2].map(k => `<button type="button" class="box${sel[i].includes(k) ? ' on' : ''}${unused(i, k) ? ' unused' : ''}${k===fav ? ' fav' : ''}${rowIdx && rowIdx[i] === k ? (sel[i].includes(k) ? ' hit' : ' miss') : ''}" data-fk="${i}-${k}" aria-pressed="${sel[i].includes(k)}" aria-label="Match ${m.n}, ${SIGNS[k]}${k===fav ? ', folkets favorit' : ''}">${SIGNS[k]}</button>`).join('')}
       </div>`;
       }).join('') +
-      `<p class="mini-foot"><span class="favdot" aria-hidden="true"></span>Klicka i rutorna för att välja ramen själv. Prick = folkets favorit.</p>`;
+      `<p class="mini-foot"><span class="favdot" aria-hidden="true"></span>Klicka i rutorna för att välja ramen själv. Prick = folkets favorit.${anyUnused ? ' Grå ruta = ingen rad använder tecknet med villkoren.' : ''}</p>`;
 
     // Raderna som tabell: en kolumn per match, tonade kolumner är garderade.
     const g = sel.map(s => s.length > 1);
@@ -1168,6 +1263,26 @@ footer a{color:inherit}
     const rs = e.target.closest('[data-reset]');
     if (rs){ delete state.overrides[+rs.dataset.reset]; saveOverrides(currentRound()); render(); }
   });
+  // Villkoren för egen reducering gäller medan man skriver (kort fördröjning), inte först när rutan lämnas.
+  let redTimer = null;
+  function readRedFilters(){
+    const clamp = v => Math.max(0, Math.min(13, Math.round(Number(v) || 0)));
+    const next = {};
+    FILTER_KEYS.forEach(k => {
+      const lo = clamp(document.getElementById(`red-${k}-0`).value), hi = clamp(document.getElementById(`red-${k}-1`).value || 13);
+      next[k] = [Math.min(lo, hi), Math.max(lo, hi)];
+    });
+    next.max = Math.max(0, Math.round(Number(document.getElementById('red-max').value) || 0));
+    if (FILTER_KEYS.every(k => next[k][0] === state.red[k][0] && next[k][1] === state.red[k][1]) && next.max === state.red.max) return;
+    Object.assign(state.red, next);
+    saveRed();
+    render();
+  }
+  document.addEventListener('input', e => {
+    if (!e.target.closest('#red-filters input')) return;
+    clearTimeout(redTimer);
+    redTimer = setTimeout(readRedFilters, 350);
+  });
   document.addEventListener('change', e => {
     const inp = e.target.closest('.edit input');
     if (inp){
@@ -1183,18 +1298,7 @@ footer a{color:inherit}
       if (again) again.focus();
       return;
     }
-    const fin = e.target.closest('#red-filters input');
-    if (fin){
-      const clamp = v => Math.max(0, Math.min(13, Math.round(Number(v) || 0)));
-      ['n1', 'nx', 'n2'].forEach(k => {
-        const lo = clamp(document.getElementById(`red-${k}-0`).value), hi = clamp(document.getElementById(`red-${k}-1`).value || 13);
-        state.red[k] = [Math.min(lo, hi), Math.max(lo, hi)];
-      });
-      state.red.max = Math.max(0, Math.round(Number(document.getElementById('red-max').value) || 0));
-      saveRed();
-      render();
-      return;
-    }
+    if (e.target.closest('#red-filters input')){ clearTimeout(redTimer); readRedFilters(); return; }
     if (e.target.id === 'round'){
       state.round = +e.target.value;
       state.open.clear();
