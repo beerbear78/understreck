@@ -249,5 +249,16 @@ class TestResults(unittest.TestCase):
             self.assertIsNone(M.run_friday(None, done, scheduled=True))
 
 
+class TestProfiles(unittest.TestCase):
+    def test_favoriter_has_highest_chance(self):
+        import json, pathlib
+        rnd = json.loads((pathlib.Path(__file__).parent / "fixtures" / "round_7763.json").read_text(encoding="utf-8"))
+        an = [model.analyse(m) for m in rnd["matches"]]
+        hit = {p: model.build_system(an, 64, profile=p)["hit"] for p in ("favorit", "balans", "skrall")}
+        self.assertGreaterEqual(hit["favorit"], hit["balans"])
+        self.assertGreaterEqual(hit["balans"], hit["skrall"])
+        self.assertAlmostEqual(1 / hit["favorit"], 2357, delta=1)  # samma siffra som sidan visar
+
+
 if __name__ == "__main__":
     unittest.main()

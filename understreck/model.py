@@ -19,6 +19,7 @@ SYSTEMS = {
     576: {"rows": 576, "h": 2, "b": 6, "label": "576 rader"},
 }
 PROFILES = {
+    "favorit": {"label": "Favoriter", "tilt": 0.0, "skrall": False},
     "balans": {"label": "Balanserad", "tilt": 0.5, "skrall": False},
     "skrall": {"label": "Skräll", "tilt": 1.5, "skrall": True},
 }

@@ -311,7 +311,7 @@ footer a{color:inherit}
   <section aria-labelledby="h-sys">
     <div class="sec-head">
       <h2 id="h-sys">Föreslagen systemrad</h2>
-      <p>M-system med 1 kr per rad. 64 rader motsvarar 6 halvgarderingar och 7 spikar. Garderingarna läggs där de höjer chansen för 13 rätt mest, och understreckade tecken väger lite tyngre. Med Auto får raden minst så många kryss som väntas i omgången, avrundat nedåt. Profilen Skräll går emot folkets favorit i fler matcher än den spikar favoriten och väljer de skrällar som har bäst beräknad chans.</p>
+      <p>M-system med 1 kr per rad. 64 rader motsvarar 6 halvgarderingar och 7 spikar. Garderingarna läggs där de höjer chansen för 13 rätt mest, och understreckade tecken väger lite tyngre. Med Auto får raden minst så många kryss som väntas i omgången, avrundat nedåt. Profilerna går från störst chans till störst utdelning: Favoriter väljer bara efter beräknad chans, Balanserad väljer understreckade tecken när chansen är nästan lika, och Skräll går emot folkets favorit i fler matcher än den spikar favoriten.</p>
     </div>
     <div class="controls">
       <div class="ctl"><span class="lbl">Systemstorlek</span><div class="seg" role="radiogroup" aria-label="Systemstorlek" id="seg"></div></div>
@@ -474,6 +474,7 @@ footer a{color:inherit}
   // Profiler: Balanserad maximerar chansen med lätt knuff mot spelvärde.
   // Skräll väger spelvärde mycket tyngre och kräver fler skrällmatcher (folkets favorit bortvald) än favoritspikar.
   const PROFILES = {
+    favorit: { label: 'Favoriter',  tilt: 0,   skrall: false },
     balans: { label: 'Balanserad', tilt: 0.5, skrall: false },
     skrall: { label: 'Skräll',     tilt: 1.5, skrall: true }
   };
@@ -596,7 +597,8 @@ footer a{color:inherit}
     if (res){
       const autoX0 = Math.floor(sum(an.map(a => a.p[1])));
       const payouts = res.payouts || [];
-      const sysRows = [['Balanserad 64 rader', buildSystem(an, SYSTEMS[1], autoX0, PROFILES.balans)],
+      const sysRows = [['Favoriter 64 rader', buildSystem(an, SYSTEMS[1], autoX0, PROFILES.favorit)],
+                       ['Balanserad 64 rader', buildSystem(an, SYSTEMS[1], autoX0, PROFILES.balans)],
                        ['Skräll 64 rader', buildSystem(an, SYSTEMS[1], autoX0, PROFILES.skrall)],
                        ['Enkelrad', buildSystem(an, SYSTEMS[0], autoX0, PROFILES.balans)]];
       const picksHit = picks.filter(pk => rowIdx[pk.i] === pk.k).length;

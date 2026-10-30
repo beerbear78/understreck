@@ -307,7 +307,7 @@ def report(rnd, matches, an, picks) -> None:
         m = matches[p["i"]]
         lines.append(f"- {m['home']} – {m['away']}: **{model.SIGNS[p['k']]}**, beräknad chans {round(p['p']*100)} %, "
                      f"folket {round(p['f']*100)} %, spelvärde {p['v']:.2f}".replace(".", ","))
-    for prof in ("balans", "skrall"):
+    for prof in ("favorit", "balans", "skrall"):
         sysm = model.build_system(an, 64, profile=prof)
         lines += ["", f"### 64 rader – {model.PROFILES[prof]['label']} (chans 13 rätt ca 1 på {round(1/sysm['hit']):,})".replace(",", " "),
                   "```", model.row_text(matches, sysm), "```"]
