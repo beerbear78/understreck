@@ -260,5 +260,20 @@ class TestProfiles(unittest.TestCase):
         self.assertAlmostEqual(1 / hit["favorit"], 2357, delta=1)  # samma siffra som sidan visar
 
 
+class TestRSystem(unittest.TestCase):
+    def test_tables_guarantee_12(self):
+        """Varje utfall inom ramen ska ha en rad med högst ett fel (garanti 12 rätt)."""
+        import itertools, json, pathlib
+        text = (pathlib.Path(__file__).parent.parent / "site" / "rkoder.js").read_text(encoding="utf-8")
+        codes = json.loads(text[text.index("window.R_KODER = ") + 17: text.rindex(";")])
+        for key, rows in codes.items():
+            h, b, n = map(int, key.split("-"))
+            self.assertEqual(len(rows), n, key)
+            sizes = [3] * h + [2] * b
+            code = [tuple(map(int, r)) for r in rows]
+            for o in itertools.product(*[range(x) for x in sizes]):
+                self.assertTrue(any(sum(a != c for a, c in zip(o, r)) <= 1 for r in code), f"{key}: {o}")
+
+
 if __name__ == "__main__":
     unittest.main()

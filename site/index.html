@@ -243,6 +243,19 @@ section{margin-top:40px}
 .sum dt{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:600}
 .sum dd{margin:2px 0 0;font-family:var(--font-display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
 .sum-note{margin:12px 0 0;font-size:13px;color:var(--muted)}
+.red-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 14px;margin-bottom:16px}
+.red-filters label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.red-filters .mm{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400}
+.red-filters input{width:56px;font:inherit;font-family:var(--font-mono);font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.red-filters input.wide{width:100px}
+.red-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:grid;gap:10px;min-width:0}
+.red-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 14px;max-height:340px;overflow:auto;font-family:var(--font-mono);font-size:13px;font-variant-numeric:tabular-nums;padding-right:4px}
+.red-rows span{white-space:nowrap}
+.red-rows small{color:var(--muted);margin-right:6px}
+.red-rows .w{color:var(--good);font-weight:600}
+.red-frame{display:flex;flex-wrap:wrap;gap:4px 10px;font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
+.red-frame b{color:var(--ink)}
+.red-empty{margin:0;font-size:13.5px;color:var(--muted)}
 .sum-sub{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--muted)}
 
 /* Metod */
@@ -327,6 +340,32 @@ footer a{color:inherit}
     </div>
   </section>
 
+  <section aria-labelledby="h-red">
+    <div class="sec-head">
+      <h2 id="h-red">Reducerat system</h2>
+      <p>Täck en större ram till lägre kostnad. Ramen, alltså vilka matcher som spikas, halv- och helgarderas, väljs med profilen och kryssregeln ovan. R-system ger garanterat minst 12 rätt om alla 13 matcher slutar inom ramen. Med egen reducering bestämmer du själv hur raderna får se ut.</p>
+    </div>
+    <div class="controls">
+      <div class="ctl"><span class="lbl">Typ</span><div class="seg" role="radiogroup" aria-label="Typ av reducering" id="segrt"></div></div>
+      <div class="ctl" id="ctl-r"><span class="lbl">R-system</span><div class="seg" role="radiogroup" aria-label="R-system" id="segr"></div></div>
+      <div class="ctl" id="ctl-ram" hidden><span class="lbl">Ram</span><div class="seg" role="radiogroup" aria-label="Ram för egen reducering" id="segram"></div></div>
+    </div>
+    <div class="red-filters" id="red-filters" hidden>
+      <label>Ettor per rad<span class="mm"><input id="red-n1-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-n1-1" type="number" min="0" max="13" inputmode="numeric"></span></label>
+      <label>Kryss per rad<span class="mm"><input id="red-nx-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-nx-1" type="number" min="0" max="13" inputmode="numeric"></span></label>
+      <label>Tvåor per rad<span class="mm"><input id="red-n2-0" type="number" min="0" max="13" inputmode="numeric"> till <input id="red-n2-1" type="number" min="0" max="13" inputmode="numeric"></span></label>
+      <label>Behåll högst<span class="mm"><input id="red-max" class="wide" type="number" min="0" inputmode="numeric" placeholder="alla"> mest sannolika rader</span></label>
+    </div>
+    <div class="sys">
+      <div class="red-box" id="red-box"></div>
+      <div>
+        <dl class="sum" id="red-sum"></dl>
+        <p class="sum-note" id="red-note"></p>
+      </div>
+    </div>
+    <textarea id="red-text" class="sys-text" readonly hidden aria-label="Det reducerade systemets rader som text"></textarea>
+  </section>
+
   <footer>
     <span>Statistik och sannolikheter, inga garantier. Spela med måtta, 18 års åldersgräns.</span>
     <span>Spelar du för mycket? Stödlinjen: 020-81 91 00, <a href="https://www.stodlinjen.se" target="_blank" rel="noopener">stodlinjen.se</a></span>
@@ -334,6 +373,7 @@ footer a{color:inherit}
 </div>
 
 <script src="data.js"></script>
+<script src="rkoder.js"></script>
 <script>
 (function(){
   const ROUNDS = (window.STRYK_ROUNDS || []).slice().sort((a,b)=>b.id-a.id);
@@ -350,7 +390,11 @@ footer a{color:inherit}
   const XG_MEAN = 1.40, XG_KEEP = 0.65;    // xG dras 35 % mot ligasnittet, få matcher spelade
   const shrink = x => XG_MEAN + XG_KEEP * (x - XG_MEAN);
   const MIN_X_OPTS = ['auto', 0, 2, 3, 4];
-  const state = { round: ROUNDS[0] ? ROUNDS[0].id : null, open: new Set(), budget: 64, minX: 'auto', profile: 'balans', overrides: {} };
+  const state = { round: ROUNDS[0] ? ROUNDS[0].id : null, open: new Set(), budget: 64, minX: 'auto', profile: 'balans', overrides: {},
+                  red: { type: 'r', rkey: '3-3-24', frame: 576, n1: [0, 13], nx: [0, 13], n2: [0, 13], max: 0 } };
+  const R_LIST = [{ key: '4-0-9', h: 4, b: 0 }, { key: '0-7-16', h: 0, b: 7 }, { key: '3-3-24', h: 3, b: 3 },
+                  { key: '5-0-27', h: 5, b: 0 }, { key: '4-4-144', h: 4, b: 4 }];
+  const FRAMES = [{ rows: 64, h: 0, b: 6 }, { rows: 192, h: 1, b: 6 }, { rows: 576, h: 2, b: 6 }, { rows: 1296, h: 4, b: 4 }];
 
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -554,6 +598,7 @@ footer a{color:inherit}
     const res = r.results && Array.isArray(r.results.row) ? r.results : null;
     const rowIdx = res ? res.row.map(x => SIGNS.indexOf(x)) : null;
     const picks = topPicks(r.matches, an);
+    const red = reducedSystem(an);
 
     $('#roundbar').innerHTML = [
       `<span><b>${esc(dateLabel(r.date))}</b></span>`,
@@ -623,6 +668,8 @@ footer a{color:inherit}
               const w = systemWin(sy.sel, rowIdx, payouts);
               return `<div class="res-sys"><span>${label}</span><b>${w.best} rätt${payouts.length ? ` · <span class="${w.win > sy.rows ? 'good-t' : ''}">${money(w.win)}</span>` : ''}</b></div>`;
             }).join('')}
+            ${red.rows.length ? (() => { const w = rowsWin(red.rows, rowIdx, payouts);
+              return `<div class="res-sys"><span>${esc(red.label)}</span><b>${w.best} rätt${payouts.length ? ` · <span class="${w.win > red.rows.length ? 'good-t' : ''}">${money(w.win)}</span>` : ''}</b></div>`; })() : ''}
             <div class="res-sys"><span>Veckans spelvärda</span><b>${picksHit} av ${picks.length} gick in</b></div>
             ${done < 13 ? `<p>${13 - done} matcher saknar resultat än.</p>` : ''}
           </div>
@@ -689,6 +736,120 @@ footer a{color:inherit}
       <div><dt>Kryss på raden</dt><dd>${sys.xCount} <small class="sum-sub">av ${dec(expX,1)} väntade</small></dd></div>
       <div><dt>Skrällar / favoritspikar</dt><dd>${sys.skrallCount} / ${sys.favSpik}</dd></div>
       <div><dt>Radens spelvärde</dt><dd>×${sys.rowValue >= 10 ? Math.round(sys.rowValue) : dec(sys.rowValue,1)}</dd></div>`;
+
+    renderReduced(r, an, red, rowIdx);
+  }
+
+  // ---------------------------------------------------------------- reducerade system
+  const rowP = (an, row) => row.reduce((t, k, i) => t * an[i].p[k], 1);
+
+  function frameFor(an, h, b){
+    const autoX = Math.floor(sum(an.map(a => a.p[1])));
+    const minX = state.minX === 'auto' ? autoX : state.minX;
+    return buildSystem(an, { rows: Math.pow(3, h) * Math.pow(2, b), h, b }, minX, PROFILES[state.profile] || PROFILES.balans);
+  }
+
+  // R-system: tabellens siffror placeras så att raderna hamnar på de mest sannolika utfallen.
+  // Garantin (12 rätt inom ramen) gäller oavsett placering, eftersom den inte beror på vilket tecken en siffra står för.
+  function rSystemRows(an, sel, code, h){
+    const digits = code.map(r => [...r].map(Number));
+    const nc = digits[0].length;
+    const hel = [], halv = [];
+    sel.forEach((s, i) => { if (s.length === 3) hel.push(i); else if (s.length === 2) halv.push(i); });
+    const rank = c => {
+      const base = c < h ? 3 : 2, f = new Array(base).fill(0);
+      digits.forEach(r => f[r[c]]++);
+      return [...Array(base).keys()].sort((x, y) => f[y] - f[x]);
+    };
+    const ranks = [...Array(nc).keys()].map(rank);
+    const signsBy = i => [...sel[i]].sort((x, y) => an[i].p[y] - an[i].p[x]);
+    const assign = [...hel, ...halv];                       // koordinat c -> match assign[c]
+    const mapFor = asg => asg.map((m, c) => { const sg = signsBy(m), out = []; ranks[c].forEach((d, k) => { out[d] = sg[k]; }); return out; });
+    const mass = asg => { const mp = mapFor(asg); return digits.reduce((t, r) => t + r.reduce((q, d, c) => q * an[asg[c]].p[mp[c][d]], 1), 0); };
+    let best = mass(assign), better = true;
+    while (better){
+      better = false;
+      for (let a = 0; a < nc; a++) for (let c = a + 1; c < nc; c++){
+        if ((a < h) !== (c < h)) continue;
+        [assign[a], assign[c]] = [assign[c], assign[a]];
+        const v = mass(assign);
+        if (v > best + 1e-15){ best = v; better = true; } else [assign[a], assign[c]] = [assign[c], assign[a]];
+      }
+    }
+    const mp = mapFor(assign);
+    const base = sel.map(s => s[0]);
+    return digits.map(r => { const row = base.slice(); r.forEach((d, c) => { row[assign[c]] = mp[c][d]; }); return row; });
+  }
+
+  function ownRows(an, sel, red){
+    const all = [], row = new Array(13);
+    (function rec(i){ if (i === 13){ all.push(row.slice()); return; } for (const k of sel[i]){ row[i] = k; rec(i + 1); } })(0);
+    const ok = r => { const c = [0, 0, 0]; r.forEach(k => c[k]++);
+      return c[0] >= red.n1[0] && c[0] <= red.n1[1] && c[1] >= red.nx[0] && c[1] <= red.nx[1] && c[2] >= red.n2[0] && c[2] <= red.n2[1]; };
+    let kept = all.filter(ok).map(r => ({ r, p: rowP(an, r) })).sort((a, b) => b.p - a.p);
+    if (red.max > 0) kept = kept.slice(0, red.max);
+    return { rows: kept.map(x => x.r), frameRows: all.length };
+  }
+
+  function reducedSystem(an){
+    const red = state.red;
+    if (red.type === 'r'){
+      const R = R_LIST.find(x => x.key === red.rkey) || R_LIST[2];
+      const frame = frameFor(an, R.h, R.b);
+      const code = (window.R_KODER || {})[R.key] || [];
+      return { label: `R ${R.key}`, frame, rows: code.length ? rSystemRows(an, frame.sel, code, R.h) : [], frameRows: frame.rows, guarantee: true };
+    }
+    const F = FRAMES.find(x => x.rows === red.frame) || FRAMES[2];
+    const frame = frameFor(an, F.h, F.b);
+    const out = ownRows(an, frame.sel, red);
+    return { label: `Egen reducering av ${F.rows.toLocaleString('sv-SE')} rader`, frame, rows: out.rows, frameRows: out.frameRows, guarantee: false };
+  }
+
+  function rowsWin(rows, rowIdx, payouts){
+    let best = 0, win = 0;
+    const amount = j => (payouts.find(p => p.name === `${j} rätt`) || {}).amount || 0;
+    rows.forEach(r => { const c = r.reduce((t, k, i) => t + (rowIdx[i] === k ? 1 : 0), 0); best = Math.max(best, c); if (c >= 10) win += amount(c); });
+    return { best, win };
+  }
+
+  const fmtChance = x => x >= 0.01 ? dec(x * 100, 1) + ' %' : (x >= 0.0001 ? dec(x * 100, 2) + ' %' : '&lt;0,01 %');
+
+  function renderReduced(r, an, red, rowIdx){
+    const st = state.red;
+    $('#segrt').innerHTML = [['r', 'R-system'], ['own', 'Egen reducering']].map(([k, l]) => `<button type="button" role="radio" aria-checked="${st.type === k}" data-rt="${k}">${l}</button>`).join('');
+    $('#segr').innerHTML = R_LIST.map(x => `<button type="button" role="radio" aria-checked="${st.rkey === x.key}" data-r="${x.key}">R ${x.key}</button>`).join('');
+    $('#segram').innerHTML = FRAMES.map(f => `<button type="button" role="radio" aria-checked="${st.frame === f.rows}" data-ram="${f.rows}">${f.rows.toLocaleString('sv-SE')}</button>`).join('');
+    $('#ctl-r').hidden = st.type !== 'r';
+    $('#ctl-ram').hidden = st.type !== 'own';
+    $('#red-filters').hidden = st.type !== 'own';
+    if (st.type === 'own'){
+      [['n1', 0], ['n1', 1], ['nx', 0], ['nx', 1], ['n2', 0], ['n2', 1]].forEach(([k, j]) => {
+        const el = document.getElementById(`red-${k}-${j}`); if (el && document.activeElement !== el) el.value = st[k][j]; });
+      const mx = document.getElementById('red-max'); if (document.activeElement !== mx) mx.value = st.max || '';
+    }
+    const sel = red.frame.sel;
+    const p13 = red.rows.reduce((t, row) => t + rowP(an, row), 0);
+    const frameTxt = r.matches.map((m, i) => `<span>${m.n}:<b>${sel[i].map(k => SIGNS[k]).join('')}</b></span>`).join('');
+    const rowsTxt = red.rows.map((row, i) => {
+      const hit = rowIdx && row.every((k, j) => rowIdx[j] === k);
+      const s = row.map(k => SIGNS[k]).join('');
+      return `<span class="${hit ? 'w' : ''}"><small>${i + 1}.</small>${s.slice(0, 4)} ${s.slice(4, 8)} ${s.slice(8)}</span>`;
+    }).join('');
+    $('#red-box').innerHTML = `<div class="mini-head"><span class="lbl">Omgång ${esc(r.id)} · ${esc(red.label)} · ${esc((PROFILES[state.profile] || PROFILES.balans).label)}</span>${red.rows.length ? '<button type="button" class="btn" id="copy-red">Kopiera raderna</button>' : ''}</div>
+      <div class="red-frame">Ram: ${frameTxt}</div>
+      ${red.rows.length ? `<div class="red-rows">${rowsTxt}</div>` : '<p class="red-empty">Inga rader uppfyller villkoren. Vidga intervallen.</p>'}`;
+    state.redText = `Stryktipset omgång ${r.id}, ${red.label}\n` + red.rows.map(row => row.map(k => SIGNS[k]).join('')).join('\n');
+    const share = red.frame.hit > 0 ? p13 / red.frame.hit : 0;
+    $('#red-sum').innerHTML = `
+      <div><dt>Rader</dt><dd>${red.rows.length}</dd></div>
+      <div><dt>Kostnad</dt><dd>${red.rows.length} kr</dd></div>
+      <div><dt>Ramen, fullt</dt><dd>${red.frameRows.toLocaleString('sv-SE')} kr</dd></div>
+      <div><dt>Chans 13 rätt</dt><dd>${red.rows.length ? fmtChance(p13) : '–'}</dd></div>
+      <div><dt>${red.guarantee ? 'Garanterat 12 rätt' : 'Ramen sitter'}</dt><dd>${fmtChance(red.frame.hit)}</dd></div>
+      <div><dt>Behållen chans</dt><dd>${Math.round(share * 100)} %</dd></div>`;
+    $('#red-note').innerHTML = red.guarantee
+      ? `Om alla 13 matcher slutar inom ramen (chans ${fmtChance(red.frame.hit)}) har minst en rad 12 rätt. Raderna är placerade på de mest sannolika utfallen inom ramen. Lämna in dem som egna rader, eller välj samma ram och R-system hos Svenska Spel (deras rader kan vara placerade annorlunda, men garantin är densamma).`
+      : `Behållen chans = hur stor del av ramens chans för 13 rätt som finns kvar efter villkoren. Lämna in raderna som egna rader.`;
   }
 
   // Antal rader i ett system per antal rätt, och vinsten enligt utdelningen.
@@ -790,6 +951,24 @@ footer a{color:inherit}
     if (bp){ state.profile = bp.dataset.p; store.set('stv:profile', state.profile); render(); return; }
     const bx = e.target.closest('#segx button');
     if (bx){ const v = bx.dataset.x; state.minX = v === 'auto' ? 'auto' : +v; store.set('stv:minx', state.minX); render(); return; }
+    const brt = e.target.closest('#segrt button');
+    if (brt){ state.red.type = brt.dataset.rt; saveRed(); render(); return; }
+    const br = e.target.closest('#segr button');
+    if (br){ state.red.rkey = br.dataset.r; saveRed(); render(); return; }
+    const bram = e.target.closest('#segram button');
+    if (bram){ state.red.frame = +bram.dataset.ram; saveRed(); render(); return; }
+    if (e.target.closest('#copy-red')){
+      const btn = e.target.closest('#copy-red');
+      const fallback = () => {
+        const ta = document.getElementById('red-text');
+        ta.value = state.redText; ta.hidden = false; ta.focus(); ta.select();
+        btn.textContent = 'Markerad, kopiera med Ctrl+C';
+      };
+      try {
+        navigator.clipboard.writeText(state.redText).then(() => { btn.textContent = 'Kopierad'; }, fallback);
+      } catch(err){ fallback(); }
+      return;
+    }
     if (e.target.closest('#copy-sys')){
       const btn = e.target.closest('#copy-sys');
       const fallback = () => {
@@ -820,6 +999,18 @@ footer a{color:inherit}
       if (again) again.focus();
       return;
     }
+    const fin = e.target.closest('#red-filters input');
+    if (fin){
+      const clamp = v => Math.max(0, Math.min(13, Math.round(Number(v) || 0)));
+      ['n1', 'nx', 'n2'].forEach(k => {
+        const lo = clamp(document.getElementById(`red-${k}-0`).value), hi = clamp(document.getElementById(`red-${k}-1`).value || 13);
+        state.red[k] = [Math.min(lo, hi), Math.max(lo, hi)];
+      });
+      state.red.max = Math.max(0, Math.round(Number(document.getElementById('red-max').value) || 0));
+      saveRed();
+      render();
+      return;
+    }
     if (e.target.id === 'round'){
       state.round = +e.target.value;
       state.open.clear();
@@ -834,6 +1025,9 @@ footer a{color:inherit}
   if (MIN_X_OPTS.includes(savedX)) state.minX = savedX;
   const savedP = store.get('stv:profile');
   if (savedP in PROFILES) state.profile = savedP;
+  function saveRed(){ store.set('stv:red', state.red); }
+  const savedRed = store.get('stv:red');
+  if (savedRed && typeof savedRed === 'object') Object.assign(state.red, savedRed);
   if (ROUNDS.length){ loadOverrides(ROUNDS[0]); renderRoundSelect(); }
   render();
 })();
