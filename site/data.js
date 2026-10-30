@@ -5,6 +5,719 @@
 */
 window.STRYK_ROUNDS = [
  {
+  "id": 7937,
+  "draw": "4977",
+  "date": "2026-10-31",
+  "deadline": "15:59",
+  "turnover": 6210102,
+  "updated": "2026-10-30",
+  "fridayUpdate": "2026-10-30T14:42",
+  "lineupUpdate": null,
+  "matches": [
+   {
+    "n": 1,
+    "home": "Aston Villa",
+    "away": "Fulham",
+    "league": "Premier League",
+    "kickoff": "21:00",
+    "folk": [
+     67,
+     19,
+     14
+    ],
+    "odds": [
+     1.92,
+     3.75,
+     3.75
+    ],
+    "table": {
+     "home": "9:e, 11 p (8 matcher)",
+     "away": "15:e, 8 p (8 matcher)"
+    },
+    "form": {
+     "home": "FVOVV",
+     "away": "OOFVV"
+    },
+    "xg": {
+     "home": [
+      1.19,
+      1.92
+     ],
+     "away": [
+      1.57,
+      1.53
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Matteo Ruggeri (lår)",
+      "Amadou Onana (knä)"
+     ],
+     "away": [
+      "Ryan Sessegnon (avstängd)",
+      "Emile Smith Rowe (osäker)"
+     ],
+     "impact": [
+      1,
+      2
+     ]
+    },
+    "facts": "Aston Villa hemma: 1–1–2 (V–O–F). Fulham borta: 1–1–2.",
+    "_src": {
+     "kickoff": "2026-10-31T21:00:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Aston Villa är favorit med 46 procents beräknad chans och har vunnit tre av de fem senaste (FVOVV). Villa släpper ändå till 1,92 xG per match, och Fulham skapar 1,57 xG framåt. Folket har lagt 67 procent på ettan, långt över den beräknade chansen. Tvåan har bara 14 procent hos folket mot 28 procents beräknad chans och är klart understreckad.",
+    "valueNote": "Tvåan är spelvärd eftersom folket bara har 14 procent på Fulham medan den beräknade chansen är 28 procent, vilket ger spelvärde 2,0."
+   },
+   {
+    "n": 2,
+    "home": "Tottenham",
+    "away": "Crystal Palace",
+    "league": "Premier League",
+    "kickoff": "18:30",
+    "folk": [
+     67,
+     19,
+     14
+    ],
+    "odds": [
+     1.56,
+     4.33,
+     5.3
+    ],
+    "table": {
+     "home": "14:e, 9 p (8 matcher)",
+     "away": "17:e, 7 p (8 matcher)"
+    },
+    "form": {
+     "home": "OFOVV",
+     "away": "FOVFF"
+    },
+    "xg": {
+     "home": [
+      1.23,
+      1.46
+     ],
+     "away": [
+      1.56,
+      2.17
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Rodrigo Bentancur (avstängd)",
+      "Kevin Danso (avstängd)",
+      "Savio (muskel)",
+      "Lucas Bergvall (knä)",
+      "Xavi Simons (korsband)",
+      "Wilson Odobert (knä)",
+      "James Maddison (osäker)",
+      "Destiny Udogie (osäker)"
+     ],
+     "away": [
+      "Takehiro Tomiyasu (vad)",
+      "Chadi Riad (knä)",
+      "J. Strand Larsen (osäker)",
+      "Quinten Timber (osäker)",
+      "Ismaila Sarr (osäker)"
+     ],
+     "impact": [
+      3,
+      3
+     ]
+    },
+    "facts": "Tottenham hemma: 1–1–2 (V–O–F). Crystal Palace borta: 1–1–2.",
+    "_src": {
+     "kickoff": "2026-10-31T18:30:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Tottenham är troligast med 55 procents beräknad chans mot ett Crystal Palace som har förlorat de två senaste (FOVFF) och släpper till 2,17 xG per match. Tottenham saknar många spelare, bland annat avstängda Bentancur och Danso samt Savio, Bergvall, Xavi Simons och Odobert. Folket har 67 procent på ettan, vilket är överstreckat jämfört med 55 procent. Tvåan har 14 procent hos folket mot 21 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 3,
+    "home": "Manchester City",
+    "away": "Brighton",
+    "league": "Premier League",
+    "kickoff": "16:00",
+    "folk": [
+     59,
+     23,
+     18
+    ],
+    "odds": [
+     1.62,
+     4.5,
+     4.7
+    ],
+    "table": {
+     "home": "1:a, 21 p (8 matcher)",
+     "away": "3:e, 16 p (8 matcher)"
+    },
+    "form": {
+     "home": "VVVVF",
+     "away": "VVVVF"
+    },
+    "xg": {
+     "home": [
+      2.37,
+      1.24
+     ],
+     "away": [
+      2.26,
+      1.43
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Antoine Semenyo (knä)",
+      "Mateo Kovacic (avstängd)",
+      "Jack Grealish (osäker)",
+      "Matheus Nunes (osäker)"
+     ],
+     "away": [
+      "Zadok Yohanna (skadad)",
+      "Femi Azeez (lår)",
+      "Kaoru Mitoma (baksida lår)",
+      "Evan Ferguson (fotled)",
+      "Stefanos Tzimas (korsband)",
+      "Ferdi Kadioglu (osäker)",
+      "Chema Andres (osäker)",
+      "Pascal Struijk (osäker)",
+      "och 1 till"
+     ],
+     "impact": [
+      3,
+      3
+     ]
+    },
+    "facts": "Manchester City hemma: 4–0–0 (V–O–F). Brighton borta: 2–0–2.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Manchester City har vunnit alla fyra hemmamatcher och skapar 2,37 xG per match, så ettan är troligast med 54 procents beräknad chans. Brighton är också farligt framåt med 2,26 xG per match men saknar bland andra Mitoma och Ferguson. Folket har 59 procent på ettan, lite över den beräknade chansen. Tvåan har 18 procent hos folket mot 23 procents beräknad chans och är något understreckad.",
+    "valueNote": ""
+   },
+   {
+    "n": 4,
+    "home": "Bournemouth",
+    "away": "Leeds",
+    "league": "Premier League",
+    "kickoff": "16:00",
+    "folk": [
+     51,
+     28,
+     21
+    ],
+    "odds": [
+     2.1,
+     3.41,
+     3.4
+    ],
+    "table": {
+     "home": "13:e, 9 p (8 matcher)",
+     "away": "7:e, 11 p (8 matcher)"
+    },
+    "form": {
+     "home": "OFFVV",
+     "away": "VOFOO"
+    },
+    "xg": {
+     "home": [
+      2.09,
+      1.16
+     ],
+     "away": [
+      1.36,
+      1.35
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Alex Scott (lår)",
+      "Alex Toth (lår)",
+      "Julian Araujo (lår)",
+      "Veljko Milosavljevic (osäker)"
+     ],
+     "away": [
+      "Joe Rodon (lår)",
+      "Mateo Joseph (fotled)",
+      "Nico Elvedi (osäker)",
+      "Daniel James (osäker)"
+     ],
+     "impact": [
+      2,
+      2
+     ]
+    },
+    "facts": "Bournemouth hemma: 1–2–1 (V–O–F). Leeds borta: 1–2–1.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Bournemouth har vunnit de två senaste och har bättre xG än Leeds, 2,09 framåt och 1,16 bakåt mot Leeds 1,36 och 1,35. Leeds har inte vunnit på de fyra senaste (VOFOO). Ettan har 46 procents beräknad chans och folket ligger på 51 procent. Tvåan är understreckad med 21 procent hos folket mot 26 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 5,
+    "home": "Coventry",
+    "away": "Sunderland",
+    "league": "Premier League",
+    "kickoff": "16:00",
+    "folk": [
+     33,
+     31,
+     36
+    ],
+    "odds": [
+     3.08,
+     3.33,
+     2.3
+    ],
+    "table": {
+     "home": "19:e, 6 p (8 matcher)",
+     "away": "20:e, 5 p (8 matcher)"
+    },
+    "form": {
+     "home": "FVVFF",
+     "away": "FFFFO"
+    },
+    "xg": {
+     "home": [
+      1.02,
+      1.54
+     ],
+     "away": [
+      1.51,
+      1.99
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Aurele Amenda (vad)",
+      "Luke Woolfenden (knä)",
+      "Josh Eccles (skadad)",
+      "Haji Wright (lår)",
+      "Bobby Thomas (osäker)"
+     ],
+     "away": [
+      "Daniel Ballard (lår)",
+      "Romaine Mundle (knä)",
+      "Nordi Mukiele (osäker)",
+      "Wilson Isidor (osäker)",
+      "Simon Adingra (osäker)"
+     ],
+     "impact": [
+      2,
+      3
+     ]
+    },
+    "facts": "Coventry hemma: 1–0–3 (V–O–F). Sunderland borta: 0–1–3.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Ettan och tvåan har båda 36 procents beräknad chans, och oddsen lutar mot Sunderland med 41 procent. Sunderland är dock utan seger på fem matcher (FFFFO) och släpper till 1,99 xG per match, medan Coventry har 1-0-3 hemma. Folket har 33, 31 och 36 procent, vilket ligger nära den beräknade chansen. Krysset är något överstreckat med 31 procent hos folket mot 28 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 6,
+    "home": "Brentford",
+    "away": "Nottingham",
+    "league": "Premier League",
+    "kickoff": "16:00",
+    "folk": [
+     56,
+     24,
+     20
+    ],
+    "odds": [
+     2.05,
+     3.62,
+     3.4
+    ],
+    "table": {
+     "home": "6:e, 11 p (8 matcher)",
+     "away": "18:e, 6 p (8 matcher)"
+    },
+    "form": {
+     "home": "OVOFO",
+     "away": "VFFFO"
+    },
+    "xg": {
+     "home": [
+      1.8,
+      1.6
+     ],
+     "away": [
+      1.97,
+      1.13
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Vitaly Janelt (avstängd)",
+      "Yehor Yarmoliuk (avstängd)",
+      "Antoni Milambo (knä)",
+      "Joshua Dasilva (lår)"
+     ],
+     "away": [
+      "Igor Jesus (vad)",
+      "Nicolo Savona (knä)",
+      "Neco Williams (osäker)",
+      "Nicolas Dominguez (osäker)"
+     ],
+     "impact": [
+      2,
+      2
+     ]
+    },
+    "facts": "Brentford hemma: 2–1–1 (V–O–F). Nottingham borta: 1–2–1.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Brentford är troligast med 43 procents beräknad chans och har 2-1-1 hemma. Nottingham ligger 18:e men har bättre xG än Brentford, 1,97 framåt och 1,13 bakåt mot Brentfords 1,8 och 1,6. Brentford saknar avstängda Janelt och Yarmoliuk. Folket har 56 procent på ettan, klart överstreckat, medan tvåan bara har 20 procent mot 30 procents beräknad chans.",
+    "valueNote": "Tvåan är spelvärd eftersom Nottingham har 30 procents beräknad chans men bara 20 procent hos folket, vilket ger spelvärde 1,5."
+   },
+   {
+    "n": 7,
+    "home": "Hull",
+    "away": "Ipswich",
+    "league": "Premier League",
+    "kickoff": "16:00",
+    "folk": [
+     42,
+     31,
+     27
+    ],
+    "odds": [
+     2.6,
+     3.4,
+     2.65
+    ],
+    "table": {
+     "home": "10:e, 10 p (8 matcher)",
+     "away": "12:e, 10 p (8 matcher)"
+    },
+    "form": {
+     "home": "OFOFO",
+     "away": "VFVFO"
+    },
+    "xg": {
+     "home": [
+      1.17,
+      1.75
+     ],
+     "away": [
+      1.33,
+      2.36
+     ]
+    },
+    "injuries": {
+     "home": [
+      "Nobel Mendy (ljumske)",
+      "Matt Targett (fotled)",
+      "Jack Butland (skadad)",
+      "Charlie Hughes (ljumske)",
+      "Darko Gyabi (lår)",
+      "Ilyas Ansah (skadad)",
+      "Eliot Matazo (knä)",
+      "Lucas Gourna-Douath (osäker)"
+     ],
+     "away": [
+      "Jack Taylor (knä)",
+      "Sasa Lukic (osäker)"
+     ],
+     "impact": [
+      3,
+      1
+     ]
+    },
+    "facts": "Hull hemma: 1–3–0 (V–O–F). Ipswich borta: 1–0–3.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_epl"
+    },
+    "note": "Hull är obesegrat hemma med 1-3-0 och Ipswich har 1-0-3 borta samt släpper till 2,36 xG per match, så ettan är troligast med 38 procents beräknad chans. Hull har en lång skadelista med bland andra Butland, Mendy, Targett och Hughes. Folket har 42 procent på ettan och 31 på krysset, båda något över den beräknade chansen. Tvåan är understreckad med 27 procent hos folket mot 34 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 8,
+    "home": "Bolton",
+    "away": "Bristol City",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     34,
+     30,
+     36
+    ],
+    "odds": [
+     2.8,
+     3.45,
+     2.33
+    ],
+    "table": {
+     "home": "19:e, 14 p (12 matcher)",
+     "away": "14:e, 15 p (12 matcher)"
+    },
+    "form": {
+     "home": "VFVOF",
+     "away": "VOFFO"
+    },
+    "xg": null,
+    "injuries": {
+     "home": [],
+     "away": [],
+     "impact": [
+      0,
+      0
+     ]
+    },
+    "facts": "Bolton hemma: 2–0–4 (V–O–F). Bristol City borta: 2–3–1.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Bristol City är troligast med 40 procents beräknad chans och har bara en förlust på sex bortamatcher (2-3-1). Bolton har 2-0-4 hemma och ligger 19:e. Folket har 36 procent på tvåan, lite under den beräknade chansen. Krysset är något överstreckat med 30 procent hos folket mot 27 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 9,
+    "home": "Burnley",
+    "away": "Portsmouth",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     43,
+     26,
+     31
+    ],
+    "odds": [
+     2.1,
+     3.4,
+     3.35
+    ],
+    "table": {
+     "home": "22:a, 8 p (12 matcher)",
+     "away": "11:e, 18 p (12 matcher)"
+    },
+    "form": {
+     "home": "OVOFF",
+     "away": "FVVOV"
+    },
+    "xg": null,
+    "injuries": {
+     "home": [
+      "Jacob Bruun Larsen (osäker)",
+      "Bashir Humphreys (osäker)"
+     ],
+     "away": [
+      "Mark Kosznovszky (knä)",
+      "Franco Umeh-Chibueze (osäker)"
+     ],
+     "impact": [
+      1,
+      1
+     ]
+    },
+    "facts": "Burnley hemma: 0–4–2 (V–O–F). Portsmouth borta: 2–2–2.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Burnley är favorit med 44 procents beräknad chans och 45 procent enligt oddsen, trots att laget ligger 22:a och saknar hemmaseger (0-4-2). Portsmouth har bra form med tre segrar på de fem senaste (FVVOV). Folket har 43, 26 och 31 procent, vilket ligger mycket nära den beräknade chansen. Inget tecken sticker ut som klart över- eller understreckat.",
+    "valueNote": ""
+   },
+   {
+    "n": 10,
+    "home": "Millwall",
+    "away": "Derby",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     66,
+     21,
+     13
+    ],
+    "odds": [
+     1.7,
+     3.8,
+     4.6
+    ],
+    "table": {
+     "home": "13:e, 15 p (12 matcher)",
+     "away": "23:e, 7 p (12 matcher)"
+    },
+    "form": {
+     "home": "OVFOF",
+     "away": "OOFFO"
+    },
+    "xg": null,
+    "injuries": {
+     "home": [
+      "Tristan Crama (osäker)",
+      "Ryan Leonard (osäker)",
+      "Josh Coburn (osäker)",
+      "B. Baker-Boaitey (osäker)"
+     ],
+     "away": [
+      "S. Klingen Langaas (osäker)",
+      "J. W. Zetterstroem (osäker)",
+      "Lewis Travis (osäker)",
+      "Craig Forsyth (osäker)",
+      "Matthew Clarke (osäker)",
+      "Patrick Agyemang (osäker)"
+     ],
+     "impact": [
+      2,
+      2
+     ]
+    },
+    "facts": "Millwall hemma: 2–2–2 (V–O–F). Derby borta: 1–2–3.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Millwall är troligast med 55 procents beräknad chans mot ett Derby som ligger 23:e och saknar seger på de fem senaste (OOFFO). Derby har också 1-2-3 borta. Folket har 66 procent på ettan, vilket är överstreckat. Tvåan har 13 procent hos folket mot 20 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 11,
+    "home": "Southampton",
+    "away": "Queens Park Rangers",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     58,
+     23,
+     19
+    ],
+    "odds": [
+     1.8,
+     3.9,
+     4.0
+    ],
+    "table": {
+     "home": "6:e, 20 p (12 matcher)",
+     "away": "8:e, 20 p (12 matcher)"
+    },
+    "form": {
+     "home": "FVVOV",
+     "away": "OOVFV"
+    },
+    "xg": null,
+    "injuries": {
+     "home": [
+      "Daniel Peretz (osäker)"
+     ],
+     "away": [],
+     "impact": [
+      1,
+      0
+     ]
+    },
+    "facts": "Southampton hemma: 5–1–0 (V–O–F). Queens Park Rangers borta: 2–3–1.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Southampton har 5-1-0 hemma och vunnit två av de tre senaste, så ettan är troligast med 51 procents beräknad chans. QPR har lika många poäng, 20, och har bara förlorat en av sex bortamatcher (2-3-1). Folket har 58 procent på ettan, över den beräknade chansen. Tvåan är understreckad med 19 procent hos folket mot 25 procents beräknad chans.",
+    "valueNote": "Tvåan är spelvärd eftersom QPR har 25 procents beräknad chans men bara 19 procent hos folket, vilket ger spelvärde 1,3."
+   },
+   {
+    "n": 12,
+    "home": "Swansea",
+    "away": "Blackburn",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     57,
+     24,
+     19
+    ],
+    "odds": [
+     1.75,
+     3.63,
+     4.33
+    ],
+    "table": {
+     "home": "2:a, 23 p (12 matcher)",
+     "away": "10:e, 18 p (12 matcher)"
+    },
+    "form": {
+     "home": "VVVFF",
+     "away": "OVVFV"
+    },
+    "xg": null,
+    "injuries": {
+     "home": [
+      "Josh Key (osäker)",
+      "Cameron Burgess (osäker)"
+     ],
+     "away": [
+      "Lewis Miller (fotled)"
+     ],
+     "impact": [
+      1,
+      0
+     ]
+    },
+    "facts": "Swansea hemma: 3–2–1 (V–O–F). Blackburn borta: 1–3–2.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "Swansea ligger 2:a med 23 poäng och har 3-2-1 hemma, vilket ger ettan 51 procents beräknad chans. Laget har dock förlorat de två senaste (VVVFF), medan Blackburn har vunnit tre av de fyra senaste. Folket har 57 procent på ettan, något överstreckat. Tvåan har 19 procent hos folket mot 23 procents beräknad chans.",
+    "valueNote": ""
+   },
+   {
+    "n": 13,
+    "home": "West Ham",
+    "away": "West Bromwich",
+    "league": "Championship",
+    "kickoff": "16:00",
+    "folk": [
+     62,
+     24,
+     14
+    ],
+    "odds": [
+     1.6,
+     4.13,
+     4.9
+    ],
+    "table": {
+     "home": "3:e, 22 p (12 matcher)",
+     "away": "5:e, 21 p (12 matcher)"
+    },
+    "form": {
+     "home": "OOVVF",
+     "away": "FFVVO"
+    },
+    "xg": null,
+    "injuries": {
+     "home": [],
+     "away": [],
+     "impact": [
+      0,
+      0
+     ]
+    },
+    "facts": "West Ham hemma: 3–1–2 (V–O–F). West Bromwich borta: 3–1–2.",
+    "_src": {
+     "kickoff": "2026-10-31T16:00:00+01:00",
+     "sport": "soccer_efl_champ"
+    },
+    "note": "West Ham ligger 3:e med 22 poäng och är troligast med 59 procents beräknad chans. West Bromwich ligger bara en poäng efter och har samma facit borta som West Ham har hemma, 3-1-2. Folket har 62 procent på ettan, nära den beräknade chansen. Tvåan är understreckad med 14 procent hos folket mot 19 procents beräknad chans.",
+    "valueNote": ""
+   }
+  ]
+ },
+ {
   "id": 7874,
   "draw": "4976",
   "date": "2026-10-24",
