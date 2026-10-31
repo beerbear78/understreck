@@ -695,7 +695,63 @@ window.STRYK_ROUNDS = [
     "valueNote": "West Bromwich har dubbelt så hög beräknad chans som folkets streck, 22 mot 11 procent, vilket ger spelvärde 2,0 på bortasegern.",
     "lineup": "West Ham startar med Bowen, som är godkänd trots en ankelskada, och tonåringen Golambeckis i stället för skadade Mavropanos bredvid Kilman. Austbo får en sällsynt start, Pablo kommer in för Castellanos och Solomon är petad. West Brom gör två ändringar: Jimmy-Jay Morgan startar som anfallare i stället för Barney Stewart, och Nzingoula kommer in för Whitwell."
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "X",
+    "1",
+    "2",
+    "1",
+    "1",
+    "1",
+    "X",
+    "2",
+    "X",
+    "1",
+    "1",
+    "1",
+    "2"
+   ],
+   "scores": [
+    "1–1",
+    "2–0",
+    "0–1",
+    "2–0",
+    "3–1",
+    "2–0",
+    "2–2",
+    "2–3",
+    "0–0",
+    "4–1",
+    "4–1",
+    "4–0",
+    "1–3"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 63,
+     "amount": 539682.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 1880,
+     "amount": 2509.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 25449,
+     "amount": 148.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 197996,
+     "amount": 39.0
+    }
+   ],
+   "updated": "2026-11-01T00:36"
+  }
  },
  {
   "id": 7874,
