@@ -219,11 +219,14 @@ section{margin-top:40px}
 .res-sys:first-of-type{border-top:0}
 .res-sys b{font-family:var(--font-mono);white-space:nowrap}
 .res-sys .good-t{color:var(--good)}
-.cell.hit{border-color:var(--good);box-shadow:inset 0 0 0 2px var(--good)}
-.cell.hit .sg::after{content:" \2713";color:var(--good)}
+/* Rätt tecken när matchen är spelad: helt grön ruta, de andra två tonas ned */
+.cells.done .cell{opacity:.45}
+.cells.done .cell.hit{opacity:1;background:var(--good);border-color:var(--good);box-shadow:none}
+.cell.hit .sg,.cell.hit .p,.cell.hit .p small,.cell.hit .f,.cell.hit .v{color:var(--on-strong)}
+.cell.hit .sg::after{content:" \2713\00a0RÄTT";font-family:var(--font-body);font-size:10.5px;letter-spacing:.04em}
 .box.hit{background:var(--good);border-color:var(--good);color:var(--on-strong)}
 .box.miss{border-color:var(--bad);color:var(--bad)}
-.meta .res{color:var(--ink);font-weight:600}
+.meta .res{display:inline-block;padding:0 7px;border-radius:999px;background:var(--good-soft);color:var(--good);font-weight:600}
 .howto{margin:0 0 12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
 .howto summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600}
 .howto summary::-webkit-details-marker{display:none}
@@ -265,7 +268,7 @@ section{margin-top:40px}
 .rm td{font-family:var(--font-display);font-weight:700;font-size:15px;border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
 .rm td.s{color:color-mix(in srgb,var(--muted) 55%,var(--surface));font-weight:500}
 .rm td.g{background:color-mix(in srgb,var(--accent-soft) 55%,var(--surface))}
-.rm td.ok{color:var(--good)}
+.rm td.ok{color:var(--good);background:var(--good-soft)}
 .rm td.no{color:color-mix(in srgb,var(--muted) 55%,var(--surface));font-weight:500}
 .rm .rn{width:34px;padding-right:8px;text-align:right;font-family:var(--font-mono);font-size:11px;font-weight:400;color:var(--muted)}
 .rm .rt{width:44px;font-family:var(--font-mono);font-size:12px;font-weight:600}
@@ -1148,7 +1151,7 @@ footer a{color:inherit}
       <button type="button" class="row" aria-expanded="${open}" aria-controls="d-${m.n}" data-n="${m.n}">
         <span class="n">${m.n}</span>
         <span class="teams"><span class="t">${esc(m.home)} – ${esc(m.away)}</span><span class="meta">${esc(m.league)}${m.kickoff ? ' · ' + esc(m.kickoff) : ''}${edited ? ' · <span class="edited">egna streck</span>' : ''}${out && out.score ? ` · <span class="res">Resultat ${esc(out.score)}</span>` : ''}</span></span>
-        <span class="cells">${cellsHTML(a, out ? out.k : -1)}</span>
+        <span class="cells${out && out.k >= 0 ? ' done' : ''}">${cellsHTML(a, out ? out.k : -1)}</span>
         <span class="verdict"><span class="badge ${a.verdict.kind}">${a.verdict.text}</span>${score ? `<span class="score">${score}</span>` : ''}</span>
         <svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
