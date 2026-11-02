@@ -186,6 +186,13 @@ class TestResults(unittest.TestCase):
         self.assertEqual(r["payouts"][0], {"name": "13 rätt", "winners": 77, "amount": 59266.0})
         self.assertEqual([p["name"] for p in r["payouts"]], ["13 rätt", "12 rätt", "11 rätt", "10 rätt"])
 
+    def test_svenskaspel_not_settled(self):
+        # 31 okt 2026: 200 med "result": null strax efter sista matchen – ska tolkas som inte avgjord, inte krascha
+        from understreck import svenskaspel
+        for body in ({"result": None}, {}, None, {"result": {"events": [], "distribution": []}}):
+            self.assertIsNone(svenskaspel.fetch_result(mock.Mock(get=lambda *a, **k: Resp(body)), 4977))
+        self.assertIsNone(svenskaspel.fetch_result(mock.Mock(get=lambda *a, **k: Resp(None, status=404)), 4977))
+
     def test_tipsrader_live(self):
         from bs4 import BeautifulSoup
         from understreck import tipsrader

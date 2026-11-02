@@ -1,6 +1,7 @@
 """Rätt rad och utdelning från Svenska Spels öppna resultatdata (ingen nyckel).
 
-/draws/{nummer}/result svarar 404 tills omgången är officiellt avgjord.
+/draws/{nummer}/result svarar 404 tills omgången är officiellt avgjord. En stund efter sista matchen kan den
+också svara 200 med "result": null (sett 31 okt 2026) – det räknas som inte avgjord än.
 """
 from __future__ import annotations
 
@@ -41,6 +42,11 @@ def fetch_result(http, draw) -> dict | None:
     if r.status_code == 404:
         return None
     r.raise_for_status()
-    out = parse_result(r.json())
+    data = r.json()
+    res = (data or {}).get("result") if isinstance(data, dict) else None
+    if not res or not res.get("events") or not res.get("distribution"):
+        log.info("Svenska Spel: omgång %s är inte avgjord än", draw)
+        return None
+    out = parse_result(data)
     log.info("Svenska Spel: officiellt resultat för omgång %s: %s", draw, "".join(x or "-" for x in out["row"]))
     return out

@@ -253,8 +253,9 @@ def run_results(s, rounds, wait=False) -> dict | None:
     while True:
         try:
             res = svenskaspel.fetch_result(s, rnd.get("draw"))
-        except requests.RequestException as e:
-            log.warning("Svenska Spel svarade inte: %s", e)
+        except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError) as e:
+            # ett konstigt svar ska inte stoppa väntan; den preliminära raden från tipsrader.se gäller tills vidare
+            log.warning("Svenska Spel gav inget användbart svar: %r", e)
             res = None
         if res:
             rnd["results"] = {**res, "updated": now().strftime("%Y-%m-%dT%H:%M")}
