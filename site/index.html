@@ -63,6 +63,8 @@ button{font:inherit;color:inherit}
 h1{font-size:clamp(34px,6vw,50px);text-transform:uppercase;letter-spacing:.01em}
 .sub{margin:4px 0 0;color:var(--muted);max-width:56ch}
 .round-pick{display:flex;flex-direction:column;gap:4px}
+.navlink{font-size:13px;font-weight:600;text-decoration:none}
+.navlink:hover{text-decoration:underline}
 .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 select{font:inherit;font-family:var(--font-mono);font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
 .roundbar{display:flex;flex-wrap:wrap;gap:6px 22px;padding-block:12px 0;color:var(--muted);font-size:13.5px}
@@ -320,6 +322,7 @@ footer a{color:inherit}
       </div>
     </div>
     <div class="round-pick">
+      <a class="navlink" href="https://understreck-v85.pages.dev/v85/">V85 →</a>
       <label class="lbl" for="round">Omgång</label>
       <select id="round"></select>
     </div>
