@@ -578,7 +578,63 @@ window.STRYK_ROUNDS = [
     "note": "Oddsen ser matchen som helt jämn med 35 procents beräknad chans för Oxford och 36 för Stevenage. Folket har ändå lagt 58 procent på Oxford, så hemmasegern är kraftigt överstreckad. Stevenage har bara 16 procent av folket. Underlaget saknar tabell och form.",
     "valueNote": "Stevenage har 36 procents beräknad chans men bara 16 procent av folket, vilket ger veckans högsta spelvärde på 2,24."
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "1",
+    "1",
+    "X",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "X",
+    "1",
+    "1",
+    "2"
+   ],
+   "scores": [
+    "3–1",
+    "1–0",
+    "1–1",
+    "2–1",
+    "2–1",
+    "5–4",
+    "2–1",
+    "1–0",
+    "2–1",
+    "0–0",
+    "3–0",
+    "2–1",
+    "0–1"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 9,
+     "amount": 1444444.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 438,
+     "amount": 7346.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 6341,
+     "amount": 405.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 54475,
+     "amount": 98.0
+    }
+   ],
+   "updated": "2026-11-07T21:59"
+  }
  },
  {
   "id": 7937,
