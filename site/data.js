@@ -453,7 +453,63 @@ window.STRYK_ROUNDS = [
     "note": "Grimsby är favorit med oddset 1,95 och 48 procent i beräknad chans, mot 44 procent hos folket. Krysset är överstreckat med 31 procent hos folket mot 25 procent i beräknad chans. Swindon har 28 procent i beräknad chans men streckas till 25 procent, vilket ger spelvärde 1,11 på ettan.",
     "valueNote": "Swindon har 28 procent i beräknad chans men bara 25 procent hos folket, och krysset är överstreckat, vilket gör 12 till en spelvärd gardering med ettan som skrällchans."
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "1",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2"
+   ],
+   "scores": [
+    "3–2",
+    "1–4",
+    "3–1",
+    "2–1",
+    "1–0",
+    "1–0",
+    "0–2",
+    "6–2",
+    "3–0",
+    "3–1",
+    "1–0",
+    "2–1",
+    "1–4"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 343,
+     "amount": 14008.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 9814,
+     "amount": 183.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 107745,
+     "amount": 0.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 554617,
+     "amount": 0.0
+    }
+   ],
+   "updated": "2026-11-14T22:47"
+  }
  },
  {
   "id": 8017,
