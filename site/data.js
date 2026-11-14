@@ -9,10 +9,10 @@ window.STRYK_ROUNDS = [
   "draw": "4979",
   "date": "2026-11-14",
   "deadline": "15:59",
-  "turnover": 3048390,
-  "updated": "2026-11-13",
+  "turnover": 13191759,
+  "updated": "2026-11-14",
   "fridayUpdate": "2026-11-13T15:58",
-  "lineupUpdate": null,
+  "lineupUpdate": "2026-11-14T15:27",
   "matches": [
    {
     "n": 1,
@@ -21,25 +21,43 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "20:45",
     "folk": [
-     71,
-     18,
-     11
+     75,
+     17,
+     8
     ],
     "odds": null,
-    "table": null,
+    "table": {
+     "home": "1:a, 10 p (4 matcher)",
+     "away": "2:a, 8 p (4 matcher)"
+    },
     "form": {},
     "xg": null,
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Besfort Zeneli (skadad)",
+      "Patrik Wålemark (skadad)",
+      "Lucas Bergvall (skadad)",
+      "Isak Hien (skadad)",
+      "Carl Starfelt (skadad)",
+      "Emil Holm (skadad)"
+     ],
+     "away": [
+      "Dennis Hadžikadunić (skadad)",
+      "Nikola Vasilj (skadad)",
+      "Armin Busuladžić (skadad)"
+     ],
+     "impact": [
+      2,
+      1
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-11-14T20:45:00+01:00"
     },
-    "note": "Sverige har 71 procent i beräknad chans mot Bosnien & Hercegovina, och hemmasegern är klart troligast. Folket streckar exakt samma 71 procent, så inget tecken är under- eller överstreckat. Det räcker för en spik på 1.",
-    "valueNote": ""
+    "note": "Sverige leder gruppen med 10 poäng på 4 matcher mot Bosniens 8, och beräknad chans för hemmaseger är 74 procent. Folket ligger nästan exakt där med 75 procent, så ettan är rätt streckad. Sverige saknar sex spelare, bland dem Isak Hien, Lucas Bergvall och Emil Holm, medan Bosnien saknar tre, bland dem Nikola Vasilj. Tvåan är något understreckad med 8 procent hos folket mot 9 procent i beräknad chans.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 19:45, efter spelstopp."
    },
    {
     "n": 2,
@@ -48,25 +66,43 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "20:45",
     "folk": [
-     65,
-     22,
-     13
+     66,
+     23,
+     11
     ],
     "odds": null,
-    "table": null,
+    "table": {
+     "home": "1:a, 12 p (4 matcher)",
+     "away": "2:a, 6 p (4 matcher)"
+    },
     "form": {},
     "xg": null,
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "João Cancelo (avstängd)",
+      "Francisco Conceição (avstängd)",
+      "Rafael Leão (skadad)",
+      "Nuno Tavares (skadad)",
+      "Tomás Araújo (skadad)",
+      "Nuno Mendes (skadad)"
+     ],
+     "away": [
+      "Andreas Christensen (skadad)",
+      "Anton Gaaei (skadad)",
+      "Kasper Dolberg (skadad)"
+     ],
+     "impact": [
+      2,
+      2
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-11-14T20:45:00+01:00"
     },
-    "note": "Portugal har 65 procent i beräknad chans mot Danmark, och hemmasegern är det troliga utfallet. Folket ligger på samma 65, 22 och 13 procent, så inget tecken är felstreckat. Bedömningen är spik 1.",
-    "valueNote": ""
+    "note": "Portugal har 12 poäng på 4 matcher och leder före Danmark på 6 poäng, och beräknad chans för hemmaseger är 66 procent. Folket streckar exakt lika, 66, 23 och 11 procent, så inget tecken är under- eller överstreckat. Portugal saknar João Cancelo och Francisco Conceição genom avstängning och Rafael Leão och Nuno Mendes genom skada. Danmark saknar Andreas Christensen, Kasper Dolberg och Anton Gaaei.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 19:45, efter spelstopp."
    },
    {
     "n": 3,
@@ -75,25 +111,39 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "18:00",
     "folk": [
-     74,
-     15,
-     11
+     80,
+     13,
+     7
     ],
     "odds": null,
-    "table": null,
+    "table": {
+     "home": "4:a, 3 p (4 matcher)",
+     "away": "3:a, 3 p (4 matcher)"
+    },
     "form": {},
     "xg": null,
     "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
+     "home": [
+      "Jørgen Strand Larsen (skadad)",
+      "Fredrik Aursnes (skadad)",
+      "Sondre Langås (skadad)"
+     ],
+     "away": [
+      "Ben Cabango (avstängd)",
+      "Sorba Thomas (avstängd)"
+     ],
+     "impact": [
+      2,
+      1
+     ]
     },
     "facts": null,
     "_src": {
      "kickoff": "2026-11-14T18:00:00+01:00"
     },
-    "note": "Norge har 74 procent i beräknad chans mot Wales, den högsta siffran på kupongen. Folket streckar också 74 procent på 1, så strecken följer chanserna. Ett tryggt spikförslag på 1.",
-    "valueNote": ""
+    "note": "Norge har 78 procent i beräknad chans trots att båda lagen har 3 poäng på 4 matcher i tabellen. Folket streckar ettan till 80 procent, så den är något överstreckad, medan tvåan är något understreckad med 7 procent mot 8. Norge saknar Jørgen Strand Larsen, Fredrik Aursnes och Sondre Langås, och Wales saknar de avstängda Ben Cabango och Sorba Thomas.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 17:00, efter spelstopp."
    },
    {
     "n": 4,
@@ -102,12 +152,15 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "20:45",
     "folk": [
+     14,
      21,
-     23,
-     56
+     65
     ],
     "odds": null,
-    "table": null,
+    "table": {
+     "home": "4:a, 0 p (4 matcher)",
+     "away": "3:a, 4 p (4 matcher)"
+    },
     "form": {},
     "xg": null,
     "injuries": {
@@ -119,8 +172,9 @@ window.STRYK_ROUNDS = [
     "_src": {
      "kickoff": "2026-11-14T20:45:00+01:00"
     },
-    "note": "Polen har 56 procent i beräknad chans på bortaplan mot Rumänien, mot 21 procent för 1 och 23 procent för X. Folket streckar exakt likadant, så inget tecken är under- eller överstreckat. Bedömningen är spik 2.",
-    "valueNote": ""
+    "note": "Polen har 4 poäng på 4 matcher medan Rumänien står på 0 poäng, och beräknad chans för bortaseger är 65 procent. Folket streckar exakt lika, 14, 21 och 65 procent, så tvåan är rättvist streckad.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 19:45, efter spelstopp."
    },
    {
     "n": 5,
@@ -129,9 +183,9 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "20:45",
     "folk": [
-     48,
+     45,
      29,
-     23
+     26
     ],
     "odds": null,
     "table": null,
@@ -146,8 +200,9 @@ window.STRYK_ROUNDS = [
     "_src": {
      "kickoff": "2026-11-14T20:45:00+01:00"
     },
-    "note": "Nordirland är favorit med 48 procent i beräknad chans, men det är långt ifrån säkert. Ukraina har 23 procent och krysset 29 procent. Folket streckar samma siffror, och en halvgardering 1X täcker 77 procent av utfallen.",
-    "valueNote": ""
+    "note": "Nordirland är favorit med 45 procent i beräknad chans, och tillsammans med krysset på 29 procent täcker 1X in 74 procent. Folket streckar exakt lika, så inget tecken är under- eller överstreckat. Ukraina har ändå 26 procent och matchen är för öppen för en spik.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 19:45, efter spelstopp."
    },
    {
     "n": 6,
@@ -156,9 +211,9 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "20:45",
     "folk": [
-     67,
-     20,
-     13
+     72,
+     19,
+     9
     ],
     "odds": null,
     "table": null,
@@ -173,8 +228,9 @@ window.STRYK_ROUNDS = [
     "_src": {
      "kickoff": "2026-11-14T20:45:00+01:00"
     },
-    "note": "Österrike har 67 procent i beräknad chans hemma mot Irland. Folket streckar också 67 procent på 1, så det finns inget att vinna på att gå emot strecken. Spik 1.",
-    "valueNote": ""
+    "note": "Österrike har 72 procent i beräknad chans för hemmaseger mot Irlands 9 procent. Folket streckar exakt lika, 72, 19 och 9 procent, så ettan är rättvist streckad.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 19:45, efter spelstopp."
    },
    {
     "n": 7,
@@ -183,9 +239,9 @@ window.STRYK_ROUNDS = [
     "league": null,
     "kickoff": "18:00",
     "folk": [
-     25,
-     29,
-     46
+     19,
+     30,
+     51
     ],
     "odds": null,
     "table": null,
@@ -200,8 +256,9 @@ window.STRYK_ROUNDS = [
     "_src": {
      "kickoff": "2026-11-14T18:00:00+01:00"
     },
-    "note": "Ungern är favorit med 46 procent i beräknad chans, men Georgien har 25 procent och krysset 29 procent. Folket streckar samma siffror, så inget tecken är felstreckat. En halvgardering X2 täcker 75 procent.",
-    "valueNote": ""
+    "note": "Ungern är favorit med 51 procent i beräknad chans, och med krysset på 30 procent täcker X2 in 81 procent. Folket streckar exakt lika, så inget tecken sticker ut. Georgien har 19 procent och är det tecken som oftast kan strykas.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 17:00, efter spelstopp."
    },
    {
     "n": 8,
@@ -210,13 +267,77 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     65,
-     21,
-     14
+     72,
+     18,
+     10
     ],
     "odds": [
-     1.67,
-     3.99,
+     1.49,
+     4.4,
+     5.5
+    ],
+    "table": null,
+    "form": {},
+    "xg": null,
+    "injuries": {
+     "home": [],
+     "away": [],
+     "impact": null
+    },
+    "facts": null,
+    "_src": {
+     "kickoff": "2026-11-14T16:00:00+01:00",
+     "sport": "soccer_england_league1"
+    },
+    "note": "Milton Keynes Dons är favorit med oddset 1,49 och 62 procent i beräknad chans. Folket streckar ettan till 72 procent, så den är tydligt överstreckad med spelvärde 0,86. Burton har 17 procent i beräknad chans men bara 10 procent hos folket, vilket ger spelvärde 1,68 på tvåan.",
+    "valueNote": ""
+   },
+   {
+    "n": 9,
+    "home": "Sheffield Wednesday",
+    "away": "Plymouth",
+    "league": "League One",
+    "kickoff": "16:00",
+    "folk": [
+     45,
+     25,
+     30
+    ],
+    "odds": [
+     2.28,
+     3.4,
+     2.9
+    ],
+    "table": null,
+    "form": {},
+    "xg": null,
+    "injuries": {
+     "home": [],
+     "away": [],
+     "impact": null
+    },
+    "facts": null,
+    "_src": {
+     "kickoff": "2026-11-14T16:00:00+01:00",
+     "sport": "soccer_england_league1"
+    },
+    "note": "Sheffield Wednesday är knapp favorit med 41 procent i beräknad chans och oddset 2,28, men Plymouth har 32 procent och krysset 27. Folket streckar ettan till 45 procent, så den är något överstreckad, medan krysset med 25 procent och tvåan med 30 procent är något understreckade. Jämnheten gör att helgardering är rimlig.",
+    "valueNote": ""
+   },
+   {
+    "n": 10,
+    "home": "Stockport",
+    "away": "Reading",
+    "league": "League One",
+    "kickoff": "16:00",
+    "folk": [
+     63,
+     22,
+     15
+    ],
+    "odds": [
+     1.62,
+     4.2,
      4.5
     ],
     "table": null,
@@ -232,72 +353,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-14T16:00:00+01:00",
      "sport": "soccer_england_league1"
     },
-    "note": "MK Dons är favorit med 56 procent i beräknad chans enligt oddset 1,67. Folket streckar 65 procent på 1, så ettan är överstreckad. Burton har 21 procent i beräknad chans men streckas bara till 14 procent, vilket ger 2:an spelvärde 1,48.",
+    "note": "Stockport är favorit med oddset 1,62 och 57 procent i beräknad chans. Folket streckar ettan till 63 procent, så den är något överstreckad. Reading har 21 procent i beräknad chans mot 15 procent hos folket, vilket ger spelvärde 1,37 på tvåan.",
     "valueNote": ""
-   },
-   {
-    "n": 9,
-    "home": "Sheffield Wednesday",
-    "away": "Plymouth",
-    "league": "League One",
-    "kickoff": "16:00",
-    "folk": [
-     47,
-     25,
-     28
-    ],
-    "odds": [
-     2.25,
-     3.6,
-     2.8
-    ],
-    "table": null,
-    "form": {},
-    "xg": null,
-    "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
-    },
-    "facts": null,
-    "_src": {
-     "kickoff": "2026-11-14T16:00:00+01:00",
-     "sport": "soccer_england_league1"
-    },
-    "note": "Sheffield Wednesday har 41 procent i beräknad chans och är knapp favorit, men Plymouth ligger nära med 33 procent. Folket streckar 47 procent på 1, så ettan är något överstreckad. 2:an streckas till 28 procent och ger spelvärde 1,18, och matchen är jämn nog för en helgardering.",
-    "valueNote": ""
-   },
-   {
-    "n": 10,
-    "home": "Stockport",
-    "away": "Reading",
-    "league": "League One",
-    "kickoff": "16:00",
-    "folk": [
-     60,
-     22,
-     18
-    ],
-    "odds": [
-     1.83,
-     3.75,
-     3.75
-    ],
-    "table": null,
-    "form": {},
-    "xg": null,
-    "injuries": {
-     "home": [],
-     "away": [],
-     "impact": null
-    },
-    "facts": null,
-    "_src": {
-     "kickoff": "2026-11-14T16:00:00+01:00",
-     "sport": "soccer_england_league1"
-    },
-    "note": "Stockport är favorit med 51 procent i beräknad chans enligt oddset 1,83. Folket streckar 60 procent på 1, så ettan är överstreckad. Reading har 25 procent i beräknad chans men streckas bara till 18 procent.",
-    "valueNote": "Reading har 25 procent i beräknad chans men bara 18 procent av folket, vilket ger spelvärde 1,37 på 2:an."
    },
    {
     "n": 11,
@@ -306,14 +363,14 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     36,
+     33,
      29,
-     35
+     38
     ],
     "odds": [
-     2.64,
-     3.35,
-     2.5
+     2.1,
+     3.5,
+     3.2
     ],
     "table": null,
     "form": {},
@@ -328,8 +385,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-14T16:00:00+01:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Matchen är mycket jämn. Blackpool har 37 procent i beräknad chans, Wimbledon 35 procent och krysset 28 procent. Folket streckar 36, 29 och 35 procent, nästan exakt som oddsen, så en helgardering passar.",
-    "valueNote": ""
+    "note": "Wimbledon är favorit med oddset 2,10 och 44 procent i beräknad chans, men folket streckar ettan till bara 33 procent. Blackpool är överstreckat med 38 procent hos folket mot 29 procent i beräknad chans. Ettan har därmed spelvärde 1,34 medan tvåan ligger på 0,77.",
+    "valueNote": "Wimbledon vinner i 44 procent av fallen enligt beräknad chans men streckas bara till 33 procent av folket, vilket ger spelvärde 1,34.",
+    "lineup": "Bekräftade startelvor: Wimbledon gör tre ändringar mot tidigare – McDonnell ersätter Bursik i målet, Maycock och Yiadom kommer in för lagkaptenen Johnson och Hippolyte (startelva: McDonnell, Seddon, Harrison, Tilley, Maycock, Stockley, Smith, Yiadom, Cornick, Sasu, Ogundere). Blackpool gör fem ändringar på grund av ett sjukdomsutbrott i truppen, och Luke Southwood debuterar i mål (startelva: Southwood, Ashworth, Casey, Brown, Clarkson, Morgan, Bloxham, Coulson, Taylor, Niskanen, Williams)."
    },
    {
     "n": 12,
@@ -338,14 +396,14 @@ window.STRYK_ROUNDS = [
     "league": "League One",
     "kickoff": "16:00",
     "folk": [
-     52,
-     26,
-     22
+     53,
+     27,
+     20
     ],
     "odds": [
-     2.3,
-     3.54,
-     2.71
+     2.1,
+     3.75,
+     3.0
     ],
     "table": null,
     "form": {},
@@ -360,8 +418,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-14T16:00:00+01:00",
      "sport": "soccer_england_league1"
     },
-    "note": "Wigan har 40 procent i beräknad chans, men folket streckar hela 52 procent på 1, så ettan är tydligt överstreckad med spelvärde 0,77. Barnsley har 34 procent i beräknad chans och streckas bara till 22 procent. Matchen är öppen och bedöms som helgardering.",
-    "valueNote": "Barnsley vinner i 34 procent av fallen enligt beräknad chans men streckas bara till 22 procent, vilket ger spelvärde 1,54 på 2:an."
+    "note": "Wigan är favorit med oddset 2,10 och 44 procent i beräknad chans, men folket streckar ettan till 53 procent, så den är överstreckad. Barnsley har 31 procent i beräknad chans mot bara 20 procent hos folket. Det ger spelvärde 1,55 på tvåan och 0,83 på ettan.",
+    "valueNote": "Barnsley har 31 procent i beräknad chans men bara 20 procent hos folket, vilket ger spelvärde 1,55 på tvåan."
    },
    {
     "n": 13,
@@ -370,14 +428,14 @@ window.STRYK_ROUNDS = [
     "league": "League Two",
     "kickoff": "16:00",
     "folk": [
-     32,
+     25,
      31,
-     37
+     44
     ],
     "odds": [
-     3.2,
-     3.62,
-     2.01
+     3.35,
+     3.75,
+     1.95
     ],
     "table": null,
     "form": {},
@@ -392,8 +450,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-14T16:00:00+01:00",
      "sport": "soccer_england_league2"
     },
-    "note": "Grimsby är favorit med 46 procent i beräknad chans enligt oddset 2,01. Folket streckar bara 37 procent på 2, medan krysset är överstreckat med 31 procent mot 25 procent i beräknad chans. Därför föreslås en halvgardering 12 som hoppar över krysset.",
-    "valueNote": "Grimsby har 46 procent i beräknad chans men streckas bara till 37 procent, vilket ger spelvärde 1,24 på 2:an."
+    "note": "Grimsby är favorit med oddset 1,95 och 48 procent i beräknad chans, mot 44 procent hos folket. Krysset är överstreckat med 31 procent hos folket mot 25 procent i beräknad chans. Swindon har 28 procent i beräknad chans men streckas till 25 procent, vilket ger spelvärde 1,11 på ettan.",
+    "valueNote": "Swindon har 28 procent i beräknad chans men bara 25 procent hos folket, och krysset är överstreckat, vilket gör 12 till en spelvärd gardering med ettan som skrällchans."
    }
   ]
  },
