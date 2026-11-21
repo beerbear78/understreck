@@ -9,10 +9,10 @@ window.STRYK_ROUNDS = [
   "draw": "4980",
   "date": "2026-11-21",
   "deadline": "15:59",
-  "turnover": 4699932,
-  "updated": "2026-11-20",
+  "turnover": 21046007,
+  "updated": "2026-11-21",
   "fridayUpdate": "2026-11-20T16:50",
-  "lineupUpdate": null,
+  "lineupUpdate": "2026-11-21T15:27",
   "matches": [
    {
     "n": 1,
@@ -21,14 +21,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "18:30",
     "folk": [
-     18,
-     22,
-     60
+     12,
+     21,
+     67
     ],
     "odds": [
-     5.62,
+     5.89,
      4.2,
-     1.56
+     1.55
     ],
     "table": {
      "home": "12:e, 12 p (10 matcher)",
@@ -41,21 +41,20 @@ window.STRYK_ROUNDS = [
     "xg": null,
     "injuries": {
      "home": [
-      "Jacob Ramsey (avstängd)",
-      "Joelinton (skadad)",
+      "Joelinton (lår)",
       "Ewen Jaouen (lår)",
       "Joseph Willock (osäker)",
       "Nico Gonzalez (osäker)"
      ],
      "away": [
+      "Martin Zubimendi (lår)",
       "Bukayo Saka (lår)",
       "Max Dowman (avstängd)",
-      "Martin Zubimendi (osäker)",
       "William Saliba (osäker)"
      ],
      "impact": [
-      3,
-      2
+      2,
+      3
      ]
     },
     "facts": "Newcastle hemma: 1–2–2 (V–O–F). Arsenal borta: 4–0–1.",
@@ -63,8 +62,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T18:30:00+01:00",
      "sport": "soccer_epl"
     },
-    "note": "Arsenal är klar favorit med 64 procent i beräknad chans, fem raka segrar och 4 vinster på 5 bortamatcher. Newcastle har bara 1 vinst på 5 hemmamatcher och saknar bland andra Joelinton och den avstängde Jacob Ramsey. Folket har 18 procent på Newcastle mot en beräknad chans på 14, så ettan är överstreckad. Arsenal saknar Bukayo Saka, och William Saliba är osäker.",
-    "valueNote": ""
+    "note": "Arsenal leder tabellen med 27 poäng och har vunnit fem raka. Borta har laget 4 vinster och 1 förlust, medan Newcastle bara har 1 hemmavinst på 5 matcher. Arsenal saknar Zubimendi och Saka, Dowman är avstängd och Saliba är osäker. Folket streckar tvåan till 67 procent mot 61 procent i beräknad chans, så ettan på 16 procent mot folkets 12 är understreckad.",
+    "valueNote": "",
+    "lineup": "Startelvan släpps cirka 17:30, efter spelstopp."
    },
    {
     "n": 2,
@@ -73,14 +73,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     59,
-     26,
-     15
+     56,
+     28,
+     16
     ],
     "odds": [
-     1.9,
-     3.67,
-     3.9
+     2.0,
+     3.5,
+     3.65
     ],
     "table": {
      "home": "5:e, 16 p (10 matcher)",
@@ -94,21 +94,19 @@ window.STRYK_ROUNDS = [
     "injuries": {
      "home": [
       "Maxence Lacroix (lår)",
+      "Jorrel Hato (skadad)",
       "Joao Pedro (lår)",
       "Reece James (lår)",
       "Mykhaylo Mudryk (fotled)",
       "Jamie Gittens (fotled)",
-      "Jorrel Hato (osäker)",
-      "Filip Joergensen (osäker)",
       "Mamadou Sarr (osäker)"
      ],
      "away": [
-      "Mateo Joseph (fotled)",
-      "Anton Stach (osäker)"
+      "Mateo Joseph (fotled)"
      ],
      "impact": [
       3,
-      1
+      0
      ]
     },
     "facts": "Chelsea hemma: 3–1–1 (V–O–F). Leeds borta: 1–2–2.",
@@ -116,8 +114,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_epl"
     },
-    "note": "Chelsea är troligast med 48 procent i beräknad chans, men folket har hela 59 procent på ettan, så den är överstreckad. Chelsea har en lång skadelista med bland andra Joao Pedro, Reece James och Maxence Lacroix. Leeds har 27 procent i beräknad chans men bara 15 procent hos folket, så tvåan är tydligt understreckad.",
-    "valueNote": "Tvåan har spelvärde 1.78 eftersom Leeds vinner i 27 procent enligt beräknad chans men bara har 15 procent av folkets streck."
+    "note": "Chelsea är femma med 16 poäng och har 3 vinster, 1 oavgjord och 1 förlust hemma, så ettan är troligast. Skadelistan är lång med bland andra Joao Pedro, Reece James, Lacroix, Mudryk och Gittens borta. Folket streckar ettan till 56 procent mot 43 procent i beräknad chans, och tvåan är kraftigt understreckad med 16 procent mot 30.",
+    "valueNote": "Tvåan har 30 procent i beräknad chans men streckas bara av 16 procent av folket, vilket ger spelvärde 1,86.",
+    "lineup": "Chelsea startar med Martínez i mål, Acheampong, Fofana, Colwill och Chavarría i backlinjen, Lavia och Caicedo på mittfältet, Estêvão, Palmer och Rogers bakom Emegha, som gör sin första start. Henderson, Neto och Welbeck är på bänken, och João Pedro, Lacroix, Hato och Reece James saknas. Leeds startar med Trafford; Bogle, Justin, Elvedi, Muharemović, Gudmundsson; Ampadu, Longstaff, Tanaka; Okafor och Calvert-Lewin."
    },
    {
     "n": 3,
@@ -126,14 +125,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     71,
-     18,
-     11
+     74,
+     17,
+     9
     ],
     "odds": [
-     1.53,
-     4.42,
-     5.54
+     1.54,
+     4.4,
+     5.5
     ],
     "table": {
      "home": "11:e, 12 p (10 matcher)",
@@ -146,20 +145,17 @@ window.STRYK_ROUNDS = [
     "xg": null,
     "injuries": {
      "home": [
-      "Savio (muskel)",
+      "Mathys Tel (fotled)",
+      "Tosin Adarabioyo (vad)",
       "Wilson Odobert (knä)",
-      "Xavi Simons (korsband)",
-      "Mathys Tel (osäker)",
-      "Lucas Bergvall (osäker)",
-      "Tosin Adarabioyo (osäker)"
+      "Xavi Simons (korsband)"
      ],
      "away": [
-      "Jack Taylor (knä)",
       "Sammie Szmodics (osäker)"
      ],
      "impact": [
-      3,
-      1
+      2,
+      0
      ]
     },
     "facts": "Tottenham hemma: 2–1–2 (V–O–F). Ipswich borta: 1–1–3.",
@@ -167,7 +163,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_epl"
     },
-    "note": "Tottenham är favorit med 59 procent i beräknad chans, och Ipswich har bara 1 vinst på 5 bortamatcher. Folket har 71 procent på ettan, vilket gör den överstreckad. Tottenham saknar Xavi Simons, Savio och Wilson Odobert. Ipswich har 19 procent i beräknad chans mot 11 procent hos folket, så tvåan är understreckad.",
+    "note": "Tottenham har 2 vinster, 1 oavgjord och 2 förluster hemma, och Ipswich har bara vunnit 1 av 5 bortamatcher. Tottenham saknar Xavi Simons, Tel, Odobert och Adarabioyo. Folket streckar ettan till 74 procent mot 59 procent i beräknad chans, så den är överstreckad, medan krysset ligger på 17 procent mot 21.",
     "valueNote": ""
    },
    {
@@ -178,12 +174,12 @@ window.STRYK_ROUNDS = [
     "kickoff": "16:00",
     "folk": [
      69,
-     19,
-     12
+     20,
+     11
     ],
     "odds": [
      1.75,
-     3.8,
+     3.85,
      4.4
     ],
     "table": {
@@ -197,24 +193,20 @@ window.STRYK_ROUNDS = [
     "xg": null,
     "injuries": {
      "home": [
-      "Matty Cash (avstängd)",
       "Matteo Ruggeri (lår)",
       "Amadou Onana (knä)",
-      "Matty Cash (osäker)",
-      "Johan Manzambi (osäker)"
+      "Matty Cash (osäker)"
      ],
      "away": [
+      "Granit Xhaka (vad)",
+      "Brian Brobbey (lår)",
       "Daniel Ballard (lår)",
-      "Omar Alderete (avstängd)",
       "Habib Diarra (lår)",
       "Romaine Mundle (knä)",
-      "Granit Xhaka (osäker)",
-      "Brian Brobbey (osäker)",
-      "Juan Riquelme Angulo (osäker)",
       "Simon Adingra (osäker)"
      ],
      "impact": [
-      3,
+      2,
       3
      ]
     },
@@ -223,8 +215,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_epl"
     },
-    "note": "Aston Villa är troligast med 55 procent i beräknad chans mot Sunderland, som ligger 19:e och har 0 vinster på 5 bortamatcher. Folket har 69 procent på ettan, vilket är klart för mycket. Villa har spelat oavgjort i tre av de fem senaste och krysset har 25 procent i beräknad chans mot 19 procent hos folket. Båda lagen har många frånvarande, bland andra Amadou Onana hos Villa och Daniel Ballard hos Sunderland.",
-    "valueNote": "Krysset har spelvärde 1.3 eftersom Villa ofta spelat oavgjort på sistone och folket bara ger det 19 procent mot en beräknad chans på 25."
+    "note": "Sunderland ligger 19:e med 8 poäng och har inte vunnit någon av 5 bortamatcher. Gästerna saknar dessutom Xhaka, Brobbey, Ballard, Diarra och Mundle. Aston Villa har bara 1 hemmavinst på 5 matcher, och folkets 69 procent på ettan är högt mot 56 procent i beräknad chans. Krysset är understreckat med 20 procent mot 25.",
+    "valueNote": ""
    },
    {
     "n": 5,
@@ -238,9 +230,9 @@ window.STRYK_ROUNDS = [
      18
     ],
     "odds": [
-     1.92,
-     3.6,
-     3.8
+     2.0,
+     3.4,
+     3.83
     ],
     "table": {
      "home": "7:e, 15 p (10 matcher)",
@@ -254,19 +246,14 @@ window.STRYK_ROUNDS = [
     "injuries": {
      "home": [
       "Alex Toth (lår)",
-      "Rayan (osäker)",
-      "Juanlu Sanchez (osäker)",
-      "Veljko Milosavljevic (osäker)",
-      "Julian Araujo (osäker)"
+      "Juanlu Sanchez (osäker)"
      ],
      "away": [
-      "Nicolas Dominguez (skadad)",
-      "Nicolo Savona (knä)",
-      "Xaver Schlager (osäker)",
-      "Neco Williams (osäker)"
+      "Callum Hudson-Odoi (ljumske)",
+      "Nicolas Dominguez (skadad)"
      ],
      "impact": [
-      2,
+      1,
       2
      ]
     },
@@ -275,8 +262,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_epl"
     },
-    "note": "Bournemouth är troligast med 50 procent i beräknad chans och fyra raka segrar i formen. Folket har 58 procent på ettan, så den är överstreckad. Nottingham ligger 16:e men har 24 procent i beräknad chans mot 18 procent hos folket.",
-    "valueNote": "Tvåan har spelvärde 1.31 eftersom Nottingham vinner i 24 procent enligt beräknad chans medan folket bara streckar 18 procent."
+    "note": "Bournemouth är sjua med 15 poäng och har vunnit fyra raka, medan Nottingham ligger 16:e och har formen FFOFV. Nottingham saknar Hudson-Odoi och Dominguez. Folket streckar ettan till 58 procent mot 50 procent i beräknad chans, så både krysset (24 mot 28) och tvåan (18 mot 22) är något understreckade.",
+    "valueNote": ""
    },
    {
     "n": 6,
@@ -285,14 +272,14 @@ window.STRYK_ROUNDS = [
     "league": "Premier League",
     "kickoff": "16:00",
     "folk": [
-     41,
-     27,
-     32
+     40,
+     26,
+     34
     ],
     "odds": [
-     2.42,
-     3.5,
-     2.79
+     2.48,
+     3.45,
+     2.75
     ],
     "table": {
      "home": "17:e, 9 p (10 matcher)",
@@ -305,24 +292,19 @@ window.STRYK_ROUNDS = [
     "xg": null,
     "injuries": {
      "home": [
+      "Ephron Mason-Clark (knä)",
       "Aurele Amenda (vad)",
-      "Luke Woolfenden (knä)",
       "Josh Eccles (skadad)",
-      "Haji Wright (lår)",
-      "Bobby Thomas (osäker)",
-      "Frank Onyeka (osäker)",
-      "Frank Onyeka (osäker)"
+      "Haji Wright (lår)"
      ],
      "away": [
       "Jean-Philippe Mateta (avstängd)",
       "Takehiro Tomiyasu (vad)",
       "Ismaila Sarr (ljumske)",
-      "Chadi Riad (knä)",
-      "Anan Khalaili (osäker)",
-      "J. Strand Larsen (osäker)"
+      "Chadi Riad (knä)"
      ],
      "impact": [
-      3,
+      2,
       3
      ]
     },
@@ -331,7 +313,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_epl"
     },
-    "note": "En jämn match mellan två bottenlag där ettan har 40 procent, krysset 27 och tvåan 33 i beräknad chans. Folket streckar nästan exakt likadant, så inget tecken är tydligt fel streckat. Crystal Palace har fyra raka förluster och saknar Jean-Philippe Mateta och Ismaila Sarr, medan Coventry saknar bland andra Haji Wright.",
+    "note": "Två bottenlag möts, Coventry 17:e med 9 poäng och Crystal Palace sist med 7 poäng och fyra raka förluster. Palace saknar Mateta som är avstängd samt Sarr, Tomiyasu och Riad, medan Coventry saknar bland andra Haji Wright och Mason-Clark. Beräknad chans 40, 27 och 32 procent ligger nästan exakt som folkets 40, 26 och 34, så inget tecken sticker ut.",
     "valueNote": ""
    },
    {
@@ -342,13 +324,13 @@ window.STRYK_ROUNDS = [
     "kickoff": "16:00",
     "folk": [
      33,
-     29,
-     38
+     28,
+     39
     ],
     "odds": [
-     2.8,
-     3.35,
-     2.4
+     2.61,
+     3.4,
+     2.6
     ],
     "table": {
      "home": "18:e, 17 p (15 matcher)",
@@ -376,7 +358,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Portsmouth är knapp favorit med 41 procent i beräknad chans mot 38 procent hos folket. Bolton ligger 18:e och har förlorat båda sina hemmamatcher, medan Portsmouth är obesegrade borta med 2 oavgjorda. Marginalerna är små och en helgardering är rimlig.",
+    "note": "Portsmouth är elva med 22 poäng och har spelat oavgjort i båda bortamatcherna, medan Bolton ligger 18:e och har förlorat båda hemmamatcherna i underlaget. Tvåan har högst beräknad chans med 38 procent, men skillnaden mot ettan på 34 är liten. Folket streckar 33, 28 och 39 procent, i stort sett som beräknad chans.",
     "valueNote": ""
    },
    {
@@ -386,14 +368,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     29,
+     26,
      30,
-     41
+     44
     ],
     "odds": [
-     2.68,
-     3.2,
-     2.6
+     2.62,
+     3.1,
+     2.69
     ],
     "table": {
      "home": "21:a, 15 p (15 matcher)",
@@ -420,8 +402,8 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Wrexham är knapp favorit med 38 procent i beräknad chans, men folket har 41 procent på tvåan. Wrexham har förlorat båda sina bortamatcher. Lincoln ligger 21:a med tre raka förluster men har 33 procent i beräknad chans mot 29 procent hos folket, så ettan är något understreckad.",
-    "valueNote": ""
+    "note": "Wrexham har knapp övervikt med 36 procent i beräknad chans mot 34 för Lincoln, men har förlorat båda bortamatcherna i underlaget. Lincoln ligger 21:a med 15 poäng och formen VFFF, Wrexham 15:e med 18 poäng. Folket streckar tvåan till 44 procent, vilket är överstreckat, medan ettan bara får 26 procent mot 34 i beräknad chans.",
+    "valueNote": "Ettan har 34 procent i beräknad chans men bara 26 procent av folket, vilket ger spelvärde 1,30."
    },
    {
     "n": 9,
@@ -430,14 +412,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     74,
-     15,
-     11
+     77,
+     14,
+     9
     ],
     "odds": [
      1.36,
      5.0,
-     7.0
+     7.1
     ],
     "table": {
      "home": "2:a, 29 p (15 matcher)",
@@ -464,7 +446,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Middlesbrough ligger 2:a med 29 poäng och har 67 procent i beräknad chans mot Bristol City på 17:e plats. Folket har 74 procent på ettan, så den är något överstreckad. Bristol City är obesegrade borta med 1 vinst och 1 oavgjord men har förlorat de två senaste matcherna.",
+    "note": "Middlesbrough är tvåa med 29 poäng och har vunnit sin enda hemmamatch i underlaget, medan Bristol City ligger 17:e med två raka förluster. Ettan har 67 procent i beräknad chans men folket streckar 77 procent, så den är överstreckad. Bristol City är obesegrade borta med 1 vinst och 1 oavgjord, och krysset får 14 procent av folket mot 19 i beräknad chans.",
     "valueNote": ""
    },
    {
@@ -474,14 +456,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     69,
-     19,
-     12
+     72,
+     18,
+     10
     ],
     "odds": [
-     1.57,
+     1.55,
      4.1,
-     5.25
+     5.5
     ],
     "table": {
      "home": "10:e, 22 p (15 matcher)",
@@ -505,8 +487,9 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Sheffield United är favorit med 60 procent i beräknad chans mot Watford, som ligger 20:e och har förlorat båda sina bortamatcher. Folket har 69 procent på ettan, vilket är för mycket. Watford har 17 procent i beräknad chans mot 12 procent hos folket.",
-    "valueNote": ""
+    "note": "Sheffield United är tia med 22 poäng och obesegrade hemma, medan Watford ligger 20:e och har förlorat båda bortamatcherna. Ettan har 61 procent i beräknad chans men folket streckar 72 procent. Krysset är understreckat med 18 procent mot 23.",
+    "valueNote": "Krysset har 23 procent i beräknad chans mot folkets 18 procent, vilket ger spelvärde 1,27.",
+    "lineup": "Sheffield United gör en ändring: Arblaster ersätter Kalvin Phillips, som har en skada efter träning, och Bamford och Shackleton är på bänken. Watford startar med Ravaglia, Coulibaly, Keben, Pollock, Bola, Bravo, Doumbia, Payero, Traoré, Kayembe och Mavididi, och Bove är på bänken."
    },
    {
     "n": 11,
@@ -515,14 +498,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     36,
-     31,
-     33
+     33,
+     32,
+     35
     ],
     "odds": [
-     2.9,
-     3.2,
-     2.4
+     2.77,
+     3.19,
+     2.55
     ],
     "table": {
      "home": "3:e, 29 p (15 matcher)",
@@ -548,7 +531,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Toppmöte där båda lagen har 29 poäng och tre raka segrar. Birmingham är troligast med 39 procent i beräknad chans men har bara 33 procent hos folket, så tvåan är understreckad. Stoke har 36 procent hos folket mot en beräknad chans på 32 och är därmed överstreckat.",
+    "note": "Tabelltrean Stoke möter ettan Birmingham, båda på 29 poäng och med tre raka vinster. Birmingham har högst beräknad chans med 37 procent mot 34 för Stoke, så tvåan är knappt troligast. Folket ligger nära med 33, 32 och 35 procent, men krysset är något överstreckat med 32 procent mot 29.",
     "valueNote": ""
    },
    {
@@ -558,13 +541,13 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     35,
-     27,
-     38
+     31,
+     28,
+     41
     ],
     "odds": [
      2.5,
-     3.25,
+     3.29,
      2.7
     ],
     "table": {
@@ -591,7 +574,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Helt jämnt där Swansea har 36 procent och West Bromwich 35 procent i beräknad chans. Swansea har vunnit båda sina hemmamatcher och West Bromwich är obesegrade borta med 2 vinster och 1 oavgjord. Folket har 38 procent på tvåan mot en beräknad chans på 35, så den är lite överstreckad.",
+    "note": "Swansea har vunnit båda hemmamatcherna i underlaget, vilket ger ettan 36 procent i beräknad chans mot 35 för tvåan. West Bromwich är femma med 28 poäng, obesegrade i fem matcher och borta har laget 2 vinster och 1 oavgjord. Folket streckar tvåan till 41 procent och ettan till 31, så ettan är understreckad och tvåan överstreckad.",
     "valueNote": ""
    },
    {
@@ -601,14 +584,14 @@ window.STRYK_ROUNDS = [
     "league": "Championship",
     "kickoff": "16:00",
     "folk": [
-     78,
-     14,
-     8
+     82,
+     13,
+     5
     ],
     "odds": [
-     1.3,
-     5.2,
-     8.5
+     1.25,
+     5.8,
+     10.76
     ],
     "table": {
      "home": "4:e, 28 p (15 matcher)",
@@ -634,7 +617,7 @@ window.STRYK_ROUNDS = [
      "kickoff": "2026-11-21T16:00:00+01:00",
      "sport": "soccer_efl_champ"
     },
-    "note": "Wolverhampton är veckans största favorit med 72 procent i beräknad chans och är obesegrade hemma med 2 vinster och 2 oavgjorda. Charlton ligger 19:e och saknar Zach Mitchell. Folket har 78 procent på ettan, så den är något överstreckad, men spiken håller ändå.",
+    "note": "Wolverhampton är fyra med 28 poäng och obesegrade hemma med 2 vinster och 2 oavgjorda, medan Charlton ligger 19:e med 17 poäng. Charlton saknar Zach Mitchell. Ettan har 76 procent i beräknad chans mot folkets 82, så den är något överstreckad, och krysset får 13 procent mot 16.",
     "valueNote": ""
    }
   ]
