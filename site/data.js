@@ -620,7 +620,63 @@ window.STRYK_ROUNDS = [
     "note": "Wolverhampton är fyra med 28 poäng och obesegrade hemma med 2 vinster och 2 oavgjorda, medan Charlton ligger 19:e med 17 poäng. Charlton saknar Zach Mitchell. Ettan har 76 procent i beräknad chans mot folkets 82, så den är något överstreckad, och krysset får 13 procent mot 16.",
     "valueNote": ""
    }
-  ]
+  ],
+  "results": {
+   "final": true,
+   "row": [
+    "X",
+    "2",
+    "1",
+    "X",
+    "1",
+    "1",
+    "X",
+    "2",
+    "1",
+    "1",
+    "1",
+    "X",
+    "1"
+   ],
+   "scores": [
+    "2–2",
+    "1–4",
+    "2–0",
+    "0–0",
+    "2–0",
+    "3–2",
+    "1–1",
+    "0–1",
+    "2–0",
+    "4–0",
+    "1–0",
+    "2–2",
+    "2–1"
+   ],
+   "payouts": [
+    {
+     "name": "13 rätt",
+     "winners": 153,
+     "amount": 81632.0
+    },
+    {
+     "name": "12 rätt",
+     "winners": 3868,
+     "amount": 779.0
+    },
+    {
+     "name": "11 rätt",
+     "winners": 44160,
+     "amount": 54.0
+    },
+    {
+     "name": "10 rätt",
+     "winners": 289503,
+     "amount": 17.0
+    }
+   ],
+   "updated": "2026-11-21T23:14"
+  }
  },
  {
   "id": 8083,
